@@ -59,14 +59,14 @@ It belongs to **ORGAN IV (Orchestration)** under the `organvm-iv-taxis` GitHub o
 ## System Context (auto-generated — do not edit)
 
 **Organ:** ORGAN-IV (Orchestration) | **Tier:** flagship | **Status:** PUBLIC_PROCESS
-**Org:** `organvm-iv-taxis` | **Repo:** `orchestration-start-here`
+**Org:** `unknown` | **Repo:** `orchestration-start-here`
 
 ### Edges
-- **Produces** → `all`: Cross-organ governance policies and dependency validation
-- **Produces** → `all`: Weekly registry health audit reports
-- **Produces** → `all`: Automated promotion recommendations based on quality gates
-- **Consumes** ← `any`: Changes to repo status, new repos, CI results
-- **Consumes** ← `ORGAN-V`: New essay publications for distribution coordination
+- **Produces** → `unknown`: unknown
+- **Produces** → `unknown`: unknown
+- **Produces** → `unknown`: unknown
+- **Consumes** ← `any`: unknown
+- **Consumes** ← `ORGAN-V`: unknown
 
 ### Siblings in Orchestration
 `petasum-super-petasum`, `universal-node-network`, `.github`, `agentic-titan`, `agent--claude-smith`, `a-i--skills`
@@ -74,5 +74,5 @@ It belongs to **ORGAN IV (Orchestration)** under the `organvm-iv-taxis` GitHub o
 ### Governance
 - *Standard ORGANVM governance applies*
 
-*Last synced: 2026-02-24T01:01:15Z*
+*Last synced: 2026-02-24T12:41:28Z*
 <!-- ORGANVM:AUTO:END -->
