@@ -1,0 +1,62 @@
+name: "Bug Report"
+description: "Report a bug in orchestration-start-here"
+title: "[BUG] "
+labels: ["bug"]
+body:
+  - type: textarea
+    id: description
+    attributes:
+      label: "Bug Description"
+      description: "What happened? What did you expect to happen?"
+    validations:
+      required: true
+
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: "Steps to Reproduce"
+      description: "Minimal steps to trigger the bug."
+      value: |
+        1.
+        2.
+        3.
+    validations:
+      required: true
+
+  - type: textarea
+    id: environment
+    attributes:
+      label: "Environment"
+      description: "OS, Python version, relevant tool versions."
+      placeholder: "macOS 26, Python 3.12"
+    validations:
+      required: false
+
+  - type: textarea
+    id: logs
+    attributes:
+      label: "Error Output / Logs"
+      render: shell
+    validations:
+      required: false
+
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: "Acceptance Criteria"
+      description: "How will we know the bug is fixed?"
+      placeholder: |
+        - [ ] Script runs without error
+        - [ ] Output matches expected format
+    validations:
+      required: false
+
+  - type: checkboxes
+    id: governance
+    attributes:
+      label: "Governance Gates"
+      options:
+        - label: "Fix requires registry.json update"
+        - label: "Fix touches governance-rules.json"
+        - label: "Fix changes CI/CD workflows"
+        - label: "Fix modifies validate-deps.py logic"

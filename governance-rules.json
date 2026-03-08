@@ -78,6 +78,11 @@
       "title": "Agent Coordination Visibility",
       "rule": "All sessions leave a breadcrumb at completion using the standardized format (docs/breadcrumb-protocol.md). Non-interactive agents must comply with the safety protocol (petasum-super-petasum/docs/NON-INTERACTIVE-AGENT-SAFETY.md).",
       "enforcement": "manual"
+    },
+    "G": {
+      "title": "Per-PR Lifecycle (Score/Rehearse/Perform)",
+      "rule": "All pull requests follow the Score/Rehearse/Perform lifecycle. Score defines scope and acceptance criteria in the issue. Rehearse iterates via FSBP sessions until green. Perform merges with governance checklist and postmortem. See docs/score-rehearse-perform.md.",
+      "enforcement": "manual"
     }
   },
   "quality_gates": {
