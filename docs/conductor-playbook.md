@@ -135,7 +135,7 @@ The Frame/Shape/Build/Prove lifecycle operates at the **per-task** scale. Two la
 | Scale | Lifecycle | Unit | Cadence |
 |-------|-----------|------|---------|
 | **Per-task** | Frame / Shape / Build / Prove | Single issue or feature | 90–120 min session |
-| **Per-PR** | Score / Rehearse / Perform | Pull request or deliverable | Days to weeks (future: F-09) |
+| **Per-PR** | Score / Rehearse / Perform | Pull request or deliverable | Days to weeks (see `docs/score-rehearse-perform.md`) |
 | **Per-month** | Capture / Structure / Systematize | Portfolio-level synthesis | Monthly review cycle |
 
 The per-task lifecycle is the atomic unit. The other scales compose from it but are defined separately.

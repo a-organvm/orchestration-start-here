@@ -1,0 +1,60 @@
+name: "Governance Change"
+description: "Propose a change to governance rules, promotion logic, or system-wide policy"
+title: "[GOV] "
+labels: ["governance"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Governance changes affect the entire eight-organ system. Review
+        `governance-rules.json` for current articles and amendments before filing.
+
+  - type: textarea
+    id: proposal
+    attributes:
+      label: "Proposal"
+      description: "What governance change are you proposing? Specify the article, amendment, or rule affected."
+    validations:
+      required: true
+
+  - type: textarea
+    id: rationale
+    attributes:
+      label: "Rationale"
+      description: "Why is this change needed? What evidence supports it?"
+    validations:
+      required: true
+
+  - type: textarea
+    id: impact
+    attributes:
+      label: "Impact Analysis"
+      value: |
+        **Organs affected:**
+        **Repos affected:**
+        **Workflows affected:**
+        **Risk of breakage:**
+    validations:
+      required: true
+
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: "Acceptance Criteria"
+      value: |
+        - [ ]
+        - [ ]
+        - [ ]
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: gates
+    attributes:
+      label: "Required Reviews"
+      options:
+        - label: "I have read the current governance-rules.json"
+          required: true
+        - label: "This change requires registry.json schema updates"
+        - label: "This change requires CI workflow updates"
+        - label: "This change affects promotion state machine logic"

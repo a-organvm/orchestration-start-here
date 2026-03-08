@@ -1,28 +1,70 @@
 ## Summary
 
-<!-- What does this PR do? Why is it needed? -->
+<!-- What does this PR deliver? Link the issue: Fixes #NNN or Relates to #NNN -->
 
-## Changes
+**Linked Issue:**
+**Lifecycle Phase:** <!-- Score/Rehearse/Perform — this PR is the PERFORM step -->
 
-<!-- List the key changes made in this PR -->
+## What Changed
+
+<!-- List key changes. Focus on the "what" — 3-5 bullets max. -->
 
 -
 
-## Related Issues
+## Why
 
-<!-- Link related issues: Fixes #123, Relates to #456 -->
+<!-- Explain the motivation. Why is this change needed? What problem does it solve? -->
+
+## Type of Change
+
+- [ ] Bug fix
+- [ ] New feature
+- [ ] Documentation update
+- [ ] Refactoring
+- [ ] CI/CD improvement
+- [ ] Governance change
 
 ## Testing
 
-<!-- How did you test these changes? -->
+<!-- How did you verify the changes? -->
 
 - [ ] Existing tests pass
 - [ ] New tests added (if applicable)
-- [ ] Manual testing performed
+- [ ] Manual verification performed
+- [ ] Lint clean (`ruff check` / `tsc --noEmit` / `yamllint`)
+- [ ] `python3 scripts/validate-deps.py` passes
+- [ ] JSON/YAML files parse correctly
 
-## Checklist
+## Governance Checklist
 
-- [ ] Code follows the project's style guidelines
-- [ ] Self-review completed
-- [ ] Documentation updated (if applicable)
-- [ ] No secrets or credentials included
+<!-- orchestration-start-here is a flagship repo — all gates enforced. -->
+
+- [ ] **Registry**: If repo metadata changed, `registry.json` is updated
+- [ ] **Dependencies**: No new back-edges (`validate-deps.py` passes)
+- [ ] **Completeness**: No TBD markers, no placeholder content, no broken links
+- [ ] **Stranger Test**: A grant reviewer seeing this PR would understand it
+- [ ] **Docs**: README, CHANGELOG updated as needed
+- [ ] **seed.yaml**: Updated if produces/consumes/subscriptions changed
+- [ ] **governance-rules.json**: Updated if governance policy changed
+- [ ] **Breadcrumbs**: Session breadcrumbs posted on the linked issue
+
+## Risk & Rollback
+
+<!-- What could go wrong? How would you revert this? -->
+
+**Risk level:** <!-- Low / Medium / High -->
+**Rollback plan:** <!-- "Revert commit" is acceptable for low-risk changes -->
+
+## Session Trail
+
+<!-- Paste your closing breadcrumb here, or link to the issue comment containing it. -->
+
+<!--
+breadcrumb:v1 format:
+**Session**: <agent> | <date> | <repo>
+**Phase**: DONE | <organ>/<repo> | <issue-ref>
+**Done:** <bullets>
+**Next:** <bullets>
+**Pipeline**: <status>
+**Commit**: <sha>
+-->
