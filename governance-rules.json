@@ -73,6 +73,11 @@
       "title": "Session Lifecycle Mandate",
       "rule": "All development sessions follow the FRAME->SHAPE->BUILD->PROVE lifecycle. No implementation without a plan. See docs/conductor-playbook.md.",
       "enforcement": "manual"
+    },
+    "F": {
+      "title": "Agent Coordination Visibility",
+      "rule": "All sessions leave a breadcrumb at completion using the standardized format (docs/breadcrumb-protocol.md). Non-interactive agents must comply with the safety protocol (petasum-super-petasum/docs/NON-INTERACTIVE-AGENT-SAFETY.md).",
+      "enforcement": "manual"
     }
   },
   "quality_gates": {

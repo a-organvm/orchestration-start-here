@@ -96,16 +96,23 @@ references:
 ## Step 6 — DONE: Breadcrumb + Close (5 min)
 
 - [ ] Commit with conventional commit message
-- [ ] Update issue with status comment:
-  ```
+- [ ] Leave a **breadcrumb** using the standardized format from `docs/breadcrumb-protocol.md`:
+  ```markdown
+  <!-- breadcrumb:v1 -->
+  **Session**: <agent-name> | <date> | <repo>
+  **Phase**: DONE | <organ>/<repo> | <issue-ref>
+
   **Done:**
-  - [list what was completed]
+  - <what was completed, 1-3 bullets>
 
   **Next:**
-  - [list follow-up items, if any]
+  - <what should happen next, max 3 bullets>
 
-  **Commit:** <sha>
+  **Pipeline**: <promotion_status> (no change | promoted from X)
+  **Commit**: <sha or "no commit">
+  <!-- /breadcrumb -->
   ```
+- [ ] Post the breadcrumb as an **issue comment** (primary) or save to `.breadcrumb.md` (fallback)
 - [ ] Update `CHANGELOG.md` if the change is user-visible
 - [ ] Merge branch if all criteria met, or note what remains
 

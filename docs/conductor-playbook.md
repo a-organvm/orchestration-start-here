@@ -95,13 +95,14 @@ The four-verb lifecycle exists to impose a minimal structure on every unit of wo
 
 **Activities**:
 - Commit with conventional commit message
-- Update the issue with done/next bullets
+- Leave a breadcrumb using the standardized format (`docs/breadcrumb-protocol.md`)
+- Post the breadcrumb as an issue comment (primary) or `.breadcrumb.md` (fallback)
 - Update CHANGELOG.md if appropriate
 - Note any follow-up issues discovered during BUILD
 
 **Entry criteria**: PROVE passed.
 
-**Exit criteria**: Breadcrumb committed. Issue updated. No uncommitted changes.
+**Exit criteria**: Breadcrumb posted (issue comment or `.breadcrumb.md`). Issue updated. No uncommitted changes.
 
 ---
 
@@ -164,6 +165,7 @@ The per-task lifecycle is the atomic unit. The other scales compose from it but 
 ## References
 
 - **Session Protocol**: `docs/session-protocol.md` — concrete checklist for running a session
+- **Breadcrumb Protocol**: `docs/breadcrumb-protocol.md` — standardized breadcrumb format for session completion
 - **WIP Limits**: `governance-rules.json` → `wip_limits` — system-wide work-in-progress constraints
-- **Governance Rules**: `governance-rules.json` — Amendment E codifies this lifecycle
+- **Governance Rules**: `governance-rules.json` — Amendment E codifies this lifecycle, Amendment F mandates breadcrumbs
 - **Gate Definitions**: `docs/flow-patterns/gate-definitions.yaml` — inter-organ flow gates
