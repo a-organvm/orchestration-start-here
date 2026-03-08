@@ -68,6 +68,11 @@
     "D": {
       "title": "AI Non-Determinism Acknowledgment",
       "rule": "All AI-generated deliverables require human review. Budget estimates use scenario banding."
+    },
+    "E": {
+      "title": "Session Lifecycle Mandate",
+      "rule": "All development sessions follow the FRAME->SHAPE->BUILD->PROVE lifecycle. No implementation without a plan. See docs/conductor-playbook.md.",
+      "enforcement": "manual"
     }
   },
   "quality_gates": {
@@ -99,5 +104,15 @@
         "Human approval by @4444j99"
       ]
     }
+  },
+  "wip_limits": {
+    "version": "1.0",
+    "note": "Aspirational ceilings. Enforcement is warn-only until backlog is resolved.",
+    "active_promotions_system_wide": 3,
+    "active_work_per_organ": 3,
+    "public_process_per_organ": 5,
+    "active_work_window_days": 14,
+    "enforcement": "warn",
+    "graduated_enforcement_date": null
   }
 }
