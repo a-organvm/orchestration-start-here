@@ -10,6 +10,7 @@ This repo participates in the **ORGAN-IV (Orchestration)** swarm.
 
 ### Production Responsibilities
 - **Produce** `governance-rules` for all
+- **Produce** `logic-as-code` for agentic-titan, agent--claude-smith
 - **Produce** `health-reports` for all
 - **Produce** `promotion-decisions` for all
 
@@ -21,5 +22,5 @@ This repo participates in the **ORGAN-IV (Orchestration)** swarm.
 - Adhere to unidirectional flow: I→II→III
 - Never commit secrets or credentials
 
-*Last synced: 2026-02-24T12:41:28Z*
+*Last synced: 2026-03-08T13:18:18Z*
 <!-- ORGANVM:AUTO:END -->
