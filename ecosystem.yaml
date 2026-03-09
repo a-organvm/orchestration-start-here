@@ -1,0 +1,8 @@
+schema_version: '1.0'
+repo: orchestration-start-here
+organ: IV
+display_name: 'Central orchestration hub: registry, governance rules, 5 workflows,
+  3 Python scripts. The central nervous system of the eight-organ system.'
+delivery:
+- platform: web_app
+  status: not_started

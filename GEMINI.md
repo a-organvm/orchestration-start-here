@@ -22,7 +22,7 @@ See `CLAUDE.md` in this repo for full development instructions, architecture, an
 ### Governance
 - *Standard ORGANVM governance applies*
 
-*Last synced: 2026-03-08T13:18:18Z*
+*Last synced: 2026-03-08T20:11:34Z*
 
 ## Session Review Protocol
 

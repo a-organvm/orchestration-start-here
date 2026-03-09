@@ -4,16 +4,36 @@
 Reads registry.json and governance-rules.json, validates system health,
 and produces a markdown audit report.
 
-Usage:
-    python3 scripts/organ-audit.py \
-        --registry registry.json \
-        --governance governance-rules.json \
-        --output audit-report.md
+Utilizes dynamic environment variables (ORG_I...VII, ORGANVM_WORKSPACE_DIR)
+for validation and context.
 """
 import json
 import sys
 import argparse
+import os
 from datetime import datetime
+from pathlib import Path
+
+
+def get_organ_env_map():
+    """Retrieve the organ org-name mapping from environment variables."""
+    id_to_env = {
+        "ORGAN-I": "ORG_I",
+        "ORGAN-II": "ORG_II",
+        "ORGAN-III": "ORG_III",
+        "ORGAN-IV": "ORG_IV",
+        "ORGAN-V": "ORG_V",
+        "ORGAN-VI": "ORG_VI",
+        "ORGAN-VII": "ORG_VII",
+        "META-ORGANVM": "ORG_META"
+    }
+    
+    mapping = {}
+    for organ_id, env_var in id_to_env.items():
+        val = os.environ.get(env_var)
+        if val:
+            mapping[organ_id] = val
+    return mapping
 
 
 def find_cycles(graph: dict) -> list:
@@ -48,26 +68,26 @@ def find_cycles(graph: dict) -> list:
 def validate_dependency_directions(registry: dict, governance: dict) -> list:
     """Check that all dependencies respect unidirectional flow."""
     allowed = governance.get("articles", {}).get("II", {}).get("allowed_dependencies", {})
-
-    org_to_organ = {
-        "organvm-i-theoria": "ORGAN-I",
-        "organvm-ii-poiesis": "ORGAN-II",
-        "organvm-iii-ergon": "ORGAN-III",
-        "organvm-iv-taxis": "ORGAN-IV",
-        "organvm-v-logos": "ORGAN-V",
-        "organvm-vi-koinonia": "ORGAN-VI",
-        "organvm-vii-kerygma": "ORGAN-VII",
-    }
+    
+    repo_to_organ = {}
+    for organ_id, organ in registry.get("organs", {}).items():
+        for repo in organ.get("repositories", []):
+            repo_to_organ[repo["name"]] = organ_id
+            if "org" in repo:
+                repo_to_organ[f"{repo['org']}/{repo['name']}"] = organ_id
 
     violations = []
     for organ_id, organ in registry.get("organs", {}).items():
         for repo in organ.get("repositories", []):
-            repo_org = repo.get("org", "")
-            source_organ = org_to_organ.get(repo_org, organ_id)
+            source_organ = organ_id
             for dep in repo.get("dependencies", []):
-                dep_org = dep.split("/")[0] if "/" in dep else ""
-                dep_organ = org_to_organ.get(dep_org, "UNKNOWN")
-                if dep_organ != source_organ:
+                dep_organ = repo_to_organ.get(dep, "UNKNOWN")
+                
+                if dep_organ == "UNKNOWN" and "/" in dep:
+                    dep_name = dep.split("/")[-1]
+                    dep_organ = repo_to_organ.get(dep_name, "UNKNOWN")
+
+                if dep_organ != source_organ and dep_organ != "UNKNOWN":
                     allowed_targets = allowed.get(source_organ, [])
                     if dep_organ not in allowed_targets:
                         violations.append(
@@ -95,16 +115,32 @@ def audit_organs(registry_path: str, governance_path: str) -> tuple:
         "organs_operational": 0,
     }
 
+    # Environment-based stats validation
+    env_total_repos = os.environ.get("CONDUCTOR_TOTAL_REPOS")
+    if env_total_repos:
+        metrics["expected_total"] = int(env_total_repos)
+
     report.append("## Organ Status\n")
 
-    for organ_id in [
-        "ORGAN-I", "ORGAN-II", "ORGAN-III", "ORGAN-IV",
-        "ORGAN-V", "ORGAN-VI", "ORGAN-VII",
-    ]:
+    env_map = get_organ_env_map()
+    all_organs = sorted(registry.get("organs", {}).keys())
+    
+    for organ_id in all_organs:
         organ = registry.get("organs", {}).get(organ_id, {})
         repos = organ.get("repositories", [])
         repo_count = len(repos)
         metrics["total_repos"] += repo_count
+
+        # Validate registry org vs environment org
+        if organ_id in env_map:
+            reg_org = None
+            if repos:
+                reg_org = repos[0].get("org")
+            if reg_org and reg_org != env_map[organ_id]:
+                alerts["warning"].append(
+                    f"{organ_id} Org Mismatch: Registry has '{reg_org}', "
+                    f"Env has '{env_map[organ_id]}'"
+                )
 
         documented = sum(
             1 for r in repos
@@ -125,7 +161,6 @@ def audit_organs(registry_path: str, governance_path: str) -> tuple:
         report.append(f"- **Repos with dependencies:** {repo_count - empty_deps}/{repo_count}")
         report.append("")
 
-        # Check for repos without documentation
         undocumented = [
             r["name"] for r in repos
             if r.get("documentation_status", "") not in (
@@ -139,10 +174,8 @@ def audit_organs(registry_path: str, governance_path: str) -> tuple:
                 + ", ".join(undocumented[:5])
             )
 
-    # Dependency validation
+    # Dependency graph
     report.append("\n## Dependency Validation\n")
-
-    # Build dependency graph for cycle detection
     dep_graph = {}
     for organ_id, organ in registry.get("organs", {}).items():
         for repo in organ.get("repositories", []):
@@ -157,7 +190,6 @@ def audit_organs(registry_path: str, governance_path: str) -> tuple:
     else:
         report.append("- **Circular dependencies:** None detected")
 
-    # Direction violations
     violations = validate_dependency_directions(registry, governance)
     metrics["dependency_violations"] = len(violations)
     if violations:
@@ -183,6 +215,10 @@ def audit_organs(registry_path: str, governance_path: str) -> tuple:
     # Metrics summary
     report.append("\n## Metrics\n")
     report.append(f"- **Total repos:** {metrics['total_repos']}")
+    if "expected_total" in metrics and metrics["total_repos"] != metrics["expected_total"]:
+        report.append(f"  - ⚠️ DISCREPANCY: Expected {metrics['expected_total']} from CONDUCTOR_TOTAL_REPOS")
+        alerts["warning"].append(f"Repo count discrepancy: Registry={metrics['total_repos']}, Env={metrics['expected_total']}")
+    
     report.append(f"- **Documented repos:** {metrics['documented_repos']}")
     report.append(f"- **Organs operational:** {metrics['organs_operational']}/7")
     report.append(f"- **Dependency violations:** {metrics['dependency_violations']}")
