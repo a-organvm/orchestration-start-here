@@ -15,7 +15,7 @@ from typing import Any
 import yaml
 
 from contrib_engine.capabilities import CAPABILITIES, match_capabilities
-from contrib_engine.github_client import get_repo_info, search_issues
+from contrib_engine.github_client import get_repo_info, list_user_forks, search_issues, who_starred_my_repos
 from contrib_engine.schemas import ContributionTarget, RankedTargets, TargetStatus
 
 logger = logging.getLogger(__name__)
@@ -227,3 +227,73 @@ def load_targets(input_path: Path | None = None) -> RankedTargets:
     if not data:
         return RankedTargets()
     return RankedTargets.model_validate(data)
+
+
+def _extract_star_signals() -> list[dict]:
+    """Extract inbound signals from users who starred our repos."""
+    stars = who_starred_my_repos()
+    return [{"login": s.get("login", ""), "repo": s.get("repo", "")} for s in stars]
+
+
+def _extract_fork_signals(username: str = "4444J99") -> list[dict]:
+    """Extract outbound signals from repos we've forked."""
+    forks = list_user_forks(username)
+    result = []
+    for fork in forks:
+        parent = fork.get("parent", {})
+        if parent:
+            owner = parent.get("owner", "")
+            name = parent.get("name", "")
+            if owner and name:
+                result.append({"name": fork["name"], "github": f"{owner}/{name}"})
+    return result
+
+
+def _extract_pr_history(organ_iv_dir: Path | None = None) -> list[dict]:
+    """Extract target repos from existing contrib workspace journals."""
+    import re
+    base = organ_iv_dir or Path.home() / "Workspace" / "organvm-iv-taxis"
+    result = []
+    if not base.exists():
+        return result
+    pr_pattern = re.compile(r"\*\*PR:\*\*\s*PR\s*#(\d+)")
+    for d in base.iterdir():
+        if not d.is_dir() or not d.name.startswith("contrib--"):
+            continue
+        journal_dir = d / "journal"
+        if not journal_dir.exists():
+            continue
+        for md in journal_dir.glob("*.md"):
+            text = md.read_text(encoding="utf-8")
+            matches = pr_pattern.findall(text)
+            if matches:
+                result.append({"workspace": d.name, "pr_numbers": [int(m) for m in matches]})
+    return result
+
+
+def _extract_dependency_signals(workspace_dir: Path | None = None) -> list[dict]:
+    """Extract external package dependencies from pyproject.toml files.
+
+    Uses tomllib (Python 3.11+) for correct TOML parsing.
+    Skips .venv, node_modules, .git directories.
+    """
+    import re
+    import tomllib
+
+    base = workspace_dir or Path.home() / "Workspace"
+    result = []
+    skip_dirs = {".venv", "node_modules", ".git", "__pycache__", ".tox"}
+    for toml_path in base.rglob("pyproject.toml"):
+        if any(part in skip_dirs for part in toml_path.parts):
+            continue
+        try:
+            with open(toml_path, "rb") as f:
+                data = tomllib.load(f)
+            deps = data.get("project", {}).get("dependencies", [])
+            for dep in deps:
+                match = re.match(r"([a-zA-Z0-9_-]+)", dep)
+                if match:
+                    result.append({"package": match.group(1), "source": str(toml_path)})
+        except Exception:
+            continue
+    return result

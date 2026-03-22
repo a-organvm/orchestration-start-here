@@ -1,0 +1,135 @@
+name: "The Plague"
+started: "2026-03-22"
+targets:
+  - contrib--temporal-sdk-python
+  - contrib--adenhq-hive
+  - contrib--primeinc-github-stars
+  - contrib--langchain-langgraph
+  - contrib--anthropic-skills
+  - contrib--dbt-mcp
+  - contrib--ipqwery-ipapi-py
+actions:
+  - id: temporal-cla
+    workspace: contrib--temporal-sdk-python
+    phase: unblock
+    action: "Sign CLA at cla-assistant.io"
+    priority: 0
+    manual: true
+    automated: false
+    blocked_by: []
+    completed: false
+    completed_at: ""
+  - id: temporal-await
+    workspace: contrib--temporal-sdk-python
+    phase: unblock
+    action: "Await CI re-run after CLA"
+    priority: 0
+    manual: false
+    automated: false
+    blocked_by:
+      - temporal-cla
+    completed: false
+    completed_at: ""
+  - id: hive-claim
+    workspace: contrib--adenhq-hive
+    phase: unblock
+    action: "Comment on issue #6613 to claim"
+    priority: 0
+    manual: true
+    automated: false
+    blocked_by: []
+    completed: false
+    completed_at: ""
+  - id: hive-await-assign
+    workspace: contrib--adenhq-hive
+    phase: unblock
+    action: "Wait for assignment (24h per CONTRIBUTING.md)"
+    priority: 0
+    manual: false
+    automated: false
+    blocked_by:
+      - hive-claim
+    completed: false
+    completed_at: ""
+  - id: hive-link-pr
+    workspace: contrib--adenhq-hive
+    phase: unblock
+    action: "Update PR #6707 description to reference issue #6613"
+    priority: 0
+    manual: false
+    automated: true
+    blocked_by:
+      - hive-await-assign
+    completed: false
+    completed_at: ""
+  - id: prime-changeset
+    workspace: contrib--primeinc-github-stars
+    phase: unblock
+    action: "Add changeset file per changeset-bot requirements"
+    priority: 1
+    manual: false
+    automated: true
+    blocked_by: []
+    completed: false
+    completed_at: ""
+  - id: langgraph-community
+    workspace: contrib--langchain-langgraph
+    phase: engage
+    action: "Find and join LangChain community channel"
+    priority: 2
+    manual: true
+    automated: false
+    blocked_by: []
+    completed: false
+    completed_at: ""
+  - id: langgraph-bump
+    workspace: contrib--langchain-langgraph
+    phase: engage
+    action: "Polite comment on PR #7237 requesting review"
+    priority: 2
+    manual: false
+    automated: true
+    blocked_by: []
+    completed: false
+    completed_at: ""
+  - id: anthropic-investigate
+    workspace: contrib--anthropic-skills
+    phase: engage
+    action: "Check if anthropics/skills accepts external PRs (review process)"
+    priority: 2
+    manual: false
+    automated: true
+    blocked_by: []
+    completed: false
+    completed_at: ""
+  - id: anthropic-engage
+    workspace: contrib--anthropic-skills
+    phase: engage
+    action: "Comment on PR #723 or related issue"
+    priority: 2
+    manual: false
+    automated: true
+    blocked_by:
+      - anthropic-investigate
+    completed: false
+    completed_at: ""
+  - id: dbt-engage
+    workspace: contrib--dbt-mcp
+    phase: engage
+    action: "Follow up on PR #669 — check if maintainers are active"
+    priority: 3
+    manual: false
+    automated: true
+    blocked_by: []
+    completed: false
+    completed_at: ""
+  - id: ipqwery-patience
+    workspace: contrib--ipqwery-ipapi-py
+    phase: engage
+    action: "Wait 14 days from PR submission, then polite bump"
+    priority: 4
+    manual: false
+    automated: false
+    blocked_by: []
+    completed: false
+    completed_at: ""

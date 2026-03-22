@@ -127,6 +127,18 @@ def create_repo(org: str, name: str, description: str = "", public: bool = True)
     return f"https://github.com/{org}/{name}"
 
 
+def list_user_forks(username: str = "4444J99") -> list[dict]:
+    """List forks owned by username with parent info."""
+    result = _run_gh([
+        "repo", "list", username,
+        "--json", "name,isFork,parent",
+        "--limit", "50",
+    ])
+    if isinstance(result, list):
+        return [r for r in result if r.get("isFork")]
+    return []
+
+
 def who_starred_my_repos(username: str = "4444J99", limit: int = 50) -> list[dict[str, str]]:
     """Find users/orgs that recently starred repos owned by username.
 
