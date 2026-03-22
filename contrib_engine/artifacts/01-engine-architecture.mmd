@@ -1,0 +1,44 @@
+---
+config:
+  theme: dark
+  themeVariables:
+    primaryColor: '#e94560'
+    primaryTextColor: '#eee'
+    primaryBorderColor: '#533483'
+    lineColor: '#533483'
+    secondaryColor: '#16213e'
+    tertiaryColor: '#0f3460'
+    background: '#0a0a1a'
+    mainBkg: '#1a1a2e'
+    nodeBorder: '#533483'
+    clusterBkg: '#111128'
+    clusterBorder: '#533483'
+---
+flowchart LR
+    subgraph ENGINE["ENGINE"]
+        direction TB
+        SC["Scanner"] --> OR["Orchestrator"] --> CA["Campaign\nSequencer"] --> MO["Monitor"] --> BF["Backflow\nPipeline"]
+    end
+
+    subgraph TARGETS["7 TARGETS  —  138K STARS"]
+        T1["AdenHQ Hive\n9.8K"]
+        T2["Anthropic Skills\n100K"]
+        T3["LangGraph\n27K"]
+        T4["Temporal SDK\n1K"]
+        T5["dbt-mcp\n516"]
+        T6["github-stars"]
+        T7["ipapi-py\n151"]
+    end
+
+    subgraph RETURNS["BACKFLOW TO ORGANVM"]
+        O1["Theory"]
+        O2["Artifacts"]
+        O3["Code"]
+        O5["Narrative"]
+        O6["Community"]
+        O7["Distribution"]
+    end
+
+    ENGINE -->|"PRs"| TARGETS
+    TARGETS -->|"knowledge"| RETURNS
+    RETURNS -.->|"compounds"| ENGINE
