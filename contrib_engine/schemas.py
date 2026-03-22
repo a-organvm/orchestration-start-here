@@ -96,3 +96,189 @@ class ContributionStatusIndex(BaseModel):
             if c.workspace == workspace:
                 return c
         return None
+
+
+# --- Campaign models ---
+
+
+class CampaignPhase(StrEnum):
+    """Phase of a contribution campaign."""
+
+    UNBLOCK = "unblock"
+    ENGAGE = "engage"
+    CULTIVATE = "cultivate"
+    HARVEST = "harvest"
+    INJECT = "inject"
+
+
+class CampaignAction(BaseModel):
+    """A single action in the campaign queue."""
+
+    id: str
+    workspace: str
+    phase: CampaignPhase
+    action: str
+    priority: int = 0
+    manual: bool = False
+    automated: bool = False
+    blocked_by: list[str] = Field(default_factory=list)
+    completed: bool = False
+    completed_at: str = ""
+
+    model_config = {"extra": "allow"}
+
+
+class Campaign(BaseModel):
+    """The full campaign state."""
+
+    name: str = "The Plague"
+    started: str = ""
+    targets: list[str] = Field(default_factory=list)
+    actions: list[CampaignAction] = Field(default_factory=list)
+
+    model_config = {"extra": "allow"}
+
+    def next_actions(self, limit: int = 5) -> list[CampaignAction]:
+        """Return top-priority unblocked incomplete actions."""
+        completed_ids = {a.id for a in self.actions if a.completed}
+        available = []
+        for a in self.actions:
+            if a.completed:
+                continue
+            blocked = any(
+                bid not in completed_ids
+                for bid in a.blocked_by
+                if any(x.id == bid for x in self.actions)
+            )
+            if not blocked:
+                available.append(a)
+        return sorted(available, key=lambda a: a.priority)[:limit]
+
+    def phase_summary(self) -> dict[str, int]:
+        """Count incomplete actions per phase."""
+        summary: dict[str, int] = {}
+        for a in self.actions:
+            if not a.completed:
+                summary[a.phase] = summary.get(a.phase, 0) + 1
+        return summary
+
+
+# --- Outreach models ---
+
+
+class OutreachChannel(StrEnum):
+    """Communication channel for outreach."""
+
+    GITHUB_ISSUE = "github_issue"
+    GITHUB_PR = "github_pr"
+    DISCORD = "discord"
+    SLACK = "slack"
+    EMAIL = "email"
+    TWITTER = "twitter"
+
+
+class OutreachDirection(StrEnum):
+    """Direction of an outreach interaction."""
+
+    OUTBOUND = "outbound"
+    INBOUND = "inbound"
+    MUTUAL = "mutual"
+
+
+class OutreachEvent(BaseModel):
+    """A single outreach interaction."""
+
+    channel: OutreachChannel
+    date: str
+    direction: OutreachDirection
+    summary: str
+    url: str = ""
+
+    model_config = {"extra": "allow"}
+
+
+class TargetRelationship(BaseModel):
+    """Relationship state with a single external target."""
+
+    workspace: str
+    target: str
+    maintainers: list[str] = Field(default_factory=list)
+    community_channels: list[dict] = Field(default_factory=list)
+    outreach_events: list[OutreachEvent] = Field(default_factory=list)
+    issue_claimed: bool = False
+    issue_assigned: bool = False
+    cla_signed: bool = False
+    first_human_contact: str = ""
+    relationship_score: int = 0
+
+    model_config = {"extra": "allow"}
+
+
+class OutreachIndex(BaseModel):
+    """All outreach relationships."""
+
+    generated: str = ""
+    relationships: list[TargetRelationship] = Field(default_factory=list)
+
+    model_config = {"extra": "allow"}
+
+    def get_relationship(self, workspace: str) -> TargetRelationship | None:
+        for r in self.relationships:
+            if r.workspace == workspace:
+                return r
+        return None
+
+
+# --- Backflow models ---
+
+
+class BackflowType(StrEnum):
+    """Type of knowledge flowing back into ORGANVM."""
+
+    THEORY = "theory"
+    GENERATIVE = "generative"
+    CODE = "code"
+    NARRATIVE = "narrative"
+    COMMUNITY = "community"
+    DISTRIBUTION = "distribution"
+
+
+class BackflowStatus(StrEnum):
+    """Status of a backflow item."""
+
+    PENDING = "pending"
+    EXTRACTED = "extracted"
+    DEPOSITED = "deposited"
+    PUBLISHED = "published"
+
+
+class BackflowItem(BaseModel):
+    """A single backflow item to deposit into an ORGANVM organ."""
+
+    workspace: str
+    organ: str
+    backflow_type: BackflowType
+    title: str
+    description: str
+    status: BackflowStatus = BackflowStatus.PENDING
+    artifact_path: str = ""
+    deposited_at: str = ""
+
+    model_config = {"extra": "allow"}
+
+
+class BackflowIndex(BaseModel):
+    """All backflow items across all contributions."""
+
+    generated: str = ""
+    items: list[BackflowItem] = Field(default_factory=list)
+
+    model_config = {"extra": "allow"}
+
+    def pending_by_organ(self) -> dict[str, list[BackflowItem]]:
+        """Group pending items by target organ."""
+        result: dict[str, list[BackflowItem]] = {}
+        for item in self.items:
+            if item.status == BackflowStatus.PENDING:
+                result.setdefault(item.organ, []).append(item)
+        return result
