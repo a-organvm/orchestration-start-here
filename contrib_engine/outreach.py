@@ -78,7 +78,7 @@ def save_outreach(index: OutreachIndex, output_path: Path | None = None) -> Path
     path.parent.mkdir(parents=True, exist_ok=True)
     with open(path, "w", encoding="utf-8") as f:
         yaml.safe_dump(
-            index.model_dump(mode="python"),
+            index.model_dump(mode="json"),
             f,
             default_flow_style=False,
             sort_keys=False,

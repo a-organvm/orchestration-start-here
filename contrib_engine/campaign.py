@@ -38,7 +38,7 @@ def save_campaign(campaign: Campaign, output_path: Path | None = None) -> Path:
     path = output_path or DATA_DIR / "campaign.yaml"
     path.parent.mkdir(parents=True, exist_ok=True)
     with open(path, "w", encoding="utf-8") as f:
-        yaml.safe_dump(campaign.model_dump(mode="python"), f, default_flow_style=False, sort_keys=False)
+        yaml.safe_dump(campaign.model_dump(mode="json"), f, default_flow_style=False, sort_keys=False)
     return path
 
 
