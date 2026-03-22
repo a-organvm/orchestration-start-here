@@ -54,12 +54,23 @@ def discover_contributions() -> list[ContributionStatus]:
 
 
 def _infer_target(seed: dict) -> str:
-    """Infer target repo from seed.yaml produces edges."""
+    """Infer target repo from seed.yaml produces edges.
+
+    Handles two formats:
+    1. String: "pr_to_{owner}_{repo}" -> "{owner}/{repo}"
+    2. Dict: {"type": "contribution", "consumers": ["owner/repo"]} -> "owner/repo"
+    """
     for edge in seed.get("produces", []):
         if isinstance(edge, str) and edge.startswith("pr_to_"):
             parts = edge.replace("pr_to_", "").split("_", 1)
             if len(parts) == 2:
                 return f"{parts[0]}/{parts[1]}"
+        elif isinstance(edge, dict):
+            consumers = edge.get("consumers", [])
+            if consumers and isinstance(consumers, list):
+                for consumer in consumers:
+                    if isinstance(consumer, str) and "/" in consumer:
+                        return consumer
     return ""
 
 

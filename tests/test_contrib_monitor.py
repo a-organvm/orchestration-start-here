@@ -54,3 +54,30 @@ class TestDetermineNextAction:
             pr_state=PRState.OPEN, assigned=True, last_ci="pass",
         )
         assert determine_next_action(c) == "await_merge"
+
+
+class TestInferTargetDictFormat:
+    def test_infers_from_dict_produces(self):
+        seed = {
+            "produces": [
+                {"type": "contribution", "description": "Skills", "consumers": ["anthropics/skills"]}
+            ]
+        }
+        assert _infer_target(seed) == "anthropics/skills"
+
+    def test_infers_from_mixed_produces(self):
+        seed = {
+            "produces": [
+                "theory_extraction",
+                {"type": "contribution", "consumers": ["dbt-labs/dbt-mcp"]},
+            ]
+        }
+        assert _infer_target(seed) == "dbt-labs/dbt-mcp"
+
+    def test_dict_without_consumers(self):
+        seed = {
+            "produces": [
+                {"type": "artifact", "description": "something"}
+            ]
+        }
+        assert _infer_target(seed) == ""
