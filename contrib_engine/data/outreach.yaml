@@ -1,107 +1,113 @@
-generated: "2026-03-22"
+generated: '2026-03-22'
 relationships:
-  - workspace: contrib--adenhq-hive
-    target: adenhq/hive
-    maintainers: []
-    community_channels: []
-    outreach_events:
-      - channel: github_pr
-        date: "2026-03-21"
-        direction: outbound
-        summary: "Submitted PR #6707 — design versioning system"
-        url: "https://github.com/adenhq/hive/pull/6707"
-    issue_claimed: false
-    issue_assigned: false
-    cla_signed: false
-    first_human_contact: ""
-    relationship_score: 10
-  - workspace: contrib--anthropic-skills
-    target: anthropics/skills
-    maintainers: []
-    community_channels: []
-    outreach_events:
-      - channel: github_pr
-        date: "2026-03-21"
-        direction: outbound
-        summary: "Submitted PR #723 — testing-patterns skill"
-        url: "https://github.com/anthropics/skills/pull/723"
-    issue_claimed: false
-    issue_assigned: false
-    cla_signed: false
-    first_human_contact: ""
-    relationship_score: 10
-  - workspace: contrib--dbt-mcp
-    target: dbt-labs/dbt-mcp
-    maintainers: []
-    community_channels: []
-    outreach_events:
-      - channel: github_pr
-        date: "2026-03-21"
-        direction: outbound
-        summary: "Submitted PR #669 — OAuth wording fix"
-        url: "https://github.com/dbt-labs/dbt-mcp/pull/669"
-    issue_claimed: false
-    issue_assigned: false
-    cla_signed: false
-    first_human_contact: ""
-    relationship_score: 10
-  - workspace: contrib--ipqwery-ipapi-py
-    target: ipqwery/ipapi-py
-    maintainers: []
-    community_channels: []
-    outreach_events:
-      - channel: github_pr
-        date: "2026-03-21"
-        direction: outbound
-        summary: "Submitted PR #8 — Codecov integration"
-        url: "https://github.com/ipqwery/ipapi-py/pull/8"
-    issue_claimed: false
-    issue_assigned: false
-    cla_signed: false
-    first_human_contact: ""
-    relationship_score: 10
-  - workspace: contrib--langchain-langgraph
-    target: langchain-ai/langgraph
-    maintainers: []
-    community_channels: []
-    outreach_events:
-      - channel: github_pr
-        date: "2026-03-21"
-        direction: outbound
-        summary: "Submitted PR #7237 — restart-safety coverage"
-        url: "https://github.com/langchain-ai/langgraph/pull/7237"
-    issue_claimed: false
-    issue_assigned: false
-    cla_signed: false
-    first_human_contact: ""
-    relationship_score: 10
-  - workspace: contrib--primeinc-github-stars
-    target: primeinc/github-stars
-    maintainers: []
-    community_channels: []
-    outreach_events:
-      - channel: github_pr
-        date: "2026-03-21"
-        direction: outbound
-        summary: "Submitted PR #39 — CodeQL security analysis"
-        url: "https://github.com/primeinc/github-stars/pull/39"
-    issue_claimed: false
-    issue_assigned: false
-    cla_signed: false
-    first_human_contact: ""
-    relationship_score: 10
-  - workspace: contrib--temporal-sdk-python
-    target: temporalio/sdk-python
-    maintainers: []
-    community_channels: []
-    outreach_events:
-      - channel: github_pr
-        date: "2026-03-21"
-        direction: outbound
-        summary: "Submitted PR #1385 — telemetry config docs"
-        url: "https://github.com/temporalio/sdk-python/pull/1385"
-    issue_claimed: false
-    issue_assigned: false
-    cla_signed: false
-    first_human_contact: ""
-    relationship_score: 10
+- workspace: contrib--adenhq-hive
+  target: adenhq/hive
+  maintainers: []
+  community_channels: []
+  outreach_events:
+  - channel: github_pr
+    date: '2026-03-21'
+    direction: outbound
+    summary: "Submitted PR #6707 \u2014 design versioning system"
+    url: https://github.com/adenhq/hive/pull/6707
+  issue_claimed: false
+  issue_assigned: false
+  cla_signed: false
+  first_human_contact: ''
+  relationship_score: 10
+- workspace: contrib--anthropic-skills
+  target: anthropics/skills
+  maintainers: []
+  community_channels: []
+  outreach_events:
+  - channel: github_pr
+    date: '2026-03-21'
+    direction: outbound
+    summary: "Submitted PR #723 \u2014 testing-patterns skill"
+    url: https://github.com/anthropics/skills/pull/723
+  - channel: github_pr
+    date: '2026-03-22'
+    direction: outbound
+    summary: 'Investigated: external PRs accepted, 10 merged from externals. Reviewers:
+      klazuka, zack-anthropic. 10 open PRs in queue. No CONTRIBUTING.md.'
+    url: ''
+  issue_claimed: false
+  issue_assigned: false
+  cla_signed: false
+  first_human_contact: ''
+  relationship_score: 15
+- workspace: contrib--dbt-mcp
+  target: dbt-labs/dbt-mcp
+  maintainers: []
+  community_channels: []
+  outreach_events:
+  - channel: github_pr
+    date: '2026-03-21'
+    direction: outbound
+    summary: "Submitted PR #669 \u2014 OAuth wording fix"
+    url: https://github.com/dbt-labs/dbt-mcp/pull/669
+  issue_claimed: false
+  issue_assigned: false
+  cla_signed: false
+  first_human_contact: ''
+  relationship_score: 10
+- workspace: contrib--ipqwery-ipapi-py
+  target: ipqwery/ipapi-py
+  maintainers: []
+  community_channels: []
+  outreach_events:
+  - channel: github_pr
+    date: '2026-03-21'
+    direction: outbound
+    summary: "Submitted PR #8 \u2014 Codecov integration"
+    url: https://github.com/ipqwery/ipapi-py/pull/8
+  issue_claimed: false
+  issue_assigned: false
+  cla_signed: false
+  first_human_contact: ''
+  relationship_score: 10
+- workspace: contrib--langchain-langgraph
+  target: langchain-ai/langgraph
+  maintainers: []
+  community_channels: []
+  outreach_events:
+  - channel: github_pr
+    date: '2026-03-21'
+    direction: outbound
+    summary: "Submitted PR #7237 \u2014 restart-safety coverage"
+    url: https://github.com/langchain-ai/langgraph/pull/7237
+  issue_claimed: false
+  issue_assigned: false
+  cla_signed: false
+  first_human_contact: ''
+  relationship_score: 10
+- workspace: contrib--primeinc-github-stars
+  target: primeinc/github-stars
+  maintainers: []
+  community_channels: []
+  outreach_events:
+  - channel: github_pr
+    date: '2026-03-21'
+    direction: outbound
+    summary: "Submitted PR #39 \u2014 CodeQL security analysis"
+    url: https://github.com/primeinc/github-stars/pull/39
+  issue_claimed: false
+  issue_assigned: false
+  cla_signed: false
+  first_human_contact: ''
+  relationship_score: 10
+- workspace: contrib--temporal-sdk-python
+  target: temporalio/sdk-python
+  maintainers: []
+  community_channels: []
+  outreach_events:
+  - channel: github_pr
+    date: '2026-03-21'
+    direction: outbound
+    summary: "Submitted PR #1385 \u2014 telemetry config docs"
+    url: https://github.com/temporalio/sdk-python/pull/1385
+  issue_claimed: false
+  issue_assigned: false
+  cla_signed: false
+  first_human_contact: ''
+  relationship_score: 10
