@@ -13,25 +13,25 @@ items:
     backflow_type: generative
     title: "State transition comparison diagrams"
     description: "Mermaid diagrams comparing ORGANVM vs Hive lifecycle models"
-    status: pending
-    artifact_path: ""
-    deposited_at: ""
+    status: deposited
+    artifact_path: "organvm-ii-poiesis/intake/contributions/state-transition-diagrams.md"
+    deposited_at: "2026-03-23"
   - workspace: contrib--adenhq-hive
     organ: "V"
     backflow_type: narrative
     title: "How ORGANVM contributed governance to a 10K-star agent framework"
     description: "Essay about the first cross-organ symbiotic contribution"
-    status: pending
-    artifact_path: ""
-    deposited_at: ""
+    status: deposited
+    artifact_path: "organvm-v-logos/intake/contributions/governance-contribution-essay.md"
+    deposited_at: "2026-03-23"
   - workspace: contrib--adenhq-hive
     organ: "VI"
     backflow_type: community
     title: "AdenHQ community engagement"
     description: "Discord membership, contact relationships with Vincent Jiang and team"
-    status: pending
-    artifact_path: ""
-    deposited_at: ""
+    status: deposited
+    artifact_path: "organvm-vi-koinonia/intake/contributions/adenhq-community.md"
+    deposited_at: "2026-03-23"
   - workspace: contrib--langchain-langgraph
     organ: "I"
     backflow_type: theory
@@ -45,22 +45,22 @@ items:
     backflow_type: narrative
     title: "Contributing restart-safety to LangGraph"
     description: "Essay about idempotency contribution to a 27K-star framework"
-    status: pending
-    artifact_path: ""
-    deposited_at: ""
+    status: deposited
+    artifact_path: "organvm-v-logos/intake/contributions/langgraph-restart-safety-essay.md"
+    deposited_at: "2026-03-23"
   - workspace: contrib--temporal-sdk-python
     organ: "V"
     backflow_type: narrative
     title: "Contributing documentation to Temporal SDK"
     description: "Essay about first docs contribution and CLA process"
-    status: pending
-    artifact_path: ""
-    deposited_at: ""
+    status: deposited
+    artifact_path: "organvm-v-logos/intake/contributions/temporal-docs-contribution-essay.md"
+    deposited_at: "2026-03-23"
   - workspace: contrib--anthropic-skills
     organ: "III"
     backflow_type: code
     title: "Testing patterns skill contributed back to Anthropic"
     description: "Skill from a-i--skills contributed to upstream Anthropic skills repo"
-    status: pending
-    artifact_path: ""
-    deposited_at: ""
+    status: deposited
+    artifact_path: "organvm-iii-ergon/intake/contributions/anthropic-testing-patterns-skill.md"
+    deposited_at: "2026-03-23"
