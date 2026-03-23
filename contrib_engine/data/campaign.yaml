@@ -115,8 +115,8 @@ actions:
   manual: true
   automated: false
   blocked_by: []
-  completed: false
-  completed_at: ''
+  completed: true
+  completed_at: '2026-03-23T19:00:00.000000'
 - id: temporal-await
   workspace: contrib--temporal-sdk-python
   phase: unblock
