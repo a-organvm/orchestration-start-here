@@ -9,10 +9,63 @@ org: organvm-iv-taxis
 metadata:
   implementation_status: ACTIVE
   tier: flagship
-  promotion_status: PUBLIC_PROCESS
-  last_validated: '2026-03-08'
+  promotion_status: GRADUATED
+  last_validated: '2026-03-23'
+  description: >-
+    Central orchestration hub and nervous system of the eight-organ ORGANVM system.
+    Registry, governance rules, 17 GitHub Actions workflows, 12 Python scripts,
+    contrib_engine (12 modules + 4 artifact renderers), 111+ tests passing.
+    Includes campaign sequencer, outreach tracker, backflow pipeline, and
+    testament formalization.
+  stack:
+    - Python 3.12
+    - GitHub Actions
+  modules:
+    contrib_engine:
+      - scanner.py
+      - orchestrator.py
+      - monitor.py
+      - campaign.py
+      - outreach.py
+      - backflow.py
+      - capabilities.py
+      - schemas.py
+      - github_client.py
+      - cli.py
+      - __main__.py
+      - __init__.py
+    scripts:
+      - validate-deps.py
+      - organ-audit.py
+      - calculate-metrics.py
+      - generate-seed-from-registry.py
+      - validate-all-seeds.py
+      - handle-dispatch-promotion.py
+      - orchestrator-dry-run.py
+      - project-progress.py
+      - validate-wip.py
+      - validate-agent-run.py
+      - enforce-ci-mandate.py
+  test_count: 111
 produces:
-- type: artifact
-  description: 'Central orchestration hub: registry, governance rules, 5 workflows,
-    3 Python scripts. The central nervous system of the eight-organ system.'
-consumes: []
+- type: governance_rules
+  description: Codified governance articles enforcing dependency flow, promotion states, and registry authority.
+- type: registry_data
+  description: registry.json — single source of truth for all ~117 repos across 8 organs.
+- type: dependency_validation
+  description: Automated enforcement of unidirectional dependency graph (I->II->III, no back-edges).
+- type: audit_reports
+  description: System-wide organ health audits and promotion readiness reports.
+- type: campaign_data
+  description: Income-weighted open-source contribution campaign state (UNBLOCK->ENGAGE->CULTIVATE->HARVEST->INJECT).
+- type: outreach_data
+  description: Relationship lifecycle tracking with scored engagement events.
+- type: backflow_data
+  description: Knowledge routing pipeline to 6 organs (theory/generative/code/narrative/community/distribution).
+- type: testament_formalization
+  description: 13-article codified writing rules formalized into logic, algorithms, and math.
+consumes:
+- type: github_pr_states
+  description: PR lifecycle states polled by contrib_engine monitor for contribution tracking.
+- type: github_issue_states
+  description: Issue states consumed for campaign sequencing and outreach event logging.
