@@ -164,6 +164,44 @@ def scan(
             if contact["name"] not in targets[org].contacts:
                 targets[org].contacts.append(contact["name"])
 
+    # Phase 1b: Extract from forks — repos we've already forked signal interest
+    forks = list_user_forks()
+    for fork in forks:
+        parent = fork.get("parent", {})
+        if not parent:
+            continue
+        owner = parent.get("owner", {}).get("login", "")
+        repo_name = parent.get("name", "")
+        if not owner or not repo_name:
+            continue
+        key = f"{owner}/{repo_name}"
+        if key not in targets:
+            targets[key] = ContributionTarget(
+                name=key,
+                github=key,
+                signal_type="outbound",
+                notes=f"Forked repo: {fork.get('name', '')}",
+            )
+
+    # Phase 1c: Extract from stargazers — who's watching our repos
+    star_events = who_starred_my_repos()
+    for event in star_events:
+        login = event.get("login", "")
+        if not login or login == "4444J99":
+            continue
+        # Check if this user has repos we could contribute to
+        key = login
+        if key not in targets:
+            targets[key] = ContributionTarget(
+                name=key,
+                github="",
+                signal_type="mutual",
+                contacts=[login],
+                notes=f"Starred our repo: {event.get('repo', '')}",
+            )
+        elif login not in targets[key].contacts:
+            targets[key].contacts.append(login)
+
     # Phase 2: Enrich with GitHub data
     if enrich_github:
         for name, target in targets.items():
@@ -211,7 +249,7 @@ def save_targets(targets: RankedTargets, output_path: Path | None = None) -> Pat
     path.parent.mkdir(parents=True, exist_ok=True)
     with open(path, "w", encoding="utf-8") as f:
         yaml.safe_dump(
-            targets.model_dump(mode="python"),
+            targets.model_dump(mode="json"),
             f,
             default_flow_style=False,
             sort_keys=False,

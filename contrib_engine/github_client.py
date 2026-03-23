@@ -45,7 +45,7 @@ def get_repo_info(owner: str, repo: str) -> dict[str, Any] | None:
     result = _run_gh([
         "repo", "view", f"{owner}/{repo}",
         "--json", "name,description,stargazerCount,isArchived,hasIssuesEnabled,"
-        "primaryLanguage,licenseInfo,openIssues",
+        "primaryLanguage,licenseInfo,issues",
     ])
     return result if isinstance(result, dict) else None
 
@@ -73,7 +73,7 @@ def search_issues(
     query = f"repo:{owner}/{repo} state:{state} " + " OR ".join(keywords[:5])
     result = _run_gh([
         "search", "issues",
-        "--json", "number,title,body,labels,assignees,comments",
+        "--json", "number,title,body,labels,assignees,commentsCount",
         "--limit", str(limit),
         "--", query,
     ])
