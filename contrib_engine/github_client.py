@@ -70,13 +70,16 @@ def search_issues(
     limit: int = 10,
 ) -> list[dict[str, Any]]:
     """Search issues in a repo matching keywords."""
-    query = f"repo:{owner}/{repo} state:{state} " + " OR ".join(keywords[:5])
+    # gh search issues expects qualifiers as separate args, not in the query string
+    keyword_str = " ".join(keywords[:5])
     result = _run_gh([
         "search", "issues",
+        "--repo", f"{owner}/{repo}",
+        "--state", state,
         "--json", "number,title,body,labels,assignees,commentsCount",
         "--limit", str(limit),
-        "--", query,
-    ])
+        "--", keyword_str,
+    ], timeout=15)
     if isinstance(result, list):
         return result
     return []
