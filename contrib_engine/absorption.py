@@ -524,9 +524,9 @@ def deposit_to_backflow(
 # --- Autonomous formalization ---
 
 ORGAN_DIRS = Path.home() / "Workspace"
-CONTRIBUTIONS_SUBDIR = "my-knowledge-base/intake/canonical/contributions"
+CONTRIBUTIONS_SUBDIR = "docs/contributions"
 ORGAN_DIR_MAP = {
-    "I": "organvm-i-theoria",
+    "I": "organvm-i-theoria/my-knowledge-base",
     "II": "organvm-ii-poiesis",
     "III": "organvm-iii-ergon",
     "V": "organvm-v-logos",
