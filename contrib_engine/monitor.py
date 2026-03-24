@@ -200,8 +200,12 @@ def determine_next_action(contribution: ContributionStatus) -> str:
     return "monitor"
 
 
-def run_monitoring_cycle() -> ContributionStatusIndex:
-    """Run one full monitoring cycle across all contributions."""
+def run_monitoring_cycle(run_absorption: bool = True) -> ContributionStatusIndex:
+    """Run one full monitoring cycle across all contributions.
+
+    Args:
+        run_absorption: Also run the Absorption Protocol scan.
+    """
     contributions = discover_contributions()
     index = ContributionStatusIndex(
         generated=datetime.now().isoformat(),
@@ -226,6 +230,22 @@ def run_monitoring_cycle() -> ContributionStatusIndex:
 
     # Save status
     save_status(index)
+
+    # Run Absorption Protocol scan
+    if run_absorption:
+        try:
+            from contrib_engine.absorption import run_absorption_scan
+
+            absorption_index = run_absorption_scan()
+            pending = absorption_index.pending_formalization()
+            if pending:
+                logger.info(
+                    "Absorption: %d items awaiting formalization",
+                    len(pending),
+                )
+        except Exception as e:
+            logger.warning("Absorption scan failed: %s", e)
+
     return index
 
 

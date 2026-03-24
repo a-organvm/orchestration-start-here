@@ -97,6 +97,24 @@ def register_contrib_commands(
     )
     absorb_pending_parser.set_defaults(func=cmd_contrib_absorb_pending)
 
+    # organvm contrib absorb-track
+    absorb_track_parser = subparsers.add_parser(
+        f"{prefix}absorb-track",
+        help="Track a conversation for absorption scanning",
+    )
+    absorb_track_parser.add_argument("url", help="GitHub issue/PR URL to track")
+    absorb_track_parser.add_argument("--workspace", type=str, default="", help="Workspace name")
+    absorb_track_parser.add_argument("--label", type=str, default="", help="Label for this conversation")
+    absorb_track_parser.set_defaults(func=cmd_contrib_absorb_track)
+
+    # organvm contrib absorb-formalize
+    absorb_formalize_parser = subparsers.add_parser(
+        f"{prefix}absorb-formalize",
+        help="Generate formalization prompt for a detected item",
+    )
+    absorb_formalize_parser.add_argument("item_id", nargs="?", help="Item ID (or shows all pending)")
+    absorb_formalize_parser.set_defaults(func=cmd_contrib_absorb_formalize)
+
 
 def cmd_contrib_scan(args: argparse.Namespace) -> None:
     """Run the signal scanner."""
@@ -240,3 +258,54 @@ def cmd_contrib_absorb_pending(args: argparse.Namespace) -> None:
         print(f"\nQuestion:")
         print(f"  {item.question_text}")
         print(f"{'=' * 70}")
+
+
+def cmd_contrib_absorb_track(args: argparse.Namespace) -> None:
+    """Track a conversation URL for absorption scanning."""
+    import re
+
+    from contrib_engine.absorption import add_tracked_conversation
+
+    # Parse GitHub URL
+    match = re.search(r"github\.com/([^/]+)/([^/]+)/(?:issues|pull)/(\d+)", args.url)
+    if not match:
+        print(f"Could not parse GitHub URL: {args.url}")
+        print("Expected format: https://github.com/owner/repo/issues/N")
+        return
+
+    owner, repo, issue_number = match.group(1), match.group(2), int(match.group(3))
+    workspace = args.workspace or f"{owner}-{repo}"
+
+    add_tracked_conversation(owner, repo, issue_number, workspace, args.label)
+    print(f"Tracking: {owner}/{repo}#{issue_number} (workspace: {workspace})")
+
+
+def cmd_contrib_absorb_formalize(args: argparse.Namespace) -> None:
+    """Generate formalization prompt for a detected absorption item."""
+    from contrib_engine.absorption import generate_formalization_prompt, load_absorption
+
+    index = load_absorption()
+    pending = index.pending_formalization()
+
+    if not pending:
+        print("No items awaiting formalization.")
+        return
+
+    if args.item_id:
+        # Generate prompt for specific item
+        item = next((i for i in pending if i.id == args.item_id), None)
+        if not item:
+            print(f"Item {args.item_id} not found in pending items.")
+            return
+        prompt = generate_formalization_prompt(item)
+        print(prompt)
+    else:
+        # Show all pending with their IDs for selection
+        print(f"{len(pending)} items awaiting formalization:\n")
+        for item in pending:
+            triggers = ", ".join(t.value for t in item.triggers)
+            print(f"  {item.id}")
+            print(f"    @{item.questioner}: {item.question_text[:80]}...")
+            print(f"    Triggers: {triggers}")
+            print()
+        print("Run: python -m contrib_engine absorb-formalize <item_id>")

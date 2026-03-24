@@ -24,6 +24,9 @@ from contrib_engine.schemas import (
     AbsorptionIndex,
     AbsorptionStatus,
     AbsorptionTrigger,
+    BackflowItem,
+    BackflowStatus,
+    BackflowType,
 )
 
 logger = logging.getLogger(__name__)
@@ -255,6 +258,13 @@ def _load_tracked_conversations() -> list[dict[str, Any]]:
                             "workspace": workspace,
                         })
 
+    # Also include explicitly tracked conversations
+    for conv in load_tracked_conversations_config():
+        key = (conv["owner"], conv["repo"], conv["issue_number"])
+        if key not in seen:
+            seen.add(key)
+            conversations.append(conv)
+
     return conversations
 
 
@@ -304,3 +314,208 @@ def load_absorption(input_path: Path | None = None) -> AbsorptionIndex:
     if not data:
         return AbsorptionIndex()
     return AbsorptionIndex.model_validate(data)
+
+
+# --- Tracked conversations (beyond outreach URLs) ---
+
+TRACKED_CONVERSATIONS_PATH = DATA_DIR / "tracked_conversations.yaml"
+
+
+def load_tracked_conversations_config() -> list[dict[str, Any]]:
+    """Load explicitly tracked conversations (issues, discussions, etc.)."""
+    if not TRACKED_CONVERSATIONS_PATH.exists():
+        return []
+    with open(TRACKED_CONVERSATIONS_PATH, encoding="utf-8") as f:
+        data = yaml.safe_load(f)
+    return data if isinstance(data, list) else []
+
+
+def save_tracked_conversations_config(conversations: list[dict[str, Any]]) -> None:
+    """Save tracked conversations config."""
+    TRACKED_CONVERSATIONS_PATH.parent.mkdir(parents=True, exist_ok=True)
+    with open(TRACKED_CONVERSATIONS_PATH, "w", encoding="utf-8") as f:
+        yaml.safe_dump(conversations, f, default_flow_style=False, sort_keys=False)
+
+
+def add_tracked_conversation(
+    owner: str, repo: str, issue_number: int, workspace: str = "", label: str = "",
+) -> None:
+    """Add a conversation to the tracked list."""
+    conversations = load_tracked_conversations_config()
+    key = f"{owner}/{repo}#{issue_number}"
+    for c in conversations:
+        if f"{c['owner']}/{c['repo']}#{c['issue_number']}" == key:
+            return  # Already tracked
+    conversations.append({
+        "owner": owner,
+        "repo": repo,
+        "issue_number": issue_number,
+        "workspace": workspace or f"{owner}-{repo}",
+        "label": label,
+    })
+    save_tracked_conversations_config(conversations)
+    logger.info("Now tracking conversation: %s", key)
+
+
+# --- Formalization ---
+
+ORGAN_MAP: dict[str, str] = {
+    "theory": "I",
+    "formal": "I",
+    "pattern": "I",
+    "mathematical": "I",
+    "generative": "II",
+    "diagram": "II",
+    "visual": "II",
+    "code": "III",
+    "implementation": "III",
+    "narrative": "V",
+    "essay": "V",
+    "community": "VI",
+    "distribution": "VII",
+}
+
+
+def infer_organ(item: AbsorptionItem) -> str:
+    """Infer target organ from triggers and question content.
+
+    Theory/pattern questions → ORGAN-I
+    Implementation questions → ORGAN-III
+    Most absorption items are theory-level → default to I.
+    """
+    text = (item.question_text + " " + item.trigger_evidence).lower()
+    for keyword, organ in ORGAN_MAP.items():
+        if keyword in text:
+            return organ
+    # Default: unnamed patterns and assumption divergence are theory-level
+    return "I"
+
+
+def generate_formalization_prompt(item: AbsorptionItem) -> str:
+    """Generate a structured prompt for formalizing an absorbed question.
+
+    Returns a prompt that can be passed to an LLM agent to produce
+    the theory note artifact.
+    """
+    triggers_str = ", ".join(t.value for t in item.triggers)
+    organ = infer_organ(item)
+
+    return f"""## Absorption Protocol — Formalization Task
+
+**Source:** {item.source_url}
+**Questioner:** @{item.questioner}
+**Workspace:** {item.workspace}
+**Triggers:** {triggers_str}
+**Evidence:** {item.trigger_evidence}
+**Target Organ:** {organ}
+
+### The Question
+
+{item.question_text}
+
+### Your Task
+
+This question triggered the Absorption Protocol because it {_explain_triggers(item.triggers)}.
+
+Write a theory note (markdown) that:
+
+1. **Names the pattern** the question exposed — give it a clear, reusable name
+2. **States formal properties** — what are the invariants, guarantees, or constraints?
+3. **Distinguishes from similar patterns** — what is this NOT? (table format)
+4. **Identifies biological/mathematical analogues** if applicable
+5. **Notes independent convergence** if the questioner described their own implementation
+6. **Places in relationship to sibling patterns** in the ORGANVM theory corpus
+
+### Output Format
+
+Save the theory note to:
+`organvm-{_organ_name(organ)}/my-knowledge-base/intake/canonical/contributions/<pattern-name-kebab>.md`
+
+Then return the pattern name and artifact path for backflow registration.
+"""
+
+
+def _explain_triggers(triggers: list[AbsorptionTrigger]) -> str:
+    """Human-readable explanation of why triggers fired."""
+    parts = []
+    if AbsorptionTrigger.ASSUMPTION_DIVERGENCE in triggers:
+        parts.append("contains an assumption we don't share")
+    if AbsorptionTrigger.UNNAMED_PATTERN in triggers:
+        parts.append("points at something we haven't named")
+    if AbsorptionTrigger.INDEPENDENT_CONVERGENCE in triggers:
+        parts.append("reveals independent convergence with our design")
+    return ", ".join(parts) if parts else "matched expansion heuristics"
+
+
+def _organ_name(organ: str) -> str:
+    """Map organ number to directory name component."""
+    names = {
+        "I": "i-theoria",
+        "II": "ii-poiesis",
+        "III": "iii-ergon",
+        "IV": "iv-taxis",
+        "V": "v-logos",
+        "VI": "vi-koinonia",
+        "VII": "vii-kerygma",
+    }
+    return names.get(organ, "i-theoria")
+
+
+def mark_formalized(
+    index: AbsorptionIndex,
+    item_id: str,
+    pattern_name: str,
+    organ: str = "",
+) -> AbsorptionItem | None:
+    """Mark an absorption item as formalized.
+
+    Args:
+        index: The absorption index.
+        item_id: ID of the item to mark.
+        pattern_name: Name of the pattern that was formalized.
+        organ: Target organ (inferred if empty).
+
+    Returns:
+        The updated item, or None if not found.
+    """
+    for item in index.items:
+        if item.id == item_id:
+            item.status = AbsorptionStatus.FORMALIZED
+            item.pattern_name = pattern_name
+            item.organ = organ or infer_organ(item)
+            return item
+    return None
+
+
+def deposit_to_backflow(
+    item: AbsorptionItem,
+    artifact_path: str,
+) -> BackflowItem:
+    """Create a backflow item from a formalized absorption item.
+
+    Args:
+        item: The formalized absorption item.
+        artifact_path: Path to the theory note artifact.
+
+    Returns:
+        The created BackflowItem (caller must add to BackflowIndex and save).
+    """
+    if item.status != AbsorptionStatus.FORMALIZED:
+        raise ValueError(f"Item {item.id} is not formalized (status: {item.status})")
+
+    backflow = BackflowItem(
+        workspace=item.workspace,
+        organ=item.organ or infer_organ(item),
+        backflow_type=BackflowType.THEORY,
+        title=item.pattern_name,
+        description=f"Absorbed from @{item.questioner}'s question: {item.question_text[:100]}",
+        status=BackflowStatus.DEPOSITED,
+        artifact_path=artifact_path,
+        deposited_at=datetime.now().strftime("%Y-%m-%d"),
+    )
+
+    # Update absorption item
+    item.status = AbsorptionStatus.DEPOSITED
+    item.backflow_ref = f"backflow:{item.organ}:{item.pattern_name}"
+
+    return backflow

@@ -1,0 +1,90 @@
+generated: ''
+items:
+- id: abs-20260324080957-0
+  workspace: agentic-titan
+  source_url: https://github.com/organvm-iv-taxis/agentic-titan/issues/20#issuecomment-4104963967
+  questioner: m13v
+  question_text: Glad it was useful. The parallel execution failure handling is genuinely
+    the hardest part to get right - most frameworks either crash the whole group or
+    silently swallow the error. What's your current thinking for ORGAN-IV's approach?
+    Retry the failed agent, redistribute its work, or just continue with partial results?
+  detected_at: '2026-03-24T08:09:57.846280'
+  triggers:
+  - assumption_divergence
+  trigger_evidence: "References conventional approach \u2014 our divergence may be\
+    \ the insight"
+  status: detected
+  pattern_name: ''
+  backflow_ref: ''
+  organ: ''
+- id: abs-20260324080957-1
+  workspace: agentic-titan
+  source_url: https://github.com/organvm-iv-taxis/agentic-titan/issues/20#issuecomment-4107519674
+  questioner: m13v
+  question_text: 'The fission-fusion dynamics are a really interesting approach. Most
+    orchestration frameworks treat agent topology as static, so having it adapt based
+    on crisis metrics is a fundamentally different design.
+
+
+    The FISSION to FUSION state transition on failure is clever - instead of just
+    retrying or escalating, you''re increasing information density across surviving
+    agents. That should help with cascading failures where the root cause isn''t obvious
+    from any single agent''s perspective.
+
+
+    How do you hand'
+  detected_at: '2026-03-24T08:09:57.846505'
+  triggers:
+  - unnamed_pattern
+  - assumption_divergence
+  - assumption_divergence
+  trigger_evidence: "Asks about handling strategy \u2014 may point at unnamed pattern;\
+    \ References conventional approach \u2014 our divergence may be the insight; Contrasts\
+    \ approaches \u2014 divergence point worth examining"
+  status: detected
+  pattern_name: ''
+  backflow_ref: ''
+  organ: ''
+- id: abs-20260324080957-2
+  workspace: agentic-titan
+  source_url: https://github.com/organvm-iv-taxis/agentic-titan/issues/20#issuecomment-4113676221
+  questioner: m13v
+  question_text: the hysteresis approach is smart, 0.3/0.7 dead zone prevents the
+    rapid oscillation problem we've seen in other systems. 30s evaluation interval
+    seems reasonable for most workloads. one question - how does the system handle
+    the actual state transfer during a FISSION to FUSION transition? moving agent
+    contexts mid-task can be tricky, especially if agents have accumulated local state
+    that needs to be merged.
+  detected_at: '2026-03-24T08:09:57.846573'
+  triggers:
+  - assumption_divergence
+  trigger_evidence: "References conventional approach \u2014 our divergence may be\
+    \ the insight"
+  status: detected
+  pattern_name: ''
+  backflow_ref: ''
+  organ: ''
+- id: abs-20260324080957-3
+  workspace: agentic-titan
+  source_url: https://github.com/organvm-iv-taxis/agentic-titan/issues/20#issuecomment-4115160082
+  questioner: m13v
+  question_text: 'The stigmergy approach is really interesting. Pheromone decay solving
+    the stale-state problem is elegant - we ended up doing something cruder with TTL-based
+    file locks that agents check before acting.
+
+
+    How do you handle conflicting traces? Like if two agents deposit contradicting
+    RESOURCE traces about the same target - does the higher intensity win, or is there
+    a merge strategy?'
+  detected_at: '2026-03-24T08:09:57.846648'
+  triggers:
+  - unnamed_pattern
+  - convergence
+  - assumption_divergence
+  trigger_evidence: "Asks about handling strategy \u2014 may point at unnamed pattern;\
+    \ Describes their own implementation \u2014 potential convergence signal; Assumes\
+    \ conflict resolution hierarchy \u2014 we may resolve differently"
+  status: detected
+  pattern_name: ''
+  backflow_ref: ''
+  organ: ''

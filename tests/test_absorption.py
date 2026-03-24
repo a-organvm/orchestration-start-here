@@ -3,9 +3,16 @@
 import pytest
 
 from contrib_engine.absorption import (
+    add_tracked_conversation,
+    deposit_to_backflow,
     detect_triggers,
+    generate_formalization_prompt,
+    infer_organ,
     load_absorption,
+    load_tracked_conversations_config,
+    mark_formalized,
     save_absorption,
+    save_tracked_conversations_config,
     scan_conversations,
 )
 from contrib_engine.schemas import (
@@ -195,11 +202,131 @@ class TestScanConversations:
 
     def test_scan_filters_our_comments(self):
         """Ensure our own comments are excluded."""
-        # This test verifies the logic path without hitting GitHub API
-        # The actual fetch_inbound_comments filters by username
         items = scan_conversations(conversations=[], since="")
         assert items == []
 
     def test_scan_empty_conversations(self):
         items = scan_conversations(conversations=[], since="")
         assert items == []
+
+
+class TestTrackedConversations:
+    """Test tracked conversations config."""
+
+    def test_save_and_load(self, tmp_path, monkeypatch):
+        monkeypatch.setattr(
+            "contrib_engine.absorption.TRACKED_CONVERSATIONS_PATH",
+            tmp_path / "tracked.yaml",
+        )
+        save_tracked_conversations_config([
+            {"owner": "org", "repo": "repo", "issue_number": 1, "workspace": "w"},
+        ])
+        loaded = load_tracked_conversations_config()
+        assert len(loaded) == 1
+        assert loaded[0]["owner"] == "org"
+
+    def test_add_tracked_dedup(self, tmp_path, monkeypatch):
+        monkeypatch.setattr(
+            "contrib_engine.absorption.TRACKED_CONVERSATIONS_PATH",
+            tmp_path / "tracked.yaml",
+        )
+        add_tracked_conversation("org", "repo", 1, "w1")
+        add_tracked_conversation("org", "repo", 1, "w2")  # Duplicate
+        add_tracked_conversation("org", "repo", 2, "w3")  # Different
+        loaded = load_tracked_conversations_config()
+        assert len(loaded) == 2
+
+    def test_load_empty(self, tmp_path, monkeypatch):
+        monkeypatch.setattr(
+            "contrib_engine.absorption.TRACKED_CONVERSATIONS_PATH",
+            tmp_path / "nonexistent.yaml",
+        )
+        loaded = load_tracked_conversations_config()
+        assert loaded == []
+
+
+class TestFormalization:
+    """Test the formalization pipeline."""
+
+    def test_infer_organ_pattern(self):
+        item = AbsorptionItem(
+            id="test", workspace="w", source_url="u", questioner="q",
+            question_text="How do you handle conflicting pattern resolution?",
+            detected_at="t", trigger_evidence="pattern detection",
+        )
+        assert infer_organ(item) == "I"
+
+    def test_infer_organ_community(self):
+        item = AbsorptionItem(
+            id="test", workspace="w", source_url="u", questioner="q",
+            question_text="How does the community engage with this?",
+            detected_at="t", trigger_evidence="community dynamics",
+        )
+        assert infer_organ(item) == "VI"
+
+    def test_infer_organ_default(self):
+        item = AbsorptionItem(
+            id="test", workspace="w", source_url="u", questioner="q",
+            question_text="What about the transition mechanism?",
+            detected_at="t", trigger_evidence="",
+        )
+        assert infer_organ(item) == "I"  # Default
+
+    def test_generate_prompt(self):
+        item = AbsorptionItem(
+            id="abs-001", workspace="agentic-titan", source_url="https://example.com",
+            questioner="m13v",
+            question_text="How do you handle conflicting traces?",
+            detected_at="2026-03-24",
+            triggers=[AbsorptionTrigger.UNNAMED_PATTERN, AbsorptionTrigger.INDEPENDENT_CONVERGENCE],
+            trigger_evidence="Points at unnamed pattern; independent convergence",
+        )
+        prompt = generate_formalization_prompt(item)
+        assert "m13v" in prompt
+        assert "conflicting traces" in prompt
+        assert "Organ" in prompt
+        assert "Names the pattern" in prompt
+
+    def test_mark_formalized(self):
+        index = AbsorptionIndex(items=[
+            AbsorptionItem(
+                id="abs-001", workspace="w", source_url="u", questioner="q",
+                question_text="q", detected_at="t",
+                status=AbsorptionStatus.DETECTED,
+            ),
+        ])
+        result = mark_formalized(index, "abs-001", "reader-side-resolution")
+        assert result is not None
+        assert result.status == AbsorptionStatus.FORMALIZED
+        assert result.pattern_name == "reader-side-resolution"
+
+    def test_mark_formalized_not_found(self):
+        index = AbsorptionIndex(items=[])
+        result = mark_formalized(index, "nonexistent", "test")
+        assert result is None
+
+    def test_deposit_to_backflow(self):
+        item = AbsorptionItem(
+            id="abs-001", workspace="agentic-titan", source_url="u",
+            questioner="m13v", question_text="How do you handle X?",
+            detected_at="t",
+            triggers=[AbsorptionTrigger.UNNAMED_PATTERN],
+            status=AbsorptionStatus.FORMALIZED,
+            pattern_name="reader-side-resolution",
+            organ="I",
+        )
+        backflow = deposit_to_backflow(item, "path/to/artifact.md")
+        assert backflow.organ == "I"
+        assert backflow.title == "reader-side-resolution"
+        assert backflow.artifact_path == "path/to/artifact.md"
+        assert item.status == AbsorptionStatus.DEPOSITED
+        assert "backflow:" in item.backflow_ref
+
+    def test_deposit_requires_formalized(self):
+        item = AbsorptionItem(
+            id="abs-001", workspace="w", source_url="u", questioner="q",
+            question_text="q", detected_at="t",
+            status=AbsorptionStatus.DETECTED,
+        )
+        with pytest.raises(ValueError, match="not formalized"):
+            deposit_to_backflow(item, "path.md")
