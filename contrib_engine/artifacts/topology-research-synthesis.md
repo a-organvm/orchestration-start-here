@@ -77,3 +77,44 @@ From Juliana Berners, *The Book of Saint Albans* (1486). Terms reflect perceived
 ---
 
 *Research synthesis: 2026-03-24. Sources: Google AI Overview, The Book of Saint Albans (1486), Crichton, Lem, Bear, Harvard Kilobots, CoCoRo.*
+
+---
+
+## IV. Biological Organ Systems → Agent Architecture
+
+**Source:** Research on 11 human organ systems, coordination patterns, nanotechnology analogues
+
+### The Dual Control Network (Already Implemented)
+
+The body coordinates through two control networks:
+- **Fast Network (Nervous):** Instant electrical signals to specific organs → `hive/events.py` EventBus
+- **Slow Network (Endocrine):** Chemical hormones broadcast to whole body over time → `hive/stigmergy.py` pheromone field
+
+This is the strongest analogy in the hive module. The EventBus/stigmergy dual IS the nervous/endocrine dual.
+
+### The Fight-or-Flight Pattern (Partially Implemented)
+
+All 11 systems coordinate simultaneously during crisis:
+- Nervous detects → Endocrine broadcasts → Circulatory accelerates → Muscular activates → Digestive SHUTS DOWN
+
+Our FISSION→FUSION transition is the closest analogue but only coordinates 2-3 subsystems. The biological model suggests coordinating ALL subsystems during crisis, including shutting down non-essential ones.
+
+### Self-Healing Materials (Nanotechnology Bridge)
+
+| Healing System | Biological Analogue | Agent Analogue | Status |
+|---------------|-------------------|----------------|--------|
+| Microcapsules (one-shot) | Platelets clotting | Circuit breaker (one-time trip) | Implemented |
+| Microvascular channels (repeatable) | Circulatory delivering nutrients | Persistent resource pipeline | **GAP** |
+| Shape memory alloys (snap-back) | Bone resetting | Topology trained state restoration | **GAP** |
+| Smart Dust (proprioception) | Nervous system | Distributed self-awareness | **GAP** (#62) |
+
+### Programmable Matter = Smart Dust + Self-Healing
+
+Nervous System (sensing) + Immune System (healing) = matter that:
+- Knows when it's hurt (proprioception)
+- Communicates the injury location (mesh network)
+- Directs resources to fix itself (autonomous repair)
+
+This IS the agentic-titan vision: agents that sense their own topology state, communicate anomalies through the pheromone field, and reconfigure to heal.
+
+*Research synthesis addendum: 2026-03-24. Issue #65 tracks implementation.*
