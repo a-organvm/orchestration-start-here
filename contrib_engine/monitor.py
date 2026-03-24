@@ -231,20 +231,21 @@ def run_monitoring_cycle(run_absorption: bool = True) -> ContributionStatusIndex
     # Save status
     save_status(index)
 
-    # Run Absorption Protocol scan
+    # Run Absorption Protocol — detect, assess, formalize, deposit (full cycle)
     if run_absorption:
         try:
-            from contrib_engine.absorption import run_absorption_scan
+            from contrib_engine.absorption import run_full_absorption_cycle
 
-            absorption_index = run_absorption_scan()
-            pending = absorption_index.pending_formalization()
-            if pending:
+            absorption_results = run_full_absorption_cycle()
+            if absorption_results["detected"]:
                 logger.info(
-                    "Absorption: %d items awaiting formalization",
-                    len(pending),
+                    "Absorption: %d detected, %d formalized, %d deposited",
+                    absorption_results["detected"],
+                    absorption_results["formalized"],
+                    absorption_results["deposited"],
                 )
         except Exception as e:
-            logger.warning("Absorption scan failed: %s", e)
+            logger.warning("Absorption cycle failed: %s", e)
 
     return index
 

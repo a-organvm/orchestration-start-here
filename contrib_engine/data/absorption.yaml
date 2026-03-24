@@ -13,10 +13,10 @@ items:
   - assumption_divergence
   trigger_evidence: "References conventional approach \u2014 our divergence may be\
     \ the insight"
-  status: detected
-  pattern_name: ''
-  backflow_ref: ''
-  organ: ''
+  status: deposited
+  pattern_name: useful parallel execution failure
+  backflow_ref: backflow:I:useful parallel execution failure
+  organ: I
 - id: abs-20260324080957-1
   workspace: agentic-titan
   source_url: https://github.com/organvm-iv-taxis/agentic-titan/issues/20#issuecomment-4107519674
@@ -41,10 +41,10 @@ items:
   trigger_evidence: "Asks about handling strategy \u2014 may point at unnamed pattern;\
     \ References conventional approach \u2014 our divergence may be the insight; Contrasts\
     \ approaches \u2014 divergence point worth examining"
-  status: detected
-  pattern_name: ''
-  backflow_ref: ''
-  organ: ''
+  status: deposited
+  pattern_name: fission fusion dynamics orchestration
+  backflow_ref: backflow:I:fission fusion dynamics orchestration
+  organ: I
 - id: abs-20260324080957-2
   workspace: agentic-titan
   source_url: https://github.com/organvm-iv-taxis/agentic-titan/issues/20#issuecomment-4113676221
@@ -60,10 +60,10 @@ items:
   - assumption_divergence
   trigger_evidence: "References conventional approach \u2014 our divergence may be\
     \ the insight"
-  status: detected
-  pattern_name: ''
-  backflow_ref: ''
-  organ: ''
+  status: deposited
+  pattern_name: hysteresis smart prevents rapid
+  backflow_ref: backflow:I:hysteresis smart prevents rapid
+  organ: I
 - id: abs-20260324080957-3
   workspace: agentic-titan
   source_url: https://github.com/organvm-iv-taxis/agentic-titan/issues/20#issuecomment-4115160082
@@ -84,7 +84,7 @@ items:
   trigger_evidence: "Asks about handling strategy \u2014 may point at unnamed pattern;\
     \ Describes their own implementation \u2014 potential convergence signal; Assumes\
     \ conflict resolution hierarchy \u2014 we may resolve differently"
-  status: detected
-  pattern_name: ''
-  backflow_ref: ''
-  organ: ''
+  status: deposited
+  pattern_name: conflicting traces
+  backflow_ref: backflow:I:conflicting traces
+  organ: I

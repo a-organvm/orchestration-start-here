@@ -519,3 +519,256 @@ def deposit_to_backflow(
     item.backflow_ref = f"backflow:{item.organ}:{item.pattern_name}"
 
     return backflow
+
+
+# --- Autonomous formalization ---
+
+ORGAN_DIRS = Path.home() / "Workspace"
+CONTRIBUTIONS_SUBDIR = "my-knowledge-base/intake/canonical/contributions"
+ORGAN_DIR_MAP = {
+    "I": "organvm-i-theoria",
+    "II": "organvm-ii-poiesis",
+    "III": "organvm-iii-ergon",
+    "V": "organvm-v-logos",
+    "VI": "organvm-vi-koinonia",
+    "VII": "organvm-vii-kerygma",
+}
+
+
+def _slugify(text: str) -> str:
+    """Convert a pattern name to a kebab-case filename slug."""
+    slug = re.sub(r"[^a-z0-9]+", "-", text.lower()).strip("-")
+    return slug[:60]  # Keep filenames reasonable
+
+
+def auto_formalize(item: AbsorptionItem) -> str | None:
+    """Automatically formalize a detected absorption item into a theory note.
+
+    Generates a structured markdown artifact from the question's triggers,
+    evidence, and context. This is the autonomous formalization — no human
+    or LLM API needed for the structural skeleton.
+
+    Returns:
+        Artifact path relative to workspace root, or None if formalization
+        was skipped (e.g., already formalized, or insufficient signal).
+    """
+    if item.status not in (AbsorptionStatus.DETECTED, AbsorptionStatus.ASSESSED):
+        return None
+
+    # Determine pattern name from the question
+    pattern_name = _extract_pattern_name(item)
+    if not pattern_name:
+        return None
+
+    organ = infer_organ(item)
+    organ_dir = ORGAN_DIR_MAP.get(organ)
+    if not organ_dir:
+        return None
+
+    slug = _slugify(pattern_name)
+    artifact_dir = ORGAN_DIRS / organ_dir / CONTRIBUTIONS_SUBDIR
+    artifact_path = artifact_dir / f"{slug}.md"
+
+    # Don't overwrite existing formalizations
+    if artifact_path.exists():
+        logger.info("Artifact already exists: %s", artifact_path)
+        item.status = AbsorptionStatus.FORMALIZED
+        item.pattern_name = pattern_name
+        item.organ = organ
+        return str(artifact_path.relative_to(ORGAN_DIRS))
+
+    # Generate the theory note
+    content = _generate_theory_note(item, pattern_name, organ)
+
+    artifact_dir.mkdir(parents=True, exist_ok=True)
+    artifact_path.write_text(content, encoding="utf-8")
+
+    item.status = AbsorptionStatus.FORMALIZED
+    item.pattern_name = pattern_name
+    item.organ = organ
+
+    logger.info("Formalized: %s → %s", item.id, artifact_path)
+    return str(artifact_path.relative_to(ORGAN_DIRS))
+
+
+def _extract_pattern_name(item: AbsorptionItem) -> str:
+    """Extract a pattern name from the question and triggers.
+
+    Uses keyword extraction from the question text to derive a descriptive
+    pattern name. Returns empty string if no clear pattern emerges.
+    """
+    text = item.question_text.lower()
+
+    # Look for explicit "how do you handle X" patterns
+    handle_match = re.search(
+        r"how do you (?:handle|deal with|manage|approach) (?:the )?(.+?)(?:\?|$)",
+        text,
+    )
+    if handle_match:
+        raw = handle_match.group(1).strip().rstrip("?. ")
+        # Clean up to a pattern name
+        raw = re.sub(r"\b(?:the|a|an|in|of|for|with|and|or|but|is|are|was|were)\b", " ", raw)
+        raw = re.sub(r"\s+", " ", raw).strip()
+        if len(raw) > 5:
+            return raw[:50]
+
+    # Look for "what happens when X" patterns
+    happens_match = re.search(
+        r"what happens (?:when|if) (.+?)(?:\?|$)",
+        text,
+    )
+    if happens_match:
+        raw = happens_match.group(1).strip().rstrip("?. ")
+        raw = re.sub(r"\b(?:the|a|an|in|of|for|with|and|or|but)\b", " ", raw)
+        raw = re.sub(r"\s+", " ", raw).strip()
+        if len(raw) > 5:
+            return raw[:50]
+
+    # Fallback: use the most distinctive noun phrases from the question
+    # Extract words >4 chars that aren't common stopwords
+    words = re.findall(r"\b[a-z]{5,}\b", text)
+    stopwords = {
+        "about", "would", "could", "should", "these", "those", "their",
+        "there", "where", "which", "really", "actually", "basically",
+        "interesting", "approach", "system", "using", "something",
+    }
+    distinctive = [w for w in words if w not in stopwords][:4]
+    if len(distinctive) >= 2:
+        return " ".join(distinctive)
+
+    return ""
+
+
+def _generate_theory_note(
+    item: AbsorptionItem,
+    pattern_name: str,
+    organ: str,
+) -> str:
+    """Generate a structured theory note markdown artifact."""
+    triggers_str = ", ".join(t.value for t in item.triggers)
+    has_convergence = AbsorptionTrigger.INDEPENDENT_CONVERGENCE in item.triggers
+    has_divergence = AbsorptionTrigger.ASSUMPTION_DIVERGENCE in item.triggers
+    has_unnamed = AbsorptionTrigger.UNNAMED_PATTERN in item.triggers
+
+    sections = [
+        f"# {pattern_name.title()}",
+        "",
+        f"**Origin:** Absorbed from @{item.questioner}'s question on {item.workspace}",
+        f"**Source:** {item.source_url}",
+        f"**Triggers:** {triggers_str}",
+        f"**Target Organ:** {organ}",
+        "",
+        "---",
+        "",
+        "## The Question That Opened This",
+        "",
+        f"> {item.question_text}",
+        "",
+    ]
+
+    if has_divergence:
+        sections.extend([
+            "## Assumption Divergence",
+            "",
+            "The question assumes a resolution or handling strategy that differs "
+            "from our implementation. This divergence is the insight — our approach "
+            "is worth naming precisely because it departs from the expected pattern.",
+            "",
+        ])
+
+    if has_unnamed:
+        sections.extend([
+            "## Unnamed Pattern",
+            "",
+            "The question points at a behavior or property in our architecture "
+            "that exists in the code but has not been given a formal name or "
+            "articulated as a reusable principle.",
+            "",
+            "### Properties (to be formalized)",
+            "",
+            "1. *[What invariant does this pattern maintain?]*",
+            "2. *[What does it guarantee under failure?]*",
+            "3. *[What does it explicitly NOT guarantee?]*",
+            "",
+        ])
+
+    if has_convergence:
+        sections.extend([
+            "## Independent Convergence",
+            "",
+            "The questioner described an independent implementation that solves "
+            "a similar problem with a different mechanism. When two systems evolve "
+            "the same solution shape independently, the pattern is a structural "
+            "attractor — worth formalizing because it emerges from the problem's "
+            "constraints, not from copying.",
+            "",
+        ])
+
+    sections.extend([
+        "## Relationship to Existing Theory",
+        "",
+        "- *[How does this relate to forward-only FSM governance?]*",
+        "- *[How does this relate to idempotent checkpoint writes?]*",
+        "- *[How does this relate to reader-side resolution?]*",
+        "",
+        "---",
+        "",
+        f"*Absorption Protocol — auto-formalized {datetime.now().strftime('%Y-%m-%d')}*",
+        f"*Backflow source: {item.workspace}, @{item.questioner}*",
+    ])
+
+    return "\n".join(sections) + "\n"
+
+
+def run_full_absorption_cycle(since: str = "") -> dict[str, int]:
+    """Run the complete absorption cycle: detect → formalize → deposit.
+
+    This is the autonomous version — no human intervention needed.
+    The system detects expansion-worthy questions, generates theory note
+    skeletons, and deposits them into the backflow pipeline.
+
+    Returns:
+        Dict with counts: detected, formalized, deposited.
+    """
+    from contrib_engine.backflow import load_backflow, save_backflow
+
+    results = {"detected": 0, "formalized": 0, "deposited": 0}
+
+    # Phase 1: Detect
+    index = load_absorption()
+    new_items = scan_conversations(since=since)
+    if new_items:
+        index.items.extend(new_items)
+        results["detected"] = len(new_items)
+
+    # Phase 2: Formalize all pending items
+    pending = index.pending_formalization()
+    backflow_index = load_backflow()
+
+    for item in pending:
+        artifact_path = auto_formalize(item)
+        if artifact_path:
+            results["formalized"] += 1
+
+            # Phase 3: Deposit to backflow
+            try:
+                backflow_item = deposit_to_backflow(item, artifact_path)
+                backflow_index.items.append(backflow_item)
+                results["deposited"] += 1
+            except ValueError:
+                pass  # Item wasn't in formalized state (shouldn't happen)
+
+    # Save state
+    if results["detected"] or results["formalized"]:
+        save_absorption(index)
+    if results["deposited"]:
+        save_backflow(backflow_index)
+
+    logger.info(
+        "Absorption cycle: %d detected, %d formalized, %d deposited",
+        results["detected"],
+        results["formalized"],
+        results["deposited"],
+    )
+
+    return results

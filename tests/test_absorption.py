@@ -3,7 +3,10 @@
 import pytest
 
 from contrib_engine.absorption import (
+    _extract_pattern_name,
+    _generate_theory_note,
     add_tracked_conversation,
+    auto_formalize,
     deposit_to_backflow,
     detect_triggers,
     generate_formalization_prompt,
@@ -330,3 +333,98 @@ class TestFormalization:
         )
         with pytest.raises(ValueError, match="not formalized"):
             deposit_to_backflow(item, "path.md")
+
+
+class TestAutoFormalize:
+    """Test autonomous formalization."""
+
+    def test_extract_pattern_how_handle(self):
+        item = AbsorptionItem(
+            id="test", workspace="w", source_url="u", questioner="q",
+            question_text="How do you handle conflicting traces between agents?",
+            detected_at="t",
+        )
+        name = _extract_pattern_name(item)
+        assert name  # Should extract something
+        assert "conflicting" in name.lower() or "traces" in name.lower()
+
+    def test_extract_pattern_what_happens(self):
+        item = AbsorptionItem(
+            id="test", workspace="w", source_url="u", questioner="q",
+            question_text="What happens when the crisis level drops mid-fusion?",
+            detected_at="t",
+        )
+        name = _extract_pattern_name(item)
+        assert name
+        assert "crisis" in name.lower() or "drops" in name.lower() or "level" in name.lower()
+
+    def test_extract_pattern_fallback(self):
+        item = AbsorptionItem(
+            id="test", workspace="w", source_url="u", questioner="q",
+            question_text="The stigmergy approach with pheromone decay solving stale state is elegant",
+            detected_at="t",
+        )
+        name = _extract_pattern_name(item)
+        assert name  # Fallback to distinctive words
+
+    def test_generate_theory_note_all_triggers(self):
+        item = AbsorptionItem(
+            id="test", workspace="agentic-titan", source_url="https://example.com",
+            questioner="m13v",
+            question_text="How do you handle conflicting traces?",
+            detected_at="2026-03-24",
+            triggers=[
+                AbsorptionTrigger.UNNAMED_PATTERN,
+                AbsorptionTrigger.INDEPENDENT_CONVERGENCE,
+                AbsorptionTrigger.ASSUMPTION_DIVERGENCE,
+            ],
+        )
+        content = _generate_theory_note(item, "reader-side resolution", "I")
+        assert "Reader-Side Resolution" in content
+        assert "m13v" in content
+        assert "Assumption Divergence" in content
+        assert "Unnamed Pattern" in content
+        assert "Independent Convergence" in content
+
+    def test_auto_formalize_creates_file(self, tmp_path, monkeypatch):
+        monkeypatch.setattr("contrib_engine.absorption.ORGAN_DIRS", tmp_path)
+        # Create the expected organ directory
+        organ_dir = tmp_path / "organvm-i-theoria" / "my-knowledge-base" / "intake" / "canonical" / "contributions"
+        organ_dir.mkdir(parents=True)
+
+        item = AbsorptionItem(
+            id="abs-test", workspace="agentic-titan", source_url="https://example.com",
+            questioner="m13v",
+            question_text="How do you handle conflicting pheromone traces between multiple agents?",
+            detected_at="2026-03-24",
+            triggers=[AbsorptionTrigger.UNNAMED_PATTERN],
+            status=AbsorptionStatus.DETECTED,
+        )
+        artifact_path = auto_formalize(item)
+        assert artifact_path is not None
+        assert item.status == AbsorptionStatus.FORMALIZED
+        assert item.pattern_name
+        # File should exist
+        full_path = tmp_path / artifact_path
+        assert full_path.exists()
+        content = full_path.read_text()
+        assert "m13v" in content
+
+    def test_auto_formalize_skips_already_formalized(self):
+        item = AbsorptionItem(
+            id="abs-test", workspace="w", source_url="u", questioner="q",
+            question_text="q", detected_at="t",
+            status=AbsorptionStatus.FORMALIZED,
+        )
+        result = auto_formalize(item)
+        assert result is None
+
+    def test_auto_formalize_skips_no_pattern(self):
+        item = AbsorptionItem(
+            id="abs-test", workspace="w", source_url="u", questioner="q",
+            question_text="ok",  # Too short for pattern extraction
+            detected_at="t",
+            status=AbsorptionStatus.DETECTED,
+        )
+        result = auto_formalize(item)
+        assert result is None

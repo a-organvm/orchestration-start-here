@@ -1,74 +1,112 @@
-generated: "2026-03-24"
+generated: '2026-03-24'
 items:
-  - workspace: contrib--m13v-summarize-recent-commit
-    organ: "I"
-    backflow_type: theory
-    title: "Reader-side resolution in append-only environments with decay"
-    description: "Extracted from m13v's question about conflicting pheromone traces (agentic-titan #20). Formalizes the pattern: contradictions coexist, reader decides, decay resolves. Independent convergence with m13v's TTL-based file locks."
-    status: deposited
-    artifact_path: "organvm-i-theoria/my-knowledge-base/intake/canonical/contributions/reader-side-resolution-pattern.md"
-    deposited_at: "2026-03-24"
-  - workspace: contrib--adenhq-hive
-    organ: "I"
-    backflow_type: theory
-    title: "Forward-only lifecycle state machine as universal governance pattern"
-    description: "Extracted from fusion of ORGANVM promotion FSM + Hive QueenPhaseState"
-    status: deposited
-    artifact_path: "organvm-i-theoria/my-knowledge-base/intake/canonical/contributions/forward-only-fsm-governance.md"
-    deposited_at: "2026-03-23"
-  - workspace: contrib--adenhq-hive
-    organ: "II"
-    backflow_type: generative
-    title: "State transition comparison diagrams"
-    description: "Mermaid diagrams comparing ORGANVM vs Hive lifecycle models"
-    status: deposited
-    artifact_path: "organvm-ii-poiesis/intake/contributions/state-transition-diagrams.md"
-    deposited_at: "2026-03-23"
-  - workspace: contrib--adenhq-hive
-    organ: "V"
-    backflow_type: narrative
-    title: "How ORGANVM contributed governance to a 10K-star agent framework"
-    description: "Essay about the first cross-organ symbiotic contribution"
-    status: deposited
-    artifact_path: "organvm-v-logos/intake/contributions/governance-contribution-essay.md"
-    deposited_at: "2026-03-23"
-  - workspace: contrib--adenhq-hive
-    organ: "VI"
-    backflow_type: community
-    title: "AdenHQ community engagement"
-    description: "Discord membership, contact relationships with Vincent Jiang and team"
-    status: deposited
-    artifact_path: "organvm-vi-koinonia/intake/contributions/adenhq-community.md"
-    deposited_at: "2026-03-23"
-  - workspace: contrib--langchain-langgraph
-    organ: "I"
-    backflow_type: theory
-    title: "Idempotency patterns in distributed state machines"
-    description: "Put_writes restart-safety as a formal property"
-    status: deposited
-    artifact_path: "organvm-i-theoria/my-knowledge-base/intake/canonical/contributions/idempotent-checkpoint-writes.md"
-    deposited_at: "2026-03-23"
-  - workspace: contrib--langchain-langgraph
-    organ: "V"
-    backflow_type: narrative
-    title: "Contributing restart-safety to LangGraph"
-    description: "Essay about idempotency contribution to a 27K-star framework"
-    status: deposited
-    artifact_path: "organvm-v-logos/intake/contributions/langgraph-restart-safety-essay.md"
-    deposited_at: "2026-03-23"
-  - workspace: contrib--temporal-sdk-python
-    organ: "V"
-    backflow_type: narrative
-    title: "Contributing documentation to Temporal SDK"
-    description: "Essay about first docs contribution and CLA process"
-    status: deposited
-    artifact_path: "organvm-v-logos/intake/contributions/temporal-docs-contribution-essay.md"
-    deposited_at: "2026-03-23"
-  - workspace: contrib--anthropic-skills
-    organ: "III"
-    backflow_type: code
-    title: "Testing patterns skill contributed back to Anthropic"
-    description: "Skill from a-i--skills contributed to upstream Anthropic skills repo"
-    status: deposited
-    artifact_path: "organvm-iii-ergon/intake/contributions/anthropic-testing-patterns-skill.md"
-    deposited_at: "2026-03-23"
+- workspace: contrib--m13v-summarize-recent-commit
+  organ: I
+  backflow_type: theory
+  title: Reader-side resolution in append-only environments with decay
+  description: 'Extracted from m13v''s question about conflicting pheromone traces
+    (agentic-titan #20). Formalizes the pattern: contradictions coexist, reader decides,
+    decay resolves. Independent convergence with m13v''s TTL-based file locks.'
+  status: deposited
+  artifact_path: organvm-i-theoria/my-knowledge-base/intake/canonical/contributions/reader-side-resolution-pattern.md
+  deposited_at: '2026-03-24'
+- workspace: contrib--adenhq-hive
+  organ: I
+  backflow_type: theory
+  title: Forward-only lifecycle state machine as universal governance pattern
+  description: Extracted from fusion of ORGANVM promotion FSM + Hive QueenPhaseState
+  status: deposited
+  artifact_path: organvm-i-theoria/my-knowledge-base/intake/canonical/contributions/forward-only-fsm-governance.md
+  deposited_at: '2026-03-23'
+- workspace: contrib--adenhq-hive
+  organ: II
+  backflow_type: generative
+  title: State transition comparison diagrams
+  description: Mermaid diagrams comparing ORGANVM vs Hive lifecycle models
+  status: deposited
+  artifact_path: organvm-ii-poiesis/intake/contributions/state-transition-diagrams.md
+  deposited_at: '2026-03-23'
+- workspace: contrib--adenhq-hive
+  organ: V
+  backflow_type: narrative
+  title: How ORGANVM contributed governance to a 10K-star agent framework
+  description: Essay about the first cross-organ symbiotic contribution
+  status: deposited
+  artifact_path: organvm-v-logos/intake/contributions/governance-contribution-essay.md
+  deposited_at: '2026-03-23'
+- workspace: contrib--adenhq-hive
+  organ: VI
+  backflow_type: community
+  title: AdenHQ community engagement
+  description: Discord membership, contact relationships with Vincent Jiang and team
+  status: deposited
+  artifact_path: organvm-vi-koinonia/intake/contributions/adenhq-community.md
+  deposited_at: '2026-03-23'
+- workspace: contrib--langchain-langgraph
+  organ: I
+  backflow_type: theory
+  title: Idempotency patterns in distributed state machines
+  description: Put_writes restart-safety as a formal property
+  status: deposited
+  artifact_path: organvm-i-theoria/my-knowledge-base/intake/canonical/contributions/idempotent-checkpoint-writes.md
+  deposited_at: '2026-03-23'
+- workspace: contrib--langchain-langgraph
+  organ: V
+  backflow_type: narrative
+  title: Contributing restart-safety to LangGraph
+  description: Essay about idempotency contribution to a 27K-star framework
+  status: deposited
+  artifact_path: organvm-v-logos/intake/contributions/langgraph-restart-safety-essay.md
+  deposited_at: '2026-03-23'
+- workspace: contrib--temporal-sdk-python
+  organ: V
+  backflow_type: narrative
+  title: Contributing documentation to Temporal SDK
+  description: Essay about first docs contribution and CLA process
+  status: deposited
+  artifact_path: organvm-v-logos/intake/contributions/temporal-docs-contribution-essay.md
+  deposited_at: '2026-03-23'
+- workspace: contrib--anthropic-skills
+  organ: III
+  backflow_type: code
+  title: Testing patterns skill contributed back to Anthropic
+  description: Skill from a-i--skills contributed to upstream Anthropic skills repo
+  status: deposited
+  artifact_path: organvm-iii-ergon/intake/contributions/anthropic-testing-patterns-skill.md
+  deposited_at: '2026-03-23'
+- workspace: agentic-titan
+  organ: I
+  backflow_type: theory
+  title: useful parallel execution failure
+  description: 'Absorbed from @m13v''s question: Glad it was useful. The parallel
+    execution failure handling is genuinely the hardest part to get rig'
+  status: deposited
+  artifact_path: organvm-i-theoria/my-knowledge-base/intake/canonical/contributions/useful-parallel-execution-failure.md
+  deposited_at: '2026-03-24'
+- workspace: agentic-titan
+  organ: I
+  backflow_type: theory
+  title: fission fusion dynamics orchestration
+  description: 'Absorbed from @m13v''s question: The fission-fusion dynamics are a
+    really interesting approach. Most orchestration frameworks treat a'
+  status: deposited
+  artifact_path: organvm-i-theoria/my-knowledge-base/intake/canonical/contributions/fission-fusion-dynamics-orchestration.md
+  deposited_at: '2026-03-24'
+- workspace: agentic-titan
+  organ: I
+  backflow_type: theory
+  title: hysteresis smart prevents rapid
+  description: 'Absorbed from @m13v''s question: the hysteresis approach is smart,
+    0.3/0.7 dead zone prevents the rapid oscillation problem we''ve see'
+  status: deposited
+  artifact_path: organvm-i-theoria/my-knowledge-base/intake/canonical/contributions/hysteresis-smart-prevents-rapid.md
+  deposited_at: '2026-03-24'
+- workspace: agentic-titan
+  organ: I
+  backflow_type: theory
+  title: conflicting traces
+  description: 'Absorbed from @m13v''s question: The stigmergy approach is really
+    interesting. Pheromone decay solving the stale-state problem is ele'
+  status: deposited
+  artifact_path: organvm-i-theoria/my-knowledge-base/intake/canonical/contributions/conflicting-traces.md
+  deposited_at: '2026-03-24'
