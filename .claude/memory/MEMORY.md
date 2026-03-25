@@ -16,6 +16,7 @@
 - [feedback_system_simply_knows.md](feedback_system_simply_knows.md) — System simply knows. Never output CLI commands for the human. The engine is ambient, not invoked. Detect, act, report results — not instructions.
 - [feedback_scope_discipline.md](feedback_scope_discipline.md) — Revising existing content ≠ creating new content. Same topic, better structure. Topic does not change.
 - [feedback_visual_discipline.md](feedback_visual_discipline.md) — Every section requires a visual, every visual requires data analysis. Visuals are arguments rendered spatially, not decoration.
+- [feedback_na_is_never_an_answer.md](feedback_na_is_never_an_answer.md) — N/A is never an answer. Every N/A, unknown, zero, or placeholder is a vacuum. Research it, plan it, log it. No exceptions.
 
 ## User
 - [user_voice_masks.md](user_voice_masks.md) — Three simultaneous masks: academic, educator, business.
