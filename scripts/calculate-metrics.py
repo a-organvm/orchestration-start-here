@@ -1,7 +1,11 @@
 #!/usr/bin/env python3
 """Calculate system-wide metrics from registry.json.
+# ISOTOPE DISSOLUTION: Gate circulatory--contribute G1
 
 Produces a metrics.json file with health indicators for the monthly audit.
+
+When organvm-engine is installed, delegates to the canonical
+metrics.calculator.compute_metrics. Falls back to standalone implementation.
 
 Usage:
     python3 scripts/calculate-metrics.py \
@@ -12,6 +16,15 @@ import json
 import sys
 import argparse
 from datetime import datetime
+
+# --- Canonical engine imports (isotope dissolution) ---
+try:
+    from organvm_engine.metrics.calculator import compute_metrics as _engine_compute_metrics
+    from organvm_engine.registry.loader import load_registry as _engine_load_registry
+
+    _HAS_ENGINE = True
+except ImportError:
+    _HAS_ENGINE = False
 
 
 def calculate_metrics(registry_path: str) -> dict:
@@ -102,20 +115,28 @@ def main():
     parser.add_argument("--output", required=True, help="Output JSON file")
     args = parser.parse_args()
 
-    metrics = calculate_metrics(args.registry)
+    if _HAS_ENGINE:
+        registry = _engine_load_registry(args.registry)
+        metrics = _engine_compute_metrics(registry)
+        print("Metrics calculated (via organvm-engine)")
+    else:
+        metrics = calculate_metrics(args.registry)
+        print("Metrics calculated (standalone fallback)")
 
     with open(args.output, "w") as f:
         json.dump(metrics, f, indent=2)
         f.write("\n")
 
-    print(f"Metrics calculated:")
-    print(f"  Total repos: {metrics['total_repos']}")
-    print(f"  On GitHub: {metrics['repos_on_github']}")
-    print(f"  Documented: {metrics['documented_repos']}")
-    print(f"  Flagships: {metrics['flagship_repos']}")
-    print(f"  Operational organs: {metrics['operational_organs']}/{metrics['total_organs']}")
-    print(f"  Completion: {metrics['completion']}%")
-    print(f"  Dependencies: {metrics['total_dependencies']}")
+    print(f"  Total repos: {metrics.get('total_repos', 'N/A')}")
+    for key in ("repos_on_github", "documented_repos", "flagship_repos"):
+        if key in metrics:
+            print(f"  {key}: {metrics[key]}")
+    if "operational_organs" in metrics:
+        print(f"  Operational organs: {metrics['operational_organs']}/{metrics.get('total_organs', '?')}")
+    if "completion" in metrics:
+        print(f"  Completion: {metrics['completion']}%")
+    if "total_dependencies" in metrics:
+        print(f"  Dependencies: {metrics['total_dependencies']}")
 
 
 if __name__ == "__main__":

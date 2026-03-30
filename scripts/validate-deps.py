@@ -1,8 +1,12 @@
 #!/usr/bin/env python3
 """Dependency validation script for the eight-organ system.
+# ISOTOPE DISSOLUTION: Gate circulatory--contribute G1
 
 Validates that all dependencies in registry.json respect the unidirectional
 flow rules defined in governance-rules.json.
+
+When organvm-engine is installed, delegates to the canonical
+governance.dependency_graph module. Falls back to standalone implementation.
 
 Usage:
     python3 scripts/validate-deps.py \
@@ -14,6 +18,17 @@ import sys
 import argparse
 from pathlib import Path
 
+# --- Canonical engine imports (isotope dissolution) ---
+try:
+    from organvm_engine.governance.dependency_graph import validate_dependencies as _engine_validate
+    from organvm_engine.registry.loader import load_registry as _engine_load_registry
+    from organvm_engine.paths import registry_path as _engine_registry_path
+
+    _HAS_ENGINE = True
+except ImportError:
+    _HAS_ENGINE = False
+
+# --- Standalone fallback definitions ---
 
 ORG_TO_ORGAN = {
     "organvm-i-theoria": "ORGAN-I",
@@ -149,13 +164,40 @@ def validate(registry_path: str, governance_path: str) -> int:
     return 0
 
 
+def _run_via_engine(registry_path: str) -> int:
+    """Validate using canonical organvm-engine dependency graph."""
+    registry = _engine_load_registry(registry_path)
+    result = _engine_validate(registry)
+    print(f"Dependency Validation Report (via organvm-engine)")
+    print(f"{'=' * 50}")
+    print(f"Total edges: {result.total_edges}")
+    print(f"Cycles: {len(result.cycles)}")
+    print(f"Back-edges: {len(result.back_edges)}")
+    print()
+    violations = len(result.cycles) + len(result.back_edges)
+    if result.cycles:
+        print("CYCLES:")
+        for c in result.cycles:
+            print(f"  {c}")
+    if result.back_edges:
+        print("BACK-EDGE VIOLATIONS:")
+        for e in result.back_edges:
+            print(f"  {e}")
+    if not violations:
+        print("All dependencies valid. No violations detected.")
+    return violations
+
+
 def main():
     parser = argparse.ArgumentParser(description="Validate dependency directions")
     parser.add_argument("--registry", required=True)
     parser.add_argument("--governance", required=True)
     args = parser.parse_args()
 
-    violation_count = validate(args.registry, args.governance)
+    if _HAS_ENGINE:
+        violation_count = _run_via_engine(args.registry)
+    else:
+        violation_count = validate(args.registry, args.governance)
     sys.exit(1 if violation_count > 0 else 0)
 
 

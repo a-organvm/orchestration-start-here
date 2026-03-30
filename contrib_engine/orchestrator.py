@@ -1,8 +1,12 @@
 """Contribution Orchestrator — initializes cross-organ contribution workspaces.
+# ISOTOPE DISSOLUTION: Gate circulatory--contribute G1, G2
 
 On human approval, creates the full ORGANVM infrastructure for contributing
 to an open-source project: fork, workspace, submodule, registry entry,
 seed.yaml, journal, CLAUDE.md, CONTRIBUTION-PROMPT.md.
+
+When organvm-engine is installed, derives paths from the canonical
+paths module. Falls back to hardcoded defaults.
 """
 
 from __future__ import annotations
@@ -22,14 +26,22 @@ from contrib_engine.schemas import ContributionTarget, TargetStatus
 
 logger = logging.getLogger(__name__)
 
-ORGAN_IV_DIR = Path.home() / "Workspace" / "organvm-iv-taxis"
-REGISTRY_PATH = (
-    Path.home()
-    / "Workspace"
-    / "meta-organvm"
-    / "organvm-corpvs-testamentvm"
-    / "registry-v2.json"
-)
+# --- Canonical engine imports (isotope dissolution) ---
+try:
+    from organvm_engine.paths import workspace_root as _engine_workspace_root
+    from organvm_engine.paths import registry_path as _engine_registry_path
+
+    ORGAN_IV_DIR = _engine_workspace_root() / "organvm-iv-taxis"
+    REGISTRY_PATH = _engine_registry_path()
+except ImportError:
+    ORGAN_IV_DIR = Path.home() / "Workspace" / "organvm-iv-taxis"
+    REGISTRY_PATH = (
+        Path.home()
+        / "Workspace"
+        / "meta-organvm"
+        / "organvm-corpvs-testamentvm"
+        / "registry-v2.json"
+    )
 
 
 def workspace_name(target: ContributionTarget) -> str:

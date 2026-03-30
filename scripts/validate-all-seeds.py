@@ -1,10 +1,14 @@
 #!/usr/bin/env python3
 """Validate all seed.yaml files across the workspace.
+# ISOTOPE DISSOLUTION: Gate circulatory--contribute G1
 
 Three validation layers:
   1. Schema — YAML parseable, required fields present
   2. Registry agreement — metadata matches registry-v2.json
   3. Graph integrity — produces/consumes references resolve
+
+When organvm-engine is installed, delegates seed discovery and contract
+validation to the canonical modules. Falls back to standalone implementation.
 
 Usage:
     python3 scripts/validate-all-seeds.py
@@ -20,6 +24,17 @@ from pathlib import Path
 
 import yaml
 
+# --- Canonical engine imports (isotope dissolution) ---
+try:
+    from organvm_engine.seed.discover import discover_seeds as _engine_discover_seeds
+    from organvm_engine.seed.contracts import validate_contract as _engine_validate_contract
+    from organvm_engine.seed.graph import validate_edge_resolution as _engine_validate_edges
+    from organvm_engine.registry.loader import load_registry as _engine_load_registry
+    from organvm_engine.paths import registry_path as _engine_registry_path
+
+    _HAS_ENGINE = True
+except ImportError:
+    _HAS_ENGINE = False
 
 WORKSPACE = Path.home() / "Workspace"
 REGISTRY_PATH = WORKSPACE / "meta-organvm" / "organvm-corpvs-testamentvm" / "registry-v2.json"
@@ -217,13 +232,28 @@ def validate_graph_integrity(seeds: dict[str, Path]) -> list[str]:
 
 def main():
     parser = argparse.ArgumentParser(description="Validate all seed.yaml files")
-    parser.add_argument("--registry", default=str(REGISTRY_PATH))
+    parser.add_argument("--registry", default=str(
+        _engine_registry_path() if _HAS_ENGINE else REGISTRY_PATH
+    ))
     parser.add_argument("--workspace", default=str(WORKSPACE))
     parser.add_argument("--json", action="store_true", help="Output JSON results")
     args = parser.parse_args()
 
     workspace = Path(args.workspace)
-    seeds = discover_seeds(workspace)
+
+    if _HAS_ENGINE:
+        # Use engine's canonical seed discovery (returns list of Paths)
+        seed_paths = _engine_discover_seeds(workspace=workspace)
+        seeds = {}
+        for p in seed_paths:
+            # Reconstruct org/repo key from path structure
+            repo_dir = p.parent
+            org_dir = repo_dir.parent
+            key = f"{org_dir.name}/{repo_dir.name}"
+            seeds[key] = p
+    else:
+        seeds = discover_seeds(workspace)
+
     registry = load_registry(Path(args.registry))
 
     schema_errors: list[str] = []

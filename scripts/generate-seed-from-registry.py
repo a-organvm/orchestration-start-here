@@ -1,10 +1,14 @@
 #!/usr/bin/env python3
 """Reconcile seed.yaml files against registry-v2.json.
+# ISOTOPE DISSOLUTION: Gate circulatory--contribute G1
 
 Three modes:
   --mode report    Dry-run: show drift between seeds and registry
   --mode reconcile Update metadata in existing seeds to match registry (registry wins)
   --mode generate  Create seed.yaml for repos that are missing one
+
+When organvm-engine is installed, uses canonical seed discovery and registry
+loading. Falls back to standalone implementation.
 
 Registry is the single source of truth (Article I).
 
@@ -22,6 +26,16 @@ from pathlib import Path
 
 import yaml
 
+# --- Canonical engine imports (isotope dissolution) ---
+try:
+    from organvm_engine.seed.discover import discover_seeds as _engine_discover_seeds
+    from organvm_engine.registry.loader import load_registry as _engine_load_registry
+    from organvm_engine.paths import registry_path as _engine_registry_path
+    from organvm_engine.organ_config import get_organ_map as _engine_get_organ_map
+
+    _HAS_ENGINE = True
+except ImportError:
+    _HAS_ENGINE = False
 
 WORKSPACE = Path.home() / "Workspace"
 REGISTRY_PATH = WORKSPACE / "meta-organvm" / "organvm-corpvs-testamentvm" / "registry-v2.json"
@@ -350,6 +364,8 @@ def generate_mode(registry: dict, seeds: dict[str, Path]) -> int:
 
 
 def main():
+    default_registry = str(_engine_registry_path()) if _HAS_ENGINE else str(REGISTRY_PATH)
+
     parser = argparse.ArgumentParser(description="Reconcile seed.yaml vs registry-v2.json")
     parser.add_argument(
         "--mode",
@@ -359,8 +375,8 @@ def main():
     )
     parser.add_argument(
         "--registry",
-        default=str(REGISTRY_PATH),
-        help=f"Path to registry-v2.json (default: {REGISTRY_PATH})",
+        default=default_registry,
+        help=f"Path to registry-v2.json (default: {default_registry})",
     )
     parser.add_argument(
         "--workspace",
@@ -369,8 +385,20 @@ def main():
     )
     args = parser.parse_args()
 
-    registry = load_registry(Path(args.registry))
-    seeds = discover_seeds(Path(args.workspace))
+    if _HAS_ENGINE:
+        # Use engine's canonical registry loader
+        registry = load_registry(Path(args.registry))
+        # Use engine's canonical seed discovery, convert to keyed dict
+        seed_paths = _engine_discover_seeds(workspace=Path(args.workspace))
+        seeds = {}
+        for p in seed_paths:
+            repo_dir = p.parent
+            org_dir = repo_dir.parent
+            key = f"{org_dir.name}/{repo_dir.name}"
+            seeds[key] = p
+    else:
+        registry = load_registry(Path(args.registry))
+        seeds = discover_seeds(Path(args.workspace))
 
     if args.mode == "report":
         issues = report_mode(registry, seeds)

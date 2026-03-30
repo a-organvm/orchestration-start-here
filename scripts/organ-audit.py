@@ -1,8 +1,12 @@
 #!/usr/bin/env python3
 """Monthly organ audit script for the eight-organ system.
+# ISOTOPE DISSOLUTION: Gate circulatory--contribute G1
 
 Reads registry.json and governance-rules.json, validates system health,
 and produces a markdown audit report.
+
+When organvm-engine is installed, delegates to the canonical
+governance.audit.run_audit. Falls back to standalone implementation.
 
 Utilizes dynamic environment variables (ORG_I...VII, ORGANVM_WORKSPACE_DIR)
 for validation and context.
@@ -13,6 +17,16 @@ import argparse
 import os
 from datetime import datetime
 from pathlib import Path
+
+# --- Canonical engine imports (isotope dissolution) ---
+try:
+    from organvm_engine.governance.audit import run_audit as _engine_run_audit
+    from organvm_engine.registry.loader import load_registry as _engine_load_registry
+    from organvm_engine.governance.rules import load_governance_rules as _engine_load_rules
+
+    _HAS_ENGINE = True
+except ImportError:
+    _HAS_ENGINE = False
 
 
 def get_organ_env_map():
@@ -226,6 +240,39 @@ def audit_organs(registry_path: str, governance_path: str) -> tuple:
     return "\n".join(report), alerts
 
 
+def _run_via_engine(registry_path: str, governance_path: str, output_path: str) -> int:
+    """Run audit using canonical organvm-engine governance.audit."""
+    registry = _engine_load_registry(registry_path)
+    rules = _engine_load_rules(governance_path)
+    result = _engine_run_audit(registry, rules)
+
+    # Format engine result as markdown report
+    lines = ["## Governance Audit Report (via organvm-engine)\n"]
+    if result.critical:
+        lines.append(f"### Critical ({len(result.critical)})\n")
+        for item in result.critical:
+            lines.append(f"- {item}")
+    if result.warnings:
+        lines.append(f"\n### Warnings ({len(result.warnings)})\n")
+        for item in result.warnings:
+            lines.append(f"- {item}")
+    if result.info:
+        lines.append(f"\n### Info ({len(result.info)})\n")
+        for item in result.info:
+            lines.append(f"- {item}")
+    if not result.critical and not result.warnings:
+        lines.append("No critical alerts or warnings.\n")
+
+    report = "\n".join(lines)
+    with open(output_path, "w") as f:
+        f.write(report)
+
+    print(f"Audit complete (via organvm-engine). Report written to {output_path}")
+    print(f"  Critical: {len(result.critical)}")
+    print(f"  Warnings: {len(result.warnings)}")
+    return 1 if result.critical else 0
+
+
 def main():
     parser = argparse.ArgumentParser(description="Monthly organ audit")
     parser.add_argument("--registry", required=True, help="Path to registry.json")
@@ -233,12 +280,16 @@ def main():
     parser.add_argument("--output", required=True, help="Output markdown file")
     args = parser.parse_args()
 
+    if _HAS_ENGINE:
+        exit_code = _run_via_engine(args.registry, args.governance, args.output)
+        sys.exit(exit_code)
+
     report, alerts = audit_organs(args.registry, args.governance)
 
     with open(args.output, "w") as f:
         f.write(report)
 
-    print(f"Audit complete. Report written to {args.output}")
+    print(f"Audit complete (standalone fallback). Report written to {args.output}")
     print(f"  Critical: {len(alerts['critical'])}")
     print(f"  Warnings: {len(alerts['warning'])}")
 
