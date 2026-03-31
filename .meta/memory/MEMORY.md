@@ -9,6 +9,7 @@
 
 ## Project
 - [project_action_ledger.md](project_action_ledger.md) — Action Ledger: system-wide process recording. Synthesizer paradigm for ideas. Plan approved 2026-03-31.
+- [project_temporal_convergence.md](project_temporal_convergence.md) — Action ledger + dispatch ledger are the same system at different scales. Built independently on consecutive days. Must converge.
 - [project_contrib_engine_purpose.md](project_contrib_engine_purpose.md) — Contribution engine: network expansion + income + opportunity. 14 modules, 164 tests. MCP ecosystem as strategic center.
 - [project_contribution_portfolio.md](project_contribution_portfolio.md) — 24 repos, 1 merged, 1 closed, 22 open PRs. 4 waves. Public board live. Updated 2026-03-30.
 - [project_external_contributors.md](project_external_contributors.md) — m13v (conflict detection), voidborne-d (emergence/convergence), t4g (governance PR merged). Issues #66-#73.
@@ -32,6 +33,7 @@
 - [feedback_pr_comment_discipline.md](feedback_pr_comment_discipline.md) — PR comment discipline: no pre-review bumps, one commit per round, silence after addressing feedback.
 - [feedback_realm_boundary_handoff.md](feedback_realm_boundary_handoff.md) — Cross-realm work: separate in-realm vs out-of-realm, provide structured handoff prompts.
 - [feedback_dense_abstraction_prompting.md](feedback_dense_abstraction_prompting.md) — User's prompts are dense abstractions in parameter space. Don't decompose into discrete options. Reflect holistic design.
+- [feedback_temporal_model.md](feedback_temporal_model.md) — Time is mathematical micro-to-macro cycles, not human timezones. The system's temporal reality is its own. Cycle-time, not clock-time.
 
 ## System-Wide Artifacts
 - Testament formalization: `docs/testament-formalization.md` + `contrib_engine/artifacts/testament-formalization.md`
