@@ -63,19 +63,26 @@ python -m contrib_engine outreach show # Outreach tracker — relationship lifec
 python -m contrib_engine backflow pending # Backflow pipeline — knowledge routing to organs
 ```
 
-**Core modules:** `scanner.py` (4 signal sources + scoring), `orchestrator.py` (workspace init), `monitor.py` (PR lifecycle + absorption trigger), `capabilities.py` (8 capability definitions), `schemas.py` (30+ Pydantic models), `github_client.py` (gh CLI wrapper), `cli.py` (dual-mode prefix registration).
+**Core modules:** `scanner.py` (4 signal sources + scoring), `orchestrator.py` (workspace init), `monitor.py` (PR lifecycle + absorption trigger), `capabilities.py` (8 capability definitions), `schemas.py` (40 Pydantic models incl. 8 StrEnum + 1 IntEnum), `github_client.py` (gh CLI wrapper), `cli.py` (dual-mode prefix registration).
 
 **Campaign modules (S32):** `campaign.py` (phase sequencer: UNBLOCK→ENGAGE→CULTIVATE→HARVEST→INJECT), `outreach.py` (relationship scoring, event logging), `backflow.py` (6-organ routing: theory/generative/code/narrative/community/distribution).
 
 **Absorption Protocol (S35):** `absorption.py` (inbound question detection → auto-formalization → backflow deposit). Scans tracked conversations for expansion-worthy questions using 8 heuristics + 6 reduction filters. Runs autonomously inside the monitor cycle. Protocol doc: `docs/absorption-protocol.md`.
 
-**Data files** (committed, living state): `data/campaign.yaml` (15 actions, income-weighted), `data/outreach.yaml` (10 relationships), `data/backflow.yaml` (13 deposited items), `data/absorption.yaml` (4 detected + formalized), `data/tracked_conversations.yaml` (conversation URLs for absorption scanning), `data/ranked_targets.yaml` (scanner output).
+**Fieldwork Intelligence (S-fieldwork-mvp):** `fieldwork.py` (process observations from contribution workflows). Layer 1 of 4-layer system. Records observations with 10 categories, 5-level spectrum (AVOID to ABSORB as IntEnum), 6 strategic tags, 6 sources. CLI: `fieldwork record` + `fieldwork show`. Spec: `docs/superpowers/specs/2026-03-30-fieldwork-intelligence-system-design.md`.
 
-**Artifacts:** `artifacts/dbt-mcp-patterns-absorption.md` (5 architectural patterns absorbed from dbt-mcp contribution).
+```bash
+python -m contrib_engine fieldwork record --workspace WS --category CAT --signal "..." --spectrum N --source SRC
+python -m contrib_engine fieldwork show [--workspace WS] [--category CAT] [--min-spectrum N]
+```
+
+**Data files** (committed, living state): `data/campaign.yaml` (15 actions, income-weighted), `data/outreach.yaml` (10 relationships), `data/backflow.yaml` (13 deposited items), `data/absorption.yaml` (4 detected + formalized), `data/tracked_conversations.yaml` (conversation URLs for absorption scanning), `data/ranked_targets.yaml` (scanner output), `data/fieldwork.yaml` (observation stream, append-only, created on first write).
+
+**Artifacts:** `artifacts/dbt-mcp-patterns-absorption.md` (5 architectural patterns absorbed from dbt-mcp contribution). 4 render scripts in `artifacts/` (canvas, post001, post002, post002-audit) — standalone, no CLI integration (IRF-OSS-029).
 
 **Testament:** 13 articles of codified writing rules formalized into logic/algorithms/math at `docs/testament-formalization.md`. Constitutional authority — governs all written output.
 
-**Tests:** 150 passing, 0 failures.
+**Tests:** 164 passing, 0 failures.
 
 ## ORGANVM Context
 
