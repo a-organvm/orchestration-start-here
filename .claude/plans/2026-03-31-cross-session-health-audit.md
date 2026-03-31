@@ -1,3 +1,12 @@
+---
+session: S-cross-session-health-audit
+date: 2026-03-31
+supersedes: [2026-03-31-session-close-audit.md]
+continues: []
+status: completed
+tags: [audit, session-close, verification, health-check]
+---
+
 # Session Closure Health Audit — Two Prior Sessions
 
 ## Context
@@ -91,3 +100,12 @@ All git parity, tests, seed.yaml, CLAUDE.md, action_ledger files, data files, IR
 1. Stage + commit the 2 OSH dirty files (or stash if unintended)
 2. Copy gravitas plan to `orchestration-start-here/.claude/plans/2026-03-31-gravitas-culturalis.md`
 3. No action needed on memory scoping — files are in correct project context
+
+## Forward
+
+### Next Session Context
+- Audit methodology proven: git state, persistence, memory, GitHub issues, plan files
+- Identified plan file discipline gaps — now addressed by frontmatter + archive protocol (S-energy-emission)
+
+### Handoff Prompt
+> Cross-session health audit complete. The audit methodology is reusable for future session closures. The plan handoff infrastructure (frontmatter, Forward blocks, archive directory) was built in session S-energy-emission as a direct response to gaps this audit surfaced.

@@ -39,6 +39,7 @@ metadata:
     action_ledger:
       - schemas.py
       - ledger.py
+      - emissions.py
       - routes.py
       - cycles.py
       - cli.py
@@ -61,7 +62,7 @@ metadata:
       - render_post001.py
       - render_post002.py
       - render_post002_audit.py
-  test_count: 221
+  test_count: 233
 produces:
 - type: governance_rules
   description: Codified governance articles enforcing dependency flow, promotion states, and registry authority.

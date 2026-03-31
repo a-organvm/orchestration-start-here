@@ -23,3 +23,19 @@ axes:
     description: ''
     first_seen: '2026-03-31'
     frequency: 2
+  action_count:
+    name: action_count
+    range:
+    - 0.0
+    - 3.0
+    description: ''
+    first_seen: '2026-03-31'
+    frequency: 180
+  sequence_count:
+    name: sequence_count
+    range:
+    - 0.0
+    - 2.0
+    description: ''
+    first_seen: '2026-03-31'
+    frequency: 42

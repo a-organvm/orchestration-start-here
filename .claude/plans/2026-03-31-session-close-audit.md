@@ -1,3 +1,12 @@
+---
+session: S-session-close-audit
+date: 2026-03-31
+supersedes: []
+continues: []
+status: superseded
+tags: [audit, session-close, verification]
+---
+
 # Session-Close Audit: orchestration-start-here
 
 **Date:** 2026-03-31

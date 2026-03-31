@@ -12,6 +12,13 @@ from enum import StrEnum
 from pydantic import BaseModel, Field
 
 
+class ActionOrigin(StrEnum):
+    """How an action entered the ledger."""
+
+    MANUAL = "manual"      # CLI-recorded by human or agent
+    EMITTED = "emitted"    # Auto-emitted by a state change
+
+
 class RouteKind(StrEnum):
     """How one action/artifact relates to another."""
 
@@ -85,6 +92,7 @@ class Action(BaseModel):
     params: dict[str, float | str] = Field(default_factory=dict)
     produced: list[Produced] = Field(default_factory=list)
     routes: list[Route] = Field(default_factory=list)
+    origin: ActionOrigin = ActionOrigin.MANUAL
     sequence_id: str = ""          # which sequence this belongs to
 
 

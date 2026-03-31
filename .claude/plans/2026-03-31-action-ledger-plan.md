@@ -1,7 +1,16 @@
+---
+session: S-action-ledger-recording-infrastructure
+date: 2026-03-31
+supersedes: []
+continues: []
+status: completed
+tags: [action-ledger, recording, infrastructure, synthesizer-paradigm]
+---
+
 # Action Ledger — System-Wide Process Recording Infrastructure
 
 **Date:** 2026-03-31
-**Status:** DRAFTING
+**Status:** COMPLETED
 **Scope:** ORGAN-IV (all repos), extensible system-wide
 **Conceptual Prior Art:** `organvm-ii-poiesis/alchemical-synthesizer` (Brahma Meta-Rack)
 
@@ -359,3 +368,18 @@ python -m action_ledger show --session current
 | `brahma/sc/01_module_registry.scd` | REFERENCE — extensible registry pattern |
 | `brahma/sc/08_patch_bay.scd` | REFERENCE — weighted routing pattern |
 | `brahma/sc/09_chronos_automation.scd` | REFERENCE — automation lane pattern |
+
+## Forward
+
+### Next Session Context
+- Phases 1-4 implemented and tested (57 tests). Phase 5 (emission layer) added in session S-energy-emission.
+- The emission layer (`action_ledger/emissions.py`) makes state changes self-recording.
+- Cycle detection operates on emitted actions — the system can now detect patterns in its own state transitions.
+
+### Handoff Prompt
+> Continue from action ledger Phases 1-4 + emission layer. The ledger records, composes, routes, detects cycles, and now self-records state transitions. Next work: integrate emission into the Conductor OS session lifecycle (FRAME→SHAPE→BUILD→PROVE transitions should emit). Consider whether the plan index should be a generated file or directory structure.
+
+### Open Questions
+- Fieldwork intelligence (Layer 2-4) should emit when observations are recorded
+- The Conductor session lifecycle transitions need emission wiring
+- Plan status transitions (active→completed) should emit — protocol defined but not yet wired

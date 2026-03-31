@@ -17,6 +17,7 @@ actions:
   - kind: consumed
     target: contrib_engine/fieldwork.py
     amount: 0.0
+  origin: manual
   sequence_id: seq-S42-001
 - id: act-S42-0331-002
   timestamp: '2026-03-31T10:01:41.092609'
@@ -33,4 +34,4365 @@ actions:
   - kind: informed_by
     target: brahma/sc/01_module_registry.scd
     amount: 0.0
+  origin: manual
   sequence_id: seq-S42-001
+- id: act-S42-0331-003
+  timestamp: '2026-03-31T12:03:21.728324'
+  session: S42
+  verb: closed_sequence
+  target: seq-S42-001
+  context: "action_ledger: open \u2192 closed"
+  params:
+    subsystem: action_ledger
+    from_state: open
+    to_state: closed
+    action_count: 1.0
+  produced: []
+  routes:
+  - kind: continues
+    target: seq-S42-001
+    amount: 0.0
+  origin: emitted
+  sequence_id: seq-S42-001
+- id: act-S42-0331-004
+  timestamp: '2026-03-31T12:03:21.732492'
+  session: S42
+  verb: closed_sequence
+  target: seq-S42-001
+  context: "action_ledger: open \u2192 closed"
+  params:
+    subsystem: action_ledger
+    from_state: open
+    to_state: closed
+    action_count: 1.0
+  produced: []
+  routes:
+  - kind: continues
+    target: seq-S42-001
+    amount: 0.0
+  origin: emitted
+  sequence_id: seq-S42-001
+- id: act-S42-0331-005
+  timestamp: '2026-03-31T12:03:21.743723'
+  session: S42
+  verb: closed_session
+  target: S42
+  context: "action_ledger: active \u2192 closed"
+  params:
+    subsystem: action_ledger
+    from_state: active
+    to_state: closed
+    sequence_count: 1.0
+  produced:
+  - type: chain
+    ref: chain-S42-001
+  routes:
+  - kind: continues
+    target: S42
+    amount: 0.0
+  origin: emitted
+  sequence_id: seq-S42-001
+- id: act-S42-0331-006
+  timestamp: '2026-03-31T12:03:21.751458'
+  session: S42
+  verb: composed_chain
+  target: chain-S42-001
+  context: "action_ledger: sequences \u2192 chain"
+  params:
+    subsystem: action_ledger
+    from_state: sequences
+    to_state: chain
+    sequence_count: 1.0
+  produced:
+  - type: chain
+    ref: chain-S42-001
+  routes:
+  - kind: continues
+    target: chain-S42-001
+    amount: 0.0
+  origin: emitted
+  sequence_id: seq-S42-001
+- id: act-S42-0331-007
+  timestamp: '2026-03-31T12:03:21.757877'
+  session: S42
+  verb: composed_chain
+  target: chain-S42-001
+  context: "action_ledger: sequences \u2192 chain"
+  params:
+    subsystem: action_ledger
+    from_state: sequences
+    to_state: chain
+    sequence_count: 1.0
+  produced:
+  - type: chain
+    ref: chain-S42-001
+  routes:
+  - kind: continues
+    target: chain-S42-001
+    amount: 0.0
+  origin: emitted
+  sequence_id: seq-S42-001
+- id: act-S42-0331-008
+  timestamp: '2026-03-31T12:03:21.765077'
+  session: S42
+  verb: composed_chain
+  target: chain-S42-001
+  context: "action_ledger: sequences \u2192 chain"
+  params:
+    subsystem: action_ledger
+    from_state: sequences
+    to_state: chain
+    sequence_count: 1.0
+  produced:
+  - type: chain
+    ref: chain-S42-001
+  routes:
+  - kind: continues
+    target: chain-S42-001
+    amount: 0.0
+  origin: emitted
+  sequence_id: seq-S42-001
+- id: act-S42-0331-009
+  timestamp: '2026-03-31T12:03:21.772429'
+  session: S42
+  verb: composed_chain
+  target: chain-S42-001
+  context: "action_ledger: sequences \u2192 chain"
+  params:
+    subsystem: action_ledger
+    from_state: sequences
+    to_state: chain
+    sequence_count: 1.0
+  produced:
+  - type: chain
+    ref: chain-S42-001
+  routes:
+  - kind: continues
+    target: chain-S42-001
+    amount: 0.0
+  origin: emitted
+  sequence_id: seq-S42-001
+- id: act-S42-0331-010
+  timestamp: '2026-03-31T12:03:21.780950'
+  session: S42
+  verb: closed_session
+  target: S42
+  context: "action_ledger: active \u2192 closed"
+  params:
+    subsystem: action_ledger
+    from_state: active
+    to_state: closed
+    sequence_count: 1.0
+  produced:
+  - type: chain
+    ref: chain-S42-001
+  routes:
+  - kind: continues
+    target: S42
+    amount: 0.0
+  origin: emitted
+  sequence_id: seq-S42-001
+- id: act-S42-0331-011
+  timestamp: '2026-03-31T12:03:21.791906'
+  session: S42
+  verb: closed_sequence
+  target: seq-S42-001
+  context: "action_ledger: open \u2192 closed"
+  params:
+    subsystem: action_ledger
+    from_state: open
+    to_state: closed
+    action_count: 1.0
+  produced: []
+  routes:
+  - kind: continues
+    target: seq-S42-001
+    amount: 0.0
+  origin: emitted
+  sequence_id: seq-S42-001
+- id: act-S42-0331-012
+  timestamp: '2026-03-31T12:03:21.802932'
+  session: S42
+  verb: closed_sequence
+  target: seq-S42-002
+  context: "action_ledger: open \u2192 closed"
+  params:
+    subsystem: action_ledger
+    from_state: open
+    to_state: closed
+    action_count: 1.0
+  produced: []
+  routes:
+  - kind: continues
+    target: seq-S42-002
+    amount: 0.0
+  origin: emitted
+  sequence_id: seq-S42-001
+- id: act-S42-0331-013
+  timestamp: '2026-03-31T12:03:21.815868'
+  session: S42
+  verb: composed_chain
+  target: chain-S42-001
+  context: "action_ledger: sequences \u2192 chain"
+  params:
+    subsystem: action_ledger
+    from_state: sequences
+    to_state: chain
+    sequence_count: 2.0
+  produced:
+  - type: chain
+    ref: chain-S42-001
+  routes:
+  - kind: continues
+    target: chain-S42-001
+    amount: 0.0
+  origin: emitted
+  sequence_id: seq-S42-001
+- id: act-S38-0331-001
+  timestamp: '2026-03-31T12:03:21.827983'
+  session: S38
+  verb: closed_sequence
+  target: seq-S38-001
+  context: "action_ledger: open \u2192 closed"
+  params:
+    subsystem: action_ledger
+    from_state: open
+    to_state: closed
+    action_count: 3.0
+  produced: []
+  routes:
+  - kind: continues
+    target: seq-S38-001
+    amount: 0.0
+  origin: emitted
+  sequence_id: seq-S38-001
+- id: act-S40-0331-001
+  timestamp: '2026-03-31T12:03:21.839861'
+  session: S40
+  verb: closed_sequence
+  target: seq-S40-001
+  context: "action_ledger: open \u2192 closed"
+  params:
+    subsystem: action_ledger
+    from_state: open
+    to_state: closed
+    action_count: 3.0
+  produced: []
+  routes:
+  - kind: continues
+    target: seq-S40-001
+    amount: 0.0
+  origin: emitted
+  sequence_id: seq-S40-001
+- id: act-S42-0331-014
+  timestamp: '2026-03-31T12:03:21.854008'
+  session: S42
+  verb: closed_sequence
+  target: seq-S42-001
+  context: "action_ledger: open \u2192 closed"
+  params:
+    subsystem: action_ledger
+    from_state: open
+    to_state: closed
+    action_count: 3.0
+  produced: []
+  routes:
+  - kind: continues
+    target: seq-S42-001
+    amount: 0.0
+  origin: emitted
+  sequence_id: seq-S42-001
+- id: act-S38-0331-002
+  timestamp: '2026-03-31T12:03:21.868699'
+  session: S38
+  verb: closed_sequence
+  target: seq-S38-001
+  context: "action_ledger: open \u2192 closed"
+  params:
+    subsystem: action_ledger
+    from_state: open
+    to_state: closed
+    action_count: 3.0
+  produced: []
+  routes:
+  - kind: continues
+    target: seq-S38-001
+    amount: 0.0
+  origin: emitted
+  sequence_id: seq-S38-001
+- id: act-S40-0331-002
+  timestamp: '2026-03-31T12:03:21.883165'
+  session: S40
+  verb: closed_sequence
+  target: seq-S40-001
+  context: "action_ledger: open \u2192 closed"
+  params:
+    subsystem: action_ledger
+    from_state: open
+    to_state: closed
+    action_count: 3.0
+  produced: []
+  routes:
+  - kind: continues
+    target: seq-S40-001
+    amount: 0.0
+  origin: emitted
+  sequence_id: seq-S40-001
+- id: act-S42-0331-015
+  timestamp: '2026-03-31T12:03:21.898454'
+  session: S42
+  verb: closed_sequence
+  target: seq-S42-001
+  context: "action_ledger: open \u2192 closed"
+  params:
+    subsystem: action_ledger
+    from_state: open
+    to_state: closed
+    action_count: 3.0
+  produced: []
+  routes:
+  - kind: continues
+    target: seq-S42-001
+    amount: 0.0
+  origin: emitted
+  sequence_id: seq-S42-001
+- id: act-S38-0331-003
+  timestamp: '2026-03-31T12:03:21.916689'
+  session: S38
+  verb: closed_sequence
+  target: seq-S38-001
+  context: "action_ledger: open \u2192 closed"
+  params:
+    subsystem: action_ledger
+    from_state: open
+    to_state: closed
+    action_count: 3.0
+  produced: []
+  routes:
+  - kind: continues
+    target: seq-S38-001
+    amount: 0.0
+  origin: emitted
+  sequence_id: seq-S38-001
+- id: act-S40-0331-003
+  timestamp: '2026-03-31T12:03:21.932590'
+  session: S40
+  verb: closed_sequence
+  target: seq-S40-001
+  context: "action_ledger: open \u2192 closed"
+  params:
+    subsystem: action_ledger
+    from_state: open
+    to_state: closed
+    action_count: 3.0
+  produced: []
+  routes:
+  - kind: continues
+    target: seq-S40-001
+    amount: 0.0
+  origin: emitted
+  sequence_id: seq-S40-001
+- id: act-S42-0331-016
+  timestamp: '2026-03-31T12:03:21.949244'
+  session: S42
+  verb: closed_sequence
+  target: seq-S42-001
+  context: "action_ledger: open \u2192 closed"
+  params:
+    subsystem: action_ledger
+    from_state: open
+    to_state: closed
+    action_count: 3.0
+  produced: []
+  routes:
+  - kind: continues
+    target: seq-S42-001
+    amount: 0.0
+  origin: emitted
+  sequence_id: seq-S42-001
+- id: act-S38-0331-004
+  timestamp: '2026-03-31T12:03:21.968363'
+  session: S38
+  verb: closed_sequence
+  target: seq-S38-001
+  context: "action_ledger: open \u2192 closed"
+  params:
+    subsystem: action_ledger
+    from_state: open
+    to_state: closed
+    action_count: 3.0
+  produced: []
+  routes:
+  - kind: continues
+    target: seq-S38-001
+    amount: 0.0
+  origin: emitted
+  sequence_id: seq-S38-001
+- id: act-S40-0331-004
+  timestamp: '2026-03-31T12:03:21.987444'
+  session: S40
+  verb: closed_sequence
+  target: seq-S40-001
+  context: "action_ledger: open \u2192 closed"
+  params:
+    subsystem: action_ledger
+    from_state: open
+    to_state: closed
+    action_count: 3.0
+  produced: []
+  routes:
+  - kind: continues
+    target: seq-S40-001
+    amount: 0.0
+  origin: emitted
+  sequence_id: seq-S40-001
+- id: act-S42-0331-017
+  timestamp: '2026-03-31T12:03:22.012647'
+  session: S42
+  verb: closed_sequence
+  target: seq-S42-001
+  context: "action_ledger: open \u2192 closed"
+  params:
+    subsystem: action_ledger
+    from_state: open
+    to_state: closed
+    action_count: 3.0
+  produced: []
+  routes:
+  - kind: continues
+    target: seq-S42-001
+    amount: 0.0
+  origin: emitted
+  sequence_id: seq-S42-001
+- id: act-S38-0331-005
+  timestamp: '2026-03-31T12:03:22.034974'
+  session: S38
+  verb: closed_sequence
+  target: seq-S38-001
+  context: "action_ledger: open \u2192 closed"
+  params:
+    subsystem: action_ledger
+    from_state: open
+    to_state: closed
+    action_count: 3.0
+  produced: []
+  routes:
+  - kind: continues
+    target: seq-S38-001
+    amount: 0.0
+  origin: emitted
+  sequence_id: seq-S38-001
+- id: act-S40-0331-005
+  timestamp: '2026-03-31T12:03:22.057994'
+  session: S40
+  verb: closed_sequence
+  target: seq-S40-001
+  context: "action_ledger: open \u2192 closed"
+  params:
+    subsystem: action_ledger
+    from_state: open
+    to_state: closed
+    action_count: 3.0
+  produced: []
+  routes:
+  - kind: continues
+    target: seq-S40-001
+    amount: 0.0
+  origin: emitted
+  sequence_id: seq-S40-001
+- id: act-S42-0331-018
+  timestamp: '2026-03-31T12:03:22.077906'
+  session: S42
+  verb: closed_sequence
+  target: seq-S42-001
+  context: "action_ledger: open \u2192 closed"
+  params:
+    subsystem: action_ledger
+    from_state: open
+    to_state: closed
+    action_count: 3.0
+  produced: []
+  routes:
+  - kind: continues
+    target: seq-S42-001
+    amount: 0.0
+  origin: emitted
+  sequence_id: seq-S42-001
+- id: act-S40-0331-006
+  timestamp: '2026-03-31T12:03:22.098645'
+  session: S40
+  verb: closed_sequence
+  target: seq-S40-001
+  context: "action_ledger: open \u2192 closed"
+  params:
+    subsystem: action_ledger
+    from_state: open
+    to_state: closed
+    action_count: 1.0
+  produced: []
+  routes:
+  - kind: continues
+    target: seq-S40-001
+    amount: 0.0
+  origin: emitted
+  sequence_id: seq-S40-001
+- id: act-S41-0331-001
+  timestamp: '2026-03-31T12:03:22.118881'
+  session: S41
+  verb: closed_sequence
+  target: seq-S41-001
+  context: "action_ledger: open \u2192 closed"
+  params:
+    subsystem: action_ledger
+    from_state: open
+    to_state: closed
+    action_count: 1.0
+  produced: []
+  routes:
+  - kind: continues
+    target: seq-S41-001
+    amount: 0.0
+  origin: emitted
+  sequence_id: seq-S41-001
+- id: act-S42-0331-019
+  timestamp: '2026-03-31T12:03:22.139580'
+  session: S42
+  verb: closed_sequence
+  target: seq-S42-001
+  context: "action_ledger: open \u2192 closed"
+  params:
+    subsystem: action_ledger
+    from_state: open
+    to_state: closed
+    action_count: 1.0
+  produced: []
+  routes:
+  - kind: continues
+    target: seq-S42-001
+    amount: 0.0
+  origin: emitted
+  sequence_id: seq-S42-001
+- id: act-S43-0331-001
+  timestamp: '2026-03-31T12:03:22.160882'
+  session: S43
+  verb: closed_sequence
+  target: seq-S43-001
+  context: "action_ledger: open \u2192 closed"
+  params:
+    subsystem: action_ledger
+    from_state: open
+    to_state: closed
+    action_count: 1.0
+  produced: []
+  routes:
+  - kind: continues
+    target: seq-S43-001
+    amount: 0.0
+  origin: emitted
+  sequence_id: seq-S43-001
+- id: act-S40-0331-007
+  timestamp: '2026-03-31T12:03:22.183393'
+  session: S40
+  verb: closed_sequence
+  target: seq-S40-001
+  context: "action_ledger: open \u2192 closed"
+  params:
+    subsystem: action_ledger
+    from_state: open
+    to_state: closed
+    action_count: 1.0
+  produced: []
+  routes:
+  - kind: continues
+    target: seq-S40-001
+    amount: 0.0
+  origin: emitted
+  sequence_id: seq-S40-001
+- id: act-S41-0331-002
+  timestamp: '2026-03-31T12:03:22.205870'
+  session: S41
+  verb: closed_sequence
+  target: seq-S41-001
+  context: "action_ledger: open \u2192 closed"
+  params:
+    subsystem: action_ledger
+    from_state: open
+    to_state: closed
+    action_count: 1.0
+  produced: []
+  routes:
+  - kind: continues
+    target: seq-S41-001
+    amount: 0.0
+  origin: emitted
+  sequence_id: seq-S41-001
+- id: act-S42-0331-020
+  timestamp: '2026-03-31T12:03:22.228687'
+  session: S42
+  verb: closed_sequence
+  target: seq-S42-001
+  context: "action_ledger: open \u2192 closed"
+  params:
+    subsystem: action_ledger
+    from_state: open
+    to_state: closed
+    action_count: 1.0
+  produced: []
+  routes:
+  - kind: continues
+    target: seq-S42-001
+    amount: 0.0
+  origin: emitted
+  sequence_id: seq-S42-001
+- id: act-S43-0331-002
+  timestamp: '2026-03-31T12:03:22.251878'
+  session: S43
+  verb: closed_sequence
+  target: seq-S43-001
+  context: "action_ledger: open \u2192 closed"
+  params:
+    subsystem: action_ledger
+    from_state: open
+    to_state: closed
+    action_count: 1.0
+  produced: []
+  routes:
+  - kind: continues
+    target: seq-S43-001
+    amount: 0.0
+  origin: emitted
+  sequence_id: seq-S43-001
+- id: act-S38-0331-006
+  timestamp: '2026-03-31T12:03:22.275666'
+  session: S38
+  verb: closed_sequence
+  target: seq-S38-001
+  context: "action_ledger: open \u2192 closed"
+  params:
+    subsystem: action_ledger
+    from_state: open
+    to_state: closed
+    action_count: 3.0
+  produced: []
+  routes:
+  - kind: continues
+    target: seq-S38-001
+    amount: 0.0
+  origin: emitted
+  sequence_id: seq-S38-001
+- id: act-S40-0331-008
+  timestamp: '2026-03-31T12:03:22.300166'
+  session: S40
+  verb: closed_sequence
+  target: seq-S40-001
+  context: "action_ledger: open \u2192 closed"
+  params:
+    subsystem: action_ledger
+    from_state: open
+    to_state: closed
+    action_count: 3.0
+  produced: []
+  routes:
+  - kind: continues
+    target: seq-S40-001
+    amount: 0.0
+  origin: emitted
+  sequence_id: seq-S40-001
+- id: act-S42-0331-021
+  timestamp: '2026-03-31T12:03:22.324878'
+  session: S42
+  verb: closed_sequence
+  target: seq-S42-001
+  context: "action_ledger: open \u2192 closed"
+  params:
+    subsystem: action_ledger
+    from_state: open
+    to_state: closed
+    action_count: 3.0
+  produced: []
+  routes:
+  - kind: continues
+    target: seq-S42-001
+    amount: 0.0
+  origin: emitted
+  sequence_id: seq-S42-001
+- id: act-_sys-0331-001
+  timestamp: '2026-03-31T12:04:45.269594'
+  session: _sys
+  verb: absorption_advanced
+  target: abs-001
+  context: "contrib_engine: detected \u2192 formalized"
+  params:
+    subsystem: contrib_engine
+    from_state: detected
+    to_state: formalized
+    pattern: reader-side-resolution
+  produced: []
+  routes:
+  - kind: continues
+    target: abs-001
+    amount: 0.0
+  origin: emitted
+  sequence_id: seq-_sys-001
+- id: act-_sys-0331-002
+  timestamp: '2026-03-31T12:04:45.296615'
+  session: _sys
+  verb: absorption_deposited
+  target: abs-001
+  context: "contrib_engine: formalized \u2192 deposited"
+  params:
+    subsystem: contrib_engine
+    from_state: formalized
+    to_state: deposited
+    organ: I
+  produced:
+  - type: backflow
+    ref: backflow:I:reader-side-resolution
+  routes:
+  - kind: continues
+    target: abs-001
+    amount: 0.0
+  origin: emitted
+  sequence_id: seq-_sys-001
+- id: act-S42-0331-022
+  timestamp: '2026-03-31T12:04:45.332638'
+  session: S42
+  verb: closed_sequence
+  target: seq-S42-001
+  context: "action_ledger: open \u2192 closed"
+  params:
+    subsystem: action_ledger
+    from_state: open
+    to_state: closed
+    action_count: 1.0
+  produced: []
+  routes:
+  - kind: continues
+    target: seq-S42-001
+    amount: 0.0
+  origin: emitted
+  sequence_id: seq-S42-001
+- id: act-S42-0331-023
+  timestamp: '2026-03-31T12:04:45.360286'
+  session: S42
+  verb: closed_sequence
+  target: seq-S42-001
+  context: "action_ledger: open \u2192 closed"
+  params:
+    subsystem: action_ledger
+    from_state: open
+    to_state: closed
+    action_count: 1.0
+  produced: []
+  routes:
+  - kind: continues
+    target: seq-S42-001
+    amount: 0.0
+  origin: emitted
+  sequence_id: seq-S42-001
+- id: act-S42-0331-024
+  timestamp: '2026-03-31T12:04:45.395123'
+  session: S42
+  verb: closed_session
+  target: S42
+  context: "action_ledger: active \u2192 closed"
+  params:
+    subsystem: action_ledger
+    from_state: active
+    to_state: closed
+    sequence_count: 1.0
+  produced:
+  - type: chain
+    ref: chain-S42-001
+  routes:
+  - kind: continues
+    target: S42
+    amount: 0.0
+  origin: emitted
+  sequence_id: seq-S42-001
+- id: act-S42-0331-025
+  timestamp: '2026-03-31T12:04:45.426495'
+  session: S42
+  verb: composed_chain
+  target: chain-S42-001
+  context: "action_ledger: sequences \u2192 chain"
+  params:
+    subsystem: action_ledger
+    from_state: sequences
+    to_state: chain
+    sequence_count: 1.0
+  produced:
+  - type: chain
+    ref: chain-S42-001
+  routes:
+  - kind: continues
+    target: chain-S42-001
+    amount: 0.0
+  origin: emitted
+  sequence_id: seq-S42-001
+- id: act-S42-0331-026
+  timestamp: '2026-03-31T12:04:45.456911'
+  session: S42
+  verb: composed_chain
+  target: chain-S42-001
+  context: "action_ledger: sequences \u2192 chain"
+  params:
+    subsystem: action_ledger
+    from_state: sequences
+    to_state: chain
+    sequence_count: 1.0
+  produced:
+  - type: chain
+    ref: chain-S42-001
+  routes:
+  - kind: continues
+    target: chain-S42-001
+    amount: 0.0
+  origin: emitted
+  sequence_id: seq-S42-001
+- id: act-S42-0331-027
+  timestamp: '2026-03-31T12:04:45.487108'
+  session: S42
+  verb: composed_chain
+  target: chain-S42-001
+  context: "action_ledger: sequences \u2192 chain"
+  params:
+    subsystem: action_ledger
+    from_state: sequences
+    to_state: chain
+    sequence_count: 1.0
+  produced:
+  - type: chain
+    ref: chain-S42-001
+  routes:
+  - kind: continues
+    target: chain-S42-001
+    amount: 0.0
+  origin: emitted
+  sequence_id: seq-S42-001
+- id: act-S42-0331-028
+  timestamp: '2026-03-31T12:04:45.517658'
+  session: S42
+  verb: composed_chain
+  target: chain-S42-001
+  context: "action_ledger: sequences \u2192 chain"
+  params:
+    subsystem: action_ledger
+    from_state: sequences
+    to_state: chain
+    sequence_count: 1.0
+  produced:
+  - type: chain
+    ref: chain-S42-001
+  routes:
+  - kind: continues
+    target: chain-S42-001
+    amount: 0.0
+  origin: emitted
+  sequence_id: seq-S42-001
+- id: act-S42-0331-029
+  timestamp: '2026-03-31T12:04:45.549009'
+  session: S42
+  verb: closed_session
+  target: S42
+  context: "action_ledger: active \u2192 closed"
+  params:
+    subsystem: action_ledger
+    from_state: active
+    to_state: closed
+    sequence_count: 1.0
+  produced:
+  - type: chain
+    ref: chain-S42-001
+  routes:
+  - kind: continues
+    target: S42
+    amount: 0.0
+  origin: emitted
+  sequence_id: seq-S42-001
+- id: act-S42-0331-030
+  timestamp: '2026-03-31T12:04:45.580587'
+  session: S42
+  verb: closed_sequence
+  target: seq-S42-001
+  context: "action_ledger: open \u2192 closed"
+  params:
+    subsystem: action_ledger
+    from_state: open
+    to_state: closed
+    action_count: 1.0
+  produced: []
+  routes:
+  - kind: continues
+    target: seq-S42-001
+    amount: 0.0
+  origin: emitted
+  sequence_id: seq-S42-001
+- id: act-S42-0331-031
+  timestamp: '2026-03-31T12:04:45.612152'
+  session: S42
+  verb: closed_sequence
+  target: seq-S42-002
+  context: "action_ledger: open \u2192 closed"
+  params:
+    subsystem: action_ledger
+    from_state: open
+    to_state: closed
+    action_count: 1.0
+  produced: []
+  routes:
+  - kind: continues
+    target: seq-S42-002
+    amount: 0.0
+  origin: emitted
+  sequence_id: seq-S42-001
+- id: act-S42-0331-032
+  timestamp: '2026-03-31T12:04:45.644718'
+  session: S42
+  verb: composed_chain
+  target: chain-S42-001
+  context: "action_ledger: sequences \u2192 chain"
+  params:
+    subsystem: action_ledger
+    from_state: sequences
+    to_state: chain
+    sequence_count: 2.0
+  produced:
+  - type: chain
+    ref: chain-S42-001
+  routes:
+  - kind: continues
+    target: chain-S42-001
+    amount: 0.0
+  origin: emitted
+  sequence_id: seq-S42-001
+- id: act-S38-0331-007
+  timestamp: '2026-03-31T12:04:45.678587'
+  session: S38
+  verb: closed_sequence
+  target: seq-S38-001
+  context: "action_ledger: open \u2192 closed"
+  params:
+    subsystem: action_ledger
+    from_state: open
+    to_state: closed
+    action_count: 3.0
+  produced: []
+  routes:
+  - kind: continues
+    target: seq-S38-001
+    amount: 0.0
+  origin: emitted
+  sequence_id: seq-S38-001
+- id: act-S40-0331-009
+  timestamp: '2026-03-31T12:04:45.712865'
+  session: S40
+  verb: closed_sequence
+  target: seq-S40-001
+  context: "action_ledger: open \u2192 closed"
+  params:
+    subsystem: action_ledger
+    from_state: open
+    to_state: closed
+    action_count: 3.0
+  produced: []
+  routes:
+  - kind: continues
+    target: seq-S40-001
+    amount: 0.0
+  origin: emitted
+  sequence_id: seq-S40-001
+- id: act-S42-0331-033
+  timestamp: '2026-03-31T12:04:45.748489'
+  session: S42
+  verb: closed_sequence
+  target: seq-S42-001
+  context: "action_ledger: open \u2192 closed"
+  params:
+    subsystem: action_ledger
+    from_state: open
+    to_state: closed
+    action_count: 3.0
+  produced: []
+  routes:
+  - kind: continues
+    target: seq-S42-001
+    amount: 0.0
+  origin: emitted
+  sequence_id: seq-S42-001
+- id: act-S38-0331-008
+  timestamp: '2026-03-31T12:04:45.787967'
+  session: S38
+  verb: closed_sequence
+  target: seq-S38-001
+  context: "action_ledger: open \u2192 closed"
+  params:
+    subsystem: action_ledger
+    from_state: open
+    to_state: closed
+    action_count: 3.0
+  produced: []
+  routes:
+  - kind: continues
+    target: seq-S38-001
+    amount: 0.0
+  origin: emitted
+  sequence_id: seq-S38-001
+- id: act-S40-0331-010
+  timestamp: '2026-03-31T12:04:45.824046'
+  session: S40
+  verb: closed_sequence
+  target: seq-S40-001
+  context: "action_ledger: open \u2192 closed"
+  params:
+    subsystem: action_ledger
+    from_state: open
+    to_state: closed
+    action_count: 3.0
+  produced: []
+  routes:
+  - kind: continues
+    target: seq-S40-001
+    amount: 0.0
+  origin: emitted
+  sequence_id: seq-S40-001
+- id: act-S42-0331-034
+  timestamp: '2026-03-31T12:04:45.860419'
+  session: S42
+  verb: closed_sequence
+  target: seq-S42-001
+  context: "action_ledger: open \u2192 closed"
+  params:
+    subsystem: action_ledger
+    from_state: open
+    to_state: closed
+    action_count: 3.0
+  produced: []
+  routes:
+  - kind: continues
+    target: seq-S42-001
+    amount: 0.0
+  origin: emitted
+  sequence_id: seq-S42-001
+- id: act-S38-0331-009
+  timestamp: '2026-03-31T12:04:45.897708'
+  session: S38
+  verb: closed_sequence
+  target: seq-S38-001
+  context: "action_ledger: open \u2192 closed"
+  params:
+    subsystem: action_ledger
+    from_state: open
+    to_state: closed
+    action_count: 3.0
+  produced: []
+  routes:
+  - kind: continues
+    target: seq-S38-001
+    amount: 0.0
+  origin: emitted
+  sequence_id: seq-S38-001
+- id: act-S40-0331-011
+  timestamp: '2026-03-31T12:04:45.936116'
+  session: S40
+  verb: closed_sequence
+  target: seq-S40-001
+  context: "action_ledger: open \u2192 closed"
+  params:
+    subsystem: action_ledger
+    from_state: open
+    to_state: closed
+    action_count: 3.0
+  produced: []
+  routes:
+  - kind: continues
+    target: seq-S40-001
+    amount: 0.0
+  origin: emitted
+  sequence_id: seq-S40-001
+- id: act-S42-0331-035
+  timestamp: '2026-03-31T12:04:45.974275'
+  session: S42
+  verb: closed_sequence
+  target: seq-S42-001
+  context: "action_ledger: open \u2192 closed"
+  params:
+    subsystem: action_ledger
+    from_state: open
+    to_state: closed
+    action_count: 3.0
+  produced: []
+  routes:
+  - kind: continues
+    target: seq-S42-001
+    amount: 0.0
+  origin: emitted
+  sequence_id: seq-S42-001
+- id: act-S38-0331-010
+  timestamp: '2026-03-31T12:04:46.013806'
+  session: S38
+  verb: closed_sequence
+  target: seq-S38-001
+  context: "action_ledger: open \u2192 closed"
+  params:
+    subsystem: action_ledger
+    from_state: open
+    to_state: closed
+    action_count: 3.0
+  produced: []
+  routes:
+  - kind: continues
+    target: seq-S38-001
+    amount: 0.0
+  origin: emitted
+  sequence_id: seq-S38-001
+- id: act-S40-0331-012
+  timestamp: '2026-03-31T12:04:46.053240'
+  session: S40
+  verb: closed_sequence
+  target: seq-S40-001
+  context: "action_ledger: open \u2192 closed"
+  params:
+    subsystem: action_ledger
+    from_state: open
+    to_state: closed
+    action_count: 3.0
+  produced: []
+  routes:
+  - kind: continues
+    target: seq-S40-001
+    amount: 0.0
+  origin: emitted
+  sequence_id: seq-S40-001
+- id: act-S42-0331-036
+  timestamp: '2026-03-31T12:04:46.093141'
+  session: S42
+  verb: closed_sequence
+  target: seq-S42-001
+  context: "action_ledger: open \u2192 closed"
+  params:
+    subsystem: action_ledger
+    from_state: open
+    to_state: closed
+    action_count: 3.0
+  produced: []
+  routes:
+  - kind: continues
+    target: seq-S42-001
+    amount: 0.0
+  origin: emitted
+  sequence_id: seq-S42-001
+- id: act-S38-0331-011
+  timestamp: '2026-03-31T12:04:46.134150'
+  session: S38
+  verb: closed_sequence
+  target: seq-S38-001
+  context: "action_ledger: open \u2192 closed"
+  params:
+    subsystem: action_ledger
+    from_state: open
+    to_state: closed
+    action_count: 3.0
+  produced: []
+  routes:
+  - kind: continues
+    target: seq-S38-001
+    amount: 0.0
+  origin: emitted
+  sequence_id: seq-S38-001
+- id: act-S40-0331-013
+  timestamp: '2026-03-31T12:04:46.178513'
+  session: S40
+  verb: closed_sequence
+  target: seq-S40-001
+  context: "action_ledger: open \u2192 closed"
+  params:
+    subsystem: action_ledger
+    from_state: open
+    to_state: closed
+    action_count: 3.0
+  produced: []
+  routes:
+  - kind: continues
+    target: seq-S40-001
+    amount: 0.0
+  origin: emitted
+  sequence_id: seq-S40-001
+- id: act-S42-0331-037
+  timestamp: '2026-03-31T12:04:46.219647'
+  session: S42
+  verb: closed_sequence
+  target: seq-S42-001
+  context: "action_ledger: open \u2192 closed"
+  params:
+    subsystem: action_ledger
+    from_state: open
+    to_state: closed
+    action_count: 3.0
+  produced: []
+  routes:
+  - kind: continues
+    target: seq-S42-001
+    amount: 0.0
+  origin: emitted
+  sequence_id: seq-S42-001
+- id: act-S40-0331-014
+  timestamp: '2026-03-31T12:04:46.261635'
+  session: S40
+  verb: closed_sequence
+  target: seq-S40-001
+  context: "action_ledger: open \u2192 closed"
+  params:
+    subsystem: action_ledger
+    from_state: open
+    to_state: closed
+    action_count: 1.0
+  produced: []
+  routes:
+  - kind: continues
+    target: seq-S40-001
+    amount: 0.0
+  origin: emitted
+  sequence_id: seq-S40-001
+- id: act-S41-0331-003
+  timestamp: '2026-03-31T12:04:46.304019'
+  session: S41
+  verb: closed_sequence
+  target: seq-S41-001
+  context: "action_ledger: open \u2192 closed"
+  params:
+    subsystem: action_ledger
+    from_state: open
+    to_state: closed
+    action_count: 1.0
+  produced: []
+  routes:
+  - kind: continues
+    target: seq-S41-001
+    amount: 0.0
+  origin: emitted
+  sequence_id: seq-S41-001
+- id: act-S42-0331-038
+  timestamp: '2026-03-31T12:04:46.346640'
+  session: S42
+  verb: closed_sequence
+  target: seq-S42-001
+  context: "action_ledger: open \u2192 closed"
+  params:
+    subsystem: action_ledger
+    from_state: open
+    to_state: closed
+    action_count: 1.0
+  produced: []
+  routes:
+  - kind: continues
+    target: seq-S42-001
+    amount: 0.0
+  origin: emitted
+  sequence_id: seq-S42-001
+- id: act-S43-0331-003
+  timestamp: '2026-03-31T12:04:46.390490'
+  session: S43
+  verb: closed_sequence
+  target: seq-S43-001
+  context: "action_ledger: open \u2192 closed"
+  params:
+    subsystem: action_ledger
+    from_state: open
+    to_state: closed
+    action_count: 1.0
+  produced: []
+  routes:
+  - kind: continues
+    target: seq-S43-001
+    amount: 0.0
+  origin: emitted
+  sequence_id: seq-S43-001
+- id: act-S40-0331-015
+  timestamp: '2026-03-31T12:04:46.435432'
+  session: S40
+  verb: closed_sequence
+  target: seq-S40-001
+  context: "action_ledger: open \u2192 closed"
+  params:
+    subsystem: action_ledger
+    from_state: open
+    to_state: closed
+    action_count: 1.0
+  produced: []
+  routes:
+  - kind: continues
+    target: seq-S40-001
+    amount: 0.0
+  origin: emitted
+  sequence_id: seq-S40-001
+- id: act-S41-0331-004
+  timestamp: '2026-03-31T12:04:46.480065'
+  session: S41
+  verb: closed_sequence
+  target: seq-S41-001
+  context: "action_ledger: open \u2192 closed"
+  params:
+    subsystem: action_ledger
+    from_state: open
+    to_state: closed
+    action_count: 1.0
+  produced: []
+  routes:
+  - kind: continues
+    target: seq-S41-001
+    amount: 0.0
+  origin: emitted
+  sequence_id: seq-S41-001
+- id: act-S42-0331-039
+  timestamp: '2026-03-31T12:04:46.525471'
+  session: S42
+  verb: closed_sequence
+  target: seq-S42-001
+  context: "action_ledger: open \u2192 closed"
+  params:
+    subsystem: action_ledger
+    from_state: open
+    to_state: closed
+    action_count: 1.0
+  produced: []
+  routes:
+  - kind: continues
+    target: seq-S42-001
+    amount: 0.0
+  origin: emitted
+  sequence_id: seq-S42-001
+- id: act-S43-0331-004
+  timestamp: '2026-03-31T12:04:46.574999'
+  session: S43
+  verb: closed_sequence
+  target: seq-S43-001
+  context: "action_ledger: open \u2192 closed"
+  params:
+    subsystem: action_ledger
+    from_state: open
+    to_state: closed
+    action_count: 1.0
+  produced: []
+  routes:
+  - kind: continues
+    target: seq-S43-001
+    amount: 0.0
+  origin: emitted
+  sequence_id: seq-S43-001
+- id: act-S38-0331-012
+  timestamp: '2026-03-31T12:04:46.621504'
+  session: S38
+  verb: closed_sequence
+  target: seq-S38-001
+  context: "action_ledger: open \u2192 closed"
+  params:
+    subsystem: action_ledger
+    from_state: open
+    to_state: closed
+    action_count: 3.0
+  produced: []
+  routes:
+  - kind: continues
+    target: seq-S38-001
+    amount: 0.0
+  origin: emitted
+  sequence_id: seq-S38-001
+- id: act-S40-0331-016
+  timestamp: '2026-03-31T12:04:46.668497'
+  session: S40
+  verb: closed_sequence
+  target: seq-S40-001
+  context: "action_ledger: open \u2192 closed"
+  params:
+    subsystem: action_ledger
+    from_state: open
+    to_state: closed
+    action_count: 3.0
+  produced: []
+  routes:
+  - kind: continues
+    target: seq-S40-001
+    amount: 0.0
+  origin: emitted
+  sequence_id: seq-S40-001
+- id: act-S42-0331-040
+  timestamp: '2026-03-31T12:04:46.716154'
+  session: S42
+  verb: closed_sequence
+  target: seq-S42-001
+  context: "action_ledger: open \u2192 closed"
+  params:
+    subsystem: action_ledger
+    from_state: open
+    to_state: closed
+    action_count: 3.0
+  produced: []
+  routes:
+  - kind: continues
+    target: seq-S42-001
+    amount: 0.0
+  origin: emitted
+  sequence_id: seq-S42-001
+- id: act-_sys-0331-003
+  timestamp: '2026-03-31T12:04:46.774719'
+  session: _sys
+  verb: completed_campaign_action
+  target: test
+  context: "contrib_engine: pending \u2192 completed"
+  params:
+    subsystem: contrib_engine
+    from_state: pending
+    to_state: completed
+    phase: unblock
+  produced: []
+  routes:
+  - kind: continues
+    target: test
+    amount: 0.0
+  origin: emitted
+  sequence_id: seq-_sys-001
+- id: act-_sys-0331-004
+  timestamp: '2026-03-31T12:09:23.926999'
+  session: _sys
+  verb: absorption_advanced
+  target: abs-001
+  context: "contrib_engine: detected \u2192 formalized"
+  params:
+    subsystem: contrib_engine
+    from_state: detected
+    to_state: formalized
+    pattern: reader-side-resolution
+  produced: []
+  routes:
+  - kind: continues
+    target: abs-001
+    amount: 0.0
+  origin: emitted
+  sequence_id: seq-_sys-001
+- id: act-_sys-0331-005
+  timestamp: '2026-03-31T12:09:23.982375'
+  session: _sys
+  verb: absorption_deposited
+  target: abs-001
+  context: "contrib_engine: formalized \u2192 deposited"
+  params:
+    subsystem: contrib_engine
+    from_state: formalized
+    to_state: deposited
+    organ: I
+  produced:
+  - type: backflow
+    ref: backflow:I:reader-side-resolution
+  routes:
+  - kind: continues
+    target: abs-001
+    amount: 0.0
+  origin: emitted
+  sequence_id: seq-_sys-001
+- id: act-S42-0331-041
+  timestamp: '2026-03-31T12:09:24.039895'
+  session: S42
+  verb: closed_sequence
+  target: seq-S42-001
+  context: "action_ledger: open \u2192 closed"
+  params:
+    subsystem: action_ledger
+    from_state: open
+    to_state: closed
+    action_count: 1.0
+  produced: []
+  routes:
+  - kind: continues
+    target: seq-S42-001
+    amount: 0.0
+  origin: emitted
+  sequence_id: seq-S42-001
+- id: act-S42-0331-042
+  timestamp: '2026-03-31T12:09:24.091404'
+  session: S42
+  verb: closed_sequence
+  target: seq-S42-001
+  context: "action_ledger: open \u2192 closed"
+  params:
+    subsystem: action_ledger
+    from_state: open
+    to_state: closed
+    action_count: 1.0
+  produced: []
+  routes:
+  - kind: continues
+    target: seq-S42-001
+    amount: 0.0
+  origin: emitted
+  sequence_id: seq-S42-001
+- id: act-S42-0331-043
+  timestamp: '2026-03-31T12:09:24.148197'
+  session: S42
+  verb: closed_session
+  target: S42
+  context: "action_ledger: active \u2192 closed"
+  params:
+    subsystem: action_ledger
+    from_state: active
+    to_state: closed
+    sequence_count: 1.0
+  produced:
+  - type: chain
+    ref: chain-S42-001
+  routes:
+  - kind: continues
+    target: S42
+    amount: 0.0
+  origin: emitted
+  sequence_id: seq-S42-001
+- id: act-S42-0331-044
+  timestamp: '2026-03-31T12:09:24.202509'
+  session: S42
+  verb: composed_chain
+  target: chain-S42-001
+  context: "action_ledger: sequences \u2192 chain"
+  params:
+    subsystem: action_ledger
+    from_state: sequences
+    to_state: chain
+    sequence_count: 1.0
+  produced:
+  - type: chain
+    ref: chain-S42-001
+  routes:
+  - kind: continues
+    target: chain-S42-001
+    amount: 0.0
+  origin: emitted
+  sequence_id: seq-S42-001
+- id: act-S42-0331-045
+  timestamp: '2026-03-31T12:09:24.256220'
+  session: S42
+  verb: composed_chain
+  target: chain-S42-001
+  context: "action_ledger: sequences \u2192 chain"
+  params:
+    subsystem: action_ledger
+    from_state: sequences
+    to_state: chain
+    sequence_count: 1.0
+  produced:
+  - type: chain
+    ref: chain-S42-001
+  routes:
+  - kind: continues
+    target: chain-S42-001
+    amount: 0.0
+  origin: emitted
+  sequence_id: seq-S42-001
+- id: act-S42-0331-046
+  timestamp: '2026-03-31T12:09:24.314584'
+  session: S42
+  verb: composed_chain
+  target: chain-S42-001
+  context: "action_ledger: sequences \u2192 chain"
+  params:
+    subsystem: action_ledger
+    from_state: sequences
+    to_state: chain
+    sequence_count: 1.0
+  produced:
+  - type: chain
+    ref: chain-S42-001
+  routes:
+  - kind: continues
+    target: chain-S42-001
+    amount: 0.0
+  origin: emitted
+  sequence_id: seq-S42-001
+- id: act-S42-0331-047
+  timestamp: '2026-03-31T12:09:24.368841'
+  session: S42
+  verb: composed_chain
+  target: chain-S42-001
+  context: "action_ledger: sequences \u2192 chain"
+  params:
+    subsystem: action_ledger
+    from_state: sequences
+    to_state: chain
+    sequence_count: 1.0
+  produced:
+  - type: chain
+    ref: chain-S42-001
+  routes:
+  - kind: continues
+    target: chain-S42-001
+    amount: 0.0
+  origin: emitted
+  sequence_id: seq-S42-001
+- id: act-S42-0331-048
+  timestamp: '2026-03-31T12:09:24.424885'
+  session: S42
+  verb: closed_session
+  target: S42
+  context: "action_ledger: active \u2192 closed"
+  params:
+    subsystem: action_ledger
+    from_state: active
+    to_state: closed
+    sequence_count: 1.0
+  produced:
+  - type: chain
+    ref: chain-S42-001
+  routes:
+  - kind: continues
+    target: S42
+    amount: 0.0
+  origin: emitted
+  sequence_id: seq-S42-001
+- id: act-S42-0331-049
+  timestamp: '2026-03-31T12:09:24.483917'
+  session: S42
+  verb: closed_sequence
+  target: seq-S42-001
+  context: "action_ledger: open \u2192 closed"
+  params:
+    subsystem: action_ledger
+    from_state: open
+    to_state: closed
+    action_count: 1.0
+  produced: []
+  routes:
+  - kind: continues
+    target: seq-S42-001
+    amount: 0.0
+  origin: emitted
+  sequence_id: seq-S42-001
+- id: act-S42-0331-050
+  timestamp: '2026-03-31T12:09:24.542595'
+  session: S42
+  verb: closed_sequence
+  target: seq-S42-002
+  context: "action_ledger: open \u2192 closed"
+  params:
+    subsystem: action_ledger
+    from_state: open
+    to_state: closed
+    action_count: 1.0
+  produced: []
+  routes:
+  - kind: continues
+    target: seq-S42-002
+    amount: 0.0
+  origin: emitted
+  sequence_id: seq-S42-001
+- id: act-S42-0331-051
+  timestamp: '2026-03-31T12:09:24.603299'
+  session: S42
+  verb: composed_chain
+  target: chain-S42-001
+  context: "action_ledger: sequences \u2192 chain"
+  params:
+    subsystem: action_ledger
+    from_state: sequences
+    to_state: chain
+    sequence_count: 2.0
+  produced:
+  - type: chain
+    ref: chain-S42-001
+  routes:
+  - kind: continues
+    target: chain-S42-001
+    amount: 0.0
+  origin: emitted
+  sequence_id: seq-S42-001
+- id: act-S38-0331-013
+  timestamp: '2026-03-31T12:09:24.664116'
+  session: S38
+  verb: closed_sequence
+  target: seq-S38-001
+  context: "action_ledger: open \u2192 closed"
+  params:
+    subsystem: action_ledger
+    from_state: open
+    to_state: closed
+    action_count: 3.0
+  produced: []
+  routes:
+  - kind: continues
+    target: seq-S38-001
+    amount: 0.0
+  origin: emitted
+  sequence_id: seq-S38-001
+- id: act-S40-0331-017
+  timestamp: '2026-03-31T12:09:24.728387'
+  session: S40
+  verb: closed_sequence
+  target: seq-S40-001
+  context: "action_ledger: open \u2192 closed"
+  params:
+    subsystem: action_ledger
+    from_state: open
+    to_state: closed
+    action_count: 3.0
+  produced: []
+  routes:
+  - kind: continues
+    target: seq-S40-001
+    amount: 0.0
+  origin: emitted
+  sequence_id: seq-S40-001
+- id: act-S42-0331-052
+  timestamp: '2026-03-31T12:09:24.788527'
+  session: S42
+  verb: closed_sequence
+  target: seq-S42-001
+  context: "action_ledger: open \u2192 closed"
+  params:
+    subsystem: action_ledger
+    from_state: open
+    to_state: closed
+    action_count: 3.0
+  produced: []
+  routes:
+  - kind: continues
+    target: seq-S42-001
+    amount: 0.0
+  origin: emitted
+  sequence_id: seq-S42-001
+- id: act-S38-0331-014
+  timestamp: '2026-03-31T12:09:24.848795'
+  session: S38
+  verb: closed_sequence
+  target: seq-S38-001
+  context: "action_ledger: open \u2192 closed"
+  params:
+    subsystem: action_ledger
+    from_state: open
+    to_state: closed
+    action_count: 3.0
+  produced: []
+  routes:
+  - kind: continues
+    target: seq-S38-001
+    amount: 0.0
+  origin: emitted
+  sequence_id: seq-S38-001
+- id: act-S40-0331-018
+  timestamp: '2026-03-31T12:09:24.912096'
+  session: S40
+  verb: closed_sequence
+  target: seq-S40-001
+  context: "action_ledger: open \u2192 closed"
+  params:
+    subsystem: action_ledger
+    from_state: open
+    to_state: closed
+    action_count: 3.0
+  produced: []
+  routes:
+  - kind: continues
+    target: seq-S40-001
+    amount: 0.0
+  origin: emitted
+  sequence_id: seq-S40-001
+- id: act-S42-0331-053
+  timestamp: '2026-03-31T12:09:24.973764'
+  session: S42
+  verb: closed_sequence
+  target: seq-S42-001
+  context: "action_ledger: open \u2192 closed"
+  params:
+    subsystem: action_ledger
+    from_state: open
+    to_state: closed
+    action_count: 3.0
+  produced: []
+  routes:
+  - kind: continues
+    target: seq-S42-001
+    amount: 0.0
+  origin: emitted
+  sequence_id: seq-S42-001
+- id: act-S38-0331-015
+  timestamp: '2026-03-31T12:09:25.036379'
+  session: S38
+  verb: closed_sequence
+  target: seq-S38-001
+  context: "action_ledger: open \u2192 closed"
+  params:
+    subsystem: action_ledger
+    from_state: open
+    to_state: closed
+    action_count: 3.0
+  produced: []
+  routes:
+  - kind: continues
+    target: seq-S38-001
+    amount: 0.0
+  origin: emitted
+  sequence_id: seq-S38-001
+- id: act-S40-0331-019
+  timestamp: '2026-03-31T12:09:25.100882'
+  session: S40
+  verb: closed_sequence
+  target: seq-S40-001
+  context: "action_ledger: open \u2192 closed"
+  params:
+    subsystem: action_ledger
+    from_state: open
+    to_state: closed
+    action_count: 3.0
+  produced: []
+  routes:
+  - kind: continues
+    target: seq-S40-001
+    amount: 0.0
+  origin: emitted
+  sequence_id: seq-S40-001
+- id: act-S42-0331-054
+  timestamp: '2026-03-31T12:09:25.167105'
+  session: S42
+  verb: closed_sequence
+  target: seq-S42-001
+  context: "action_ledger: open \u2192 closed"
+  params:
+    subsystem: action_ledger
+    from_state: open
+    to_state: closed
+    action_count: 3.0
+  produced: []
+  routes:
+  - kind: continues
+    target: seq-S42-001
+    amount: 0.0
+  origin: emitted
+  sequence_id: seq-S42-001
+- id: act-S38-0331-016
+  timestamp: '2026-03-31T12:09:25.233904'
+  session: S38
+  verb: closed_sequence
+  target: seq-S38-001
+  context: "action_ledger: open \u2192 closed"
+  params:
+    subsystem: action_ledger
+    from_state: open
+    to_state: closed
+    action_count: 3.0
+  produced: []
+  routes:
+  - kind: continues
+    target: seq-S38-001
+    amount: 0.0
+  origin: emitted
+  sequence_id: seq-S38-001
+- id: act-S40-0331-020
+  timestamp: '2026-03-31T12:09:25.301963'
+  session: S40
+  verb: closed_sequence
+  target: seq-S40-001
+  context: "action_ledger: open \u2192 closed"
+  params:
+    subsystem: action_ledger
+    from_state: open
+    to_state: closed
+    action_count: 3.0
+  produced: []
+  routes:
+  - kind: continues
+    target: seq-S40-001
+    amount: 0.0
+  origin: emitted
+  sequence_id: seq-S40-001
+- id: act-S42-0331-055
+  timestamp: '2026-03-31T12:09:25.366797'
+  session: S42
+  verb: closed_sequence
+  target: seq-S42-001
+  context: "action_ledger: open \u2192 closed"
+  params:
+    subsystem: action_ledger
+    from_state: open
+    to_state: closed
+    action_count: 3.0
+  produced: []
+  routes:
+  - kind: continues
+    target: seq-S42-001
+    amount: 0.0
+  origin: emitted
+  sequence_id: seq-S42-001
+- id: act-S38-0331-017
+  timestamp: '2026-03-31T12:09:25.432025'
+  session: S38
+  verb: closed_sequence
+  target: seq-S38-001
+  context: "action_ledger: open \u2192 closed"
+  params:
+    subsystem: action_ledger
+    from_state: open
+    to_state: closed
+    action_count: 3.0
+  produced: []
+  routes:
+  - kind: continues
+    target: seq-S38-001
+    amount: 0.0
+  origin: emitted
+  sequence_id: seq-S38-001
+- id: act-S40-0331-021
+  timestamp: '2026-03-31T12:09:25.498522'
+  session: S40
+  verb: closed_sequence
+  target: seq-S40-001
+  context: "action_ledger: open \u2192 closed"
+  params:
+    subsystem: action_ledger
+    from_state: open
+    to_state: closed
+    action_count: 3.0
+  produced: []
+  routes:
+  - kind: continues
+    target: seq-S40-001
+    amount: 0.0
+  origin: emitted
+  sequence_id: seq-S40-001
+- id: act-S42-0331-056
+  timestamp: '2026-03-31T12:09:25.569297'
+  session: S42
+  verb: closed_sequence
+  target: seq-S42-001
+  context: "action_ledger: open \u2192 closed"
+  params:
+    subsystem: action_ledger
+    from_state: open
+    to_state: closed
+    action_count: 3.0
+  produced: []
+  routes:
+  - kind: continues
+    target: seq-S42-001
+    amount: 0.0
+  origin: emitted
+  sequence_id: seq-S42-001
+- id: act-S40-0331-022
+  timestamp: '2026-03-31T12:09:25.635755'
+  session: S40
+  verb: closed_sequence
+  target: seq-S40-001
+  context: "action_ledger: open \u2192 closed"
+  params:
+    subsystem: action_ledger
+    from_state: open
+    to_state: closed
+    action_count: 1.0
+  produced: []
+  routes:
+  - kind: continues
+    target: seq-S40-001
+    amount: 0.0
+  origin: emitted
+  sequence_id: seq-S40-001
+- id: act-S41-0331-005
+  timestamp: '2026-03-31T12:09:25.701821'
+  session: S41
+  verb: closed_sequence
+  target: seq-S41-001
+  context: "action_ledger: open \u2192 closed"
+  params:
+    subsystem: action_ledger
+    from_state: open
+    to_state: closed
+    action_count: 1.0
+  produced: []
+  routes:
+  - kind: continues
+    target: seq-S41-001
+    amount: 0.0
+  origin: emitted
+  sequence_id: seq-S41-001
+- id: act-S42-0331-057
+  timestamp: '2026-03-31T12:09:25.768752'
+  session: S42
+  verb: closed_sequence
+  target: seq-S42-001
+  context: "action_ledger: open \u2192 closed"
+  params:
+    subsystem: action_ledger
+    from_state: open
+    to_state: closed
+    action_count: 1.0
+  produced: []
+  routes:
+  - kind: continues
+    target: seq-S42-001
+    amount: 0.0
+  origin: emitted
+  sequence_id: seq-S42-001
+- id: act-S43-0331-005
+  timestamp: '2026-03-31T12:09:25.836360'
+  session: S43
+  verb: closed_sequence
+  target: seq-S43-001
+  context: "action_ledger: open \u2192 closed"
+  params:
+    subsystem: action_ledger
+    from_state: open
+    to_state: closed
+    action_count: 1.0
+  produced: []
+  routes:
+  - kind: continues
+    target: seq-S43-001
+    amount: 0.0
+  origin: emitted
+  sequence_id: seq-S43-001
+- id: act-S40-0331-023
+  timestamp: '2026-03-31T12:09:25.909545'
+  session: S40
+  verb: closed_sequence
+  target: seq-S40-001
+  context: "action_ledger: open \u2192 closed"
+  params:
+    subsystem: action_ledger
+    from_state: open
+    to_state: closed
+    action_count: 1.0
+  produced: []
+  routes:
+  - kind: continues
+    target: seq-S40-001
+    amount: 0.0
+  origin: emitted
+  sequence_id: seq-S40-001
+- id: act-S41-0331-006
+  timestamp: '2026-03-31T12:09:25.978360'
+  session: S41
+  verb: closed_sequence
+  target: seq-S41-001
+  context: "action_ledger: open \u2192 closed"
+  params:
+    subsystem: action_ledger
+    from_state: open
+    to_state: closed
+    action_count: 1.0
+  produced: []
+  routes:
+  - kind: continues
+    target: seq-S41-001
+    amount: 0.0
+  origin: emitted
+  sequence_id: seq-S41-001
+- id: act-S42-0331-058
+  timestamp: '2026-03-31T12:09:26.047264'
+  session: S42
+  verb: closed_sequence
+  target: seq-S42-001
+  context: "action_ledger: open \u2192 closed"
+  params:
+    subsystem: action_ledger
+    from_state: open
+    to_state: closed
+    action_count: 1.0
+  produced: []
+  routes:
+  - kind: continues
+    target: seq-S42-001
+    amount: 0.0
+  origin: emitted
+  sequence_id: seq-S42-001
+- id: act-S43-0331-006
+  timestamp: '2026-03-31T12:09:26.116694'
+  session: S43
+  verb: closed_sequence
+  target: seq-S43-001
+  context: "action_ledger: open \u2192 closed"
+  params:
+    subsystem: action_ledger
+    from_state: open
+    to_state: closed
+    action_count: 1.0
+  produced: []
+  routes:
+  - kind: continues
+    target: seq-S43-001
+    amount: 0.0
+  origin: emitted
+  sequence_id: seq-S43-001
+- id: act-S38-0331-018
+  timestamp: '2026-03-31T12:09:26.187084'
+  session: S38
+  verb: closed_sequence
+  target: seq-S38-001
+  context: "action_ledger: open \u2192 closed"
+  params:
+    subsystem: action_ledger
+    from_state: open
+    to_state: closed
+    action_count: 3.0
+  produced: []
+  routes:
+  - kind: continues
+    target: seq-S38-001
+    amount: 0.0
+  origin: emitted
+  sequence_id: seq-S38-001
+- id: act-S40-0331-024
+  timestamp: '2026-03-31T12:09:26.258361'
+  session: S40
+  verb: closed_sequence
+  target: seq-S40-001
+  context: "action_ledger: open \u2192 closed"
+  params:
+    subsystem: action_ledger
+    from_state: open
+    to_state: closed
+    action_count: 3.0
+  produced: []
+  routes:
+  - kind: continues
+    target: seq-S40-001
+    amount: 0.0
+  origin: emitted
+  sequence_id: seq-S40-001
+- id: act-S42-0331-059
+  timestamp: '2026-03-31T12:09:26.334221'
+  session: S42
+  verb: closed_sequence
+  target: seq-S42-001
+  context: "action_ledger: open \u2192 closed"
+  params:
+    subsystem: action_ledger
+    from_state: open
+    to_state: closed
+    action_count: 3.0
+  produced: []
+  routes:
+  - kind: continues
+    target: seq-S42-001
+    amount: 0.0
+  origin: emitted
+  sequence_id: seq-S42-001
+- id: act-_sys-0331-006
+  timestamp: '2026-03-31T12:09:26.415478'
+  session: _sys
+  verb: completed_campaign_action
+  target: test
+  context: "contrib_engine: pending \u2192 completed"
+  params:
+    subsystem: contrib_engine
+    from_state: pending
+    to_state: completed
+    phase: unblock
+  produced: []
+  routes:
+  - kind: continues
+    target: test
+    amount: 0.0
+  origin: emitted
+  sequence_id: seq-_sys-001
+- id: act-_sys-0331-007
+  timestamp: '2026-03-31T12:11:02.048680'
+  session: _sys
+  verb: absorption_advanced
+  target: abs-001
+  context: "contrib_engine: detected \u2192 formalized"
+  params:
+    subsystem: contrib_engine
+    from_state: detected
+    to_state: formalized
+    pattern: reader-side-resolution
+  produced: []
+  routes:
+  - kind: continues
+    target: abs-001
+    amount: 0.0
+  origin: emitted
+  sequence_id: seq-_sys-001
+- id: act-_sys-0331-008
+  timestamp: '2026-03-31T12:11:02.121958'
+  session: _sys
+  verb: absorption_deposited
+  target: abs-001
+  context: "contrib_engine: formalized \u2192 deposited"
+  params:
+    subsystem: contrib_engine
+    from_state: formalized
+    to_state: deposited
+    organ: I
+  produced:
+  - type: backflow
+    ref: backflow:I:reader-side-resolution
+  routes:
+  - kind: continues
+    target: abs-001
+    amount: 0.0
+  origin: emitted
+  sequence_id: seq-_sys-001
+- id: act-S42-0331-060
+  timestamp: '2026-03-31T12:11:02.198679'
+  session: S42
+  verb: closed_sequence
+  target: seq-S42-001
+  context: "action_ledger: open \u2192 closed"
+  params:
+    subsystem: action_ledger
+    from_state: open
+    to_state: closed
+    action_count: 1.0
+  produced: []
+  routes:
+  - kind: continues
+    target: seq-S42-001
+    amount: 0.0
+  origin: emitted
+  sequence_id: seq-S42-001
+- id: act-S42-0331-061
+  timestamp: '2026-03-31T12:11:02.270722'
+  session: S42
+  verb: closed_sequence
+  target: seq-S42-001
+  context: "action_ledger: open \u2192 closed"
+  params:
+    subsystem: action_ledger
+    from_state: open
+    to_state: closed
+    action_count: 1.0
+  produced: []
+  routes:
+  - kind: continues
+    target: seq-S42-001
+    amount: 0.0
+  origin: emitted
+  sequence_id: seq-S42-001
+- id: act-S42-0331-062
+  timestamp: '2026-03-31T12:11:02.348113'
+  session: S42
+  verb: closed_session
+  target: S42
+  context: "action_ledger: active \u2192 closed"
+  params:
+    subsystem: action_ledger
+    from_state: active
+    to_state: closed
+    sequence_count: 1.0
+  produced:
+  - type: chain
+    ref: chain-S42-001
+  routes:
+  - kind: continues
+    target: S42
+    amount: 0.0
+  origin: emitted
+  sequence_id: seq-S42-001
+- id: act-S42-0331-063
+  timestamp: '2026-03-31T12:11:02.424030'
+  session: S42
+  verb: composed_chain
+  target: chain-S42-001
+  context: "action_ledger: sequences \u2192 chain"
+  params:
+    subsystem: action_ledger
+    from_state: sequences
+    to_state: chain
+    sequence_count: 1.0
+  produced:
+  - type: chain
+    ref: chain-S42-001
+  routes:
+  - kind: continues
+    target: chain-S42-001
+    amount: 0.0
+  origin: emitted
+  sequence_id: seq-S42-001
+- id: act-S42-0331-064
+  timestamp: '2026-03-31T12:11:02.501923'
+  session: S42
+  verb: composed_chain
+  target: chain-S42-001
+  context: "action_ledger: sequences \u2192 chain"
+  params:
+    subsystem: action_ledger
+    from_state: sequences
+    to_state: chain
+    sequence_count: 1.0
+  produced:
+  - type: chain
+    ref: chain-S42-001
+  routes:
+  - kind: continues
+    target: chain-S42-001
+    amount: 0.0
+  origin: emitted
+  sequence_id: seq-S42-001
+- id: act-S42-0331-065
+  timestamp: '2026-03-31T12:11:02.576182'
+  session: S42
+  verb: composed_chain
+  target: chain-S42-001
+  context: "action_ledger: sequences \u2192 chain"
+  params:
+    subsystem: action_ledger
+    from_state: sequences
+    to_state: chain
+    sequence_count: 1.0
+  produced:
+  - type: chain
+    ref: chain-S42-001
+  routes:
+  - kind: continues
+    target: chain-S42-001
+    amount: 0.0
+  origin: emitted
+  sequence_id: seq-S42-001
+- id: act-S42-0331-066
+  timestamp: '2026-03-31T12:11:02.652008'
+  session: S42
+  verb: composed_chain
+  target: chain-S42-001
+  context: "action_ledger: sequences \u2192 chain"
+  params:
+    subsystem: action_ledger
+    from_state: sequences
+    to_state: chain
+    sequence_count: 1.0
+  produced:
+  - type: chain
+    ref: chain-S42-001
+  routes:
+  - kind: continues
+    target: chain-S42-001
+    amount: 0.0
+  origin: emitted
+  sequence_id: seq-S42-001
+- id: act-S42-0331-067
+  timestamp: '2026-03-31T12:11:02.729587'
+  session: S42
+  verb: closed_session
+  target: S42
+  context: "action_ledger: active \u2192 closed"
+  params:
+    subsystem: action_ledger
+    from_state: active
+    to_state: closed
+    sequence_count: 1.0
+  produced:
+  - type: chain
+    ref: chain-S42-001
+  routes:
+  - kind: continues
+    target: S42
+    amount: 0.0
+  origin: emitted
+  sequence_id: seq-S42-001
+- id: act-S42-0331-068
+  timestamp: '2026-03-31T12:11:02.809836'
+  session: S42
+  verb: closed_sequence
+  target: seq-S42-001
+  context: "action_ledger: open \u2192 closed"
+  params:
+    subsystem: action_ledger
+    from_state: open
+    to_state: closed
+    action_count: 1.0
+  produced: []
+  routes:
+  - kind: continues
+    target: seq-S42-001
+    amount: 0.0
+  origin: emitted
+  sequence_id: seq-S42-001
+- id: act-S42-0331-069
+  timestamp: '2026-03-31T12:11:02.894150'
+  session: S42
+  verb: closed_sequence
+  target: seq-S42-002
+  context: "action_ledger: open \u2192 closed"
+  params:
+    subsystem: action_ledger
+    from_state: open
+    to_state: closed
+    action_count: 1.0
+  produced: []
+  routes:
+  - kind: continues
+    target: seq-S42-002
+    amount: 0.0
+  origin: emitted
+  sequence_id: seq-S42-001
+- id: act-S42-0331-070
+  timestamp: '2026-03-31T12:11:02.974697'
+  session: S42
+  verb: composed_chain
+  target: chain-S42-001
+  context: "action_ledger: sequences \u2192 chain"
+  params:
+    subsystem: action_ledger
+    from_state: sequences
+    to_state: chain
+    sequence_count: 2.0
+  produced:
+  - type: chain
+    ref: chain-S42-001
+  routes:
+  - kind: continues
+    target: chain-S42-001
+    amount: 0.0
+  origin: emitted
+  sequence_id: seq-S42-001
+- id: act-S38-0331-019
+  timestamp: '2026-03-31T12:11:03.056407'
+  session: S38
+  verb: closed_sequence
+  target: seq-S38-001
+  context: "action_ledger: open \u2192 closed"
+  params:
+    subsystem: action_ledger
+    from_state: open
+    to_state: closed
+    action_count: 3.0
+  produced: []
+  routes:
+  - kind: continues
+    target: seq-S38-001
+    amount: 0.0
+  origin: emitted
+  sequence_id: seq-S38-001
+- id: act-S40-0331-025
+  timestamp: '2026-03-31T12:11:03.135616'
+  session: S40
+  verb: closed_sequence
+  target: seq-S40-001
+  context: "action_ledger: open \u2192 closed"
+  params:
+    subsystem: action_ledger
+    from_state: open
+    to_state: closed
+    action_count: 3.0
+  produced: []
+  routes:
+  - kind: continues
+    target: seq-S40-001
+    amount: 0.0
+  origin: emitted
+  sequence_id: seq-S40-001
+- id: act-S42-0331-071
+  timestamp: '2026-03-31T12:11:03.215790'
+  session: S42
+  verb: closed_sequence
+  target: seq-S42-001
+  context: "action_ledger: open \u2192 closed"
+  params:
+    subsystem: action_ledger
+    from_state: open
+    to_state: closed
+    action_count: 3.0
+  produced: []
+  routes:
+  - kind: continues
+    target: seq-S42-001
+    amount: 0.0
+  origin: emitted
+  sequence_id: seq-S42-001
+- id: act-S38-0331-020
+  timestamp: '2026-03-31T12:11:03.297202'
+  session: S38
+  verb: closed_sequence
+  target: seq-S38-001
+  context: "action_ledger: open \u2192 closed"
+  params:
+    subsystem: action_ledger
+    from_state: open
+    to_state: closed
+    action_count: 3.0
+  produced: []
+  routes:
+  - kind: continues
+    target: seq-S38-001
+    amount: 0.0
+  origin: emitted
+  sequence_id: seq-S38-001
+- id: act-S40-0331-026
+  timestamp: '2026-03-31T12:11:03.380774'
+  session: S40
+  verb: closed_sequence
+  target: seq-S40-001
+  context: "action_ledger: open \u2192 closed"
+  params:
+    subsystem: action_ledger
+    from_state: open
+    to_state: closed
+    action_count: 3.0
+  produced: []
+  routes:
+  - kind: continues
+    target: seq-S40-001
+    amount: 0.0
+  origin: emitted
+  sequence_id: seq-S40-001
+- id: act-S42-0331-072
+  timestamp: '2026-03-31T12:11:03.461417'
+  session: S42
+  verb: closed_sequence
+  target: seq-S42-001
+  context: "action_ledger: open \u2192 closed"
+  params:
+    subsystem: action_ledger
+    from_state: open
+    to_state: closed
+    action_count: 3.0
+  produced: []
+  routes:
+  - kind: continues
+    target: seq-S42-001
+    amount: 0.0
+  origin: emitted
+  sequence_id: seq-S42-001
+- id: act-S38-0331-021
+  timestamp: '2026-03-31T12:11:03.543227'
+  session: S38
+  verb: closed_sequence
+  target: seq-S38-001
+  context: "action_ledger: open \u2192 closed"
+  params:
+    subsystem: action_ledger
+    from_state: open
+    to_state: closed
+    action_count: 3.0
+  produced: []
+  routes:
+  - kind: continues
+    target: seq-S38-001
+    amount: 0.0
+  origin: emitted
+  sequence_id: seq-S38-001
+- id: act-S40-0331-027
+  timestamp: '2026-03-31T12:11:03.625489'
+  session: S40
+  verb: closed_sequence
+  target: seq-S40-001
+  context: "action_ledger: open \u2192 closed"
+  params:
+    subsystem: action_ledger
+    from_state: open
+    to_state: closed
+    action_count: 3.0
+  produced: []
+  routes:
+  - kind: continues
+    target: seq-S40-001
+    amount: 0.0
+  origin: emitted
+  sequence_id: seq-S40-001
+- id: act-S42-0331-073
+  timestamp: '2026-03-31T12:11:03.712197'
+  session: S42
+  verb: closed_sequence
+  target: seq-S42-001
+  context: "action_ledger: open \u2192 closed"
+  params:
+    subsystem: action_ledger
+    from_state: open
+    to_state: closed
+    action_count: 3.0
+  produced: []
+  routes:
+  - kind: continues
+    target: seq-S42-001
+    amount: 0.0
+  origin: emitted
+  sequence_id: seq-S42-001
+- id: act-S38-0331-022
+  timestamp: '2026-03-31T12:11:03.794606'
+  session: S38
+  verb: closed_sequence
+  target: seq-S38-001
+  context: "action_ledger: open \u2192 closed"
+  params:
+    subsystem: action_ledger
+    from_state: open
+    to_state: closed
+    action_count: 3.0
+  produced: []
+  routes:
+  - kind: continues
+    target: seq-S38-001
+    amount: 0.0
+  origin: emitted
+  sequence_id: seq-S38-001
+- id: act-S40-0331-028
+  timestamp: '2026-03-31T12:11:03.877705'
+  session: S40
+  verb: closed_sequence
+  target: seq-S40-001
+  context: "action_ledger: open \u2192 closed"
+  params:
+    subsystem: action_ledger
+    from_state: open
+    to_state: closed
+    action_count: 3.0
+  produced: []
+  routes:
+  - kind: continues
+    target: seq-S40-001
+    amount: 0.0
+  origin: emitted
+  sequence_id: seq-S40-001
+- id: act-S42-0331-074
+  timestamp: '2026-03-31T12:11:03.962166'
+  session: S42
+  verb: closed_sequence
+  target: seq-S42-001
+  context: "action_ledger: open \u2192 closed"
+  params:
+    subsystem: action_ledger
+    from_state: open
+    to_state: closed
+    action_count: 3.0
+  produced: []
+  routes:
+  - kind: continues
+    target: seq-S42-001
+    amount: 0.0
+  origin: emitted
+  sequence_id: seq-S42-001
+- id: act-S38-0331-023
+  timestamp: '2026-03-31T12:11:04.057567'
+  session: S38
+  verb: closed_sequence
+  target: seq-S38-001
+  context: "action_ledger: open \u2192 closed"
+  params:
+    subsystem: action_ledger
+    from_state: open
+    to_state: closed
+    action_count: 3.0
+  produced: []
+  routes:
+  - kind: continues
+    target: seq-S38-001
+    amount: 0.0
+  origin: emitted
+  sequence_id: seq-S38-001
+- id: act-S40-0331-029
+  timestamp: '2026-03-31T12:11:04.160073'
+  session: S40
+  verb: closed_sequence
+  target: seq-S40-001
+  context: "action_ledger: open \u2192 closed"
+  params:
+    subsystem: action_ledger
+    from_state: open
+    to_state: closed
+    action_count: 3.0
+  produced: []
+  routes:
+  - kind: continues
+    target: seq-S40-001
+    amount: 0.0
+  origin: emitted
+  sequence_id: seq-S40-001
+- id: act-S42-0331-075
+  timestamp: '2026-03-31T12:11:04.245201'
+  session: S42
+  verb: closed_sequence
+  target: seq-S42-001
+  context: "action_ledger: open \u2192 closed"
+  params:
+    subsystem: action_ledger
+    from_state: open
+    to_state: closed
+    action_count: 3.0
+  produced: []
+  routes:
+  - kind: continues
+    target: seq-S42-001
+    amount: 0.0
+  origin: emitted
+  sequence_id: seq-S42-001
+- id: act-S40-0331-030
+  timestamp: '2026-03-31T12:11:04.335761'
+  session: S40
+  verb: closed_sequence
+  target: seq-S40-001
+  context: "action_ledger: open \u2192 closed"
+  params:
+    subsystem: action_ledger
+    from_state: open
+    to_state: closed
+    action_count: 1.0
+  produced: []
+  routes:
+  - kind: continues
+    target: seq-S40-001
+    amount: 0.0
+  origin: emitted
+  sequence_id: seq-S40-001
+- id: act-S41-0331-007
+  timestamp: '2026-03-31T12:11:04.430730'
+  session: S41
+  verb: closed_sequence
+  target: seq-S41-001
+  context: "action_ledger: open \u2192 closed"
+  params:
+    subsystem: action_ledger
+    from_state: open
+    to_state: closed
+    action_count: 1.0
+  produced: []
+  routes:
+  - kind: continues
+    target: seq-S41-001
+    amount: 0.0
+  origin: emitted
+  sequence_id: seq-S41-001
+- id: act-S42-0331-076
+  timestamp: '2026-03-31T12:11:04.522166'
+  session: S42
+  verb: closed_sequence
+  target: seq-S42-001
+  context: "action_ledger: open \u2192 closed"
+  params:
+    subsystem: action_ledger
+    from_state: open
+    to_state: closed
+    action_count: 1.0
+  produced: []
+  routes:
+  - kind: continues
+    target: seq-S42-001
+    amount: 0.0
+  origin: emitted
+  sequence_id: seq-S42-001
+- id: act-S43-0331-007
+  timestamp: '2026-03-31T12:11:04.615968'
+  session: S43
+  verb: closed_sequence
+  target: seq-S43-001
+  context: "action_ledger: open \u2192 closed"
+  params:
+    subsystem: action_ledger
+    from_state: open
+    to_state: closed
+    action_count: 1.0
+  produced: []
+  routes:
+  - kind: continues
+    target: seq-S43-001
+    amount: 0.0
+  origin: emitted
+  sequence_id: seq-S43-001
+- id: act-S40-0331-031
+  timestamp: '2026-03-31T12:11:04.712034'
+  session: S40
+  verb: closed_sequence
+  target: seq-S40-001
+  context: "action_ledger: open \u2192 closed"
+  params:
+    subsystem: action_ledger
+    from_state: open
+    to_state: closed
+    action_count: 1.0
+  produced: []
+  routes:
+  - kind: continues
+    target: seq-S40-001
+    amount: 0.0
+  origin: emitted
+  sequence_id: seq-S40-001
+- id: act-S41-0331-008
+  timestamp: '2026-03-31T12:11:04.809578'
+  session: S41
+  verb: closed_sequence
+  target: seq-S41-001
+  context: "action_ledger: open \u2192 closed"
+  params:
+    subsystem: action_ledger
+    from_state: open
+    to_state: closed
+    action_count: 1.0
+  produced: []
+  routes:
+  - kind: continues
+    target: seq-S41-001
+    amount: 0.0
+  origin: emitted
+  sequence_id: seq-S41-001
+- id: act-S42-0331-077
+  timestamp: '2026-03-31T12:11:04.903949'
+  session: S42
+  verb: closed_sequence
+  target: seq-S42-001
+  context: "action_ledger: open \u2192 closed"
+  params:
+    subsystem: action_ledger
+    from_state: open
+    to_state: closed
+    action_count: 1.0
+  produced: []
+  routes:
+  - kind: continues
+    target: seq-S42-001
+    amount: 0.0
+  origin: emitted
+  sequence_id: seq-S42-001
+- id: act-S43-0331-008
+  timestamp: '2026-03-31T12:11:04.997779'
+  session: S43
+  verb: closed_sequence
+  target: seq-S43-001
+  context: "action_ledger: open \u2192 closed"
+  params:
+    subsystem: action_ledger
+    from_state: open
+    to_state: closed
+    action_count: 1.0
+  produced: []
+  routes:
+  - kind: continues
+    target: seq-S43-001
+    amount: 0.0
+  origin: emitted
+  sequence_id: seq-S43-001
+- id: act-S38-0331-024
+  timestamp: '2026-03-31T12:11:05.096118'
+  session: S38
+  verb: closed_sequence
+  target: seq-S38-001
+  context: "action_ledger: open \u2192 closed"
+  params:
+    subsystem: action_ledger
+    from_state: open
+    to_state: closed
+    action_count: 3.0
+  produced: []
+  routes:
+  - kind: continues
+    target: seq-S38-001
+    amount: 0.0
+  origin: emitted
+  sequence_id: seq-S38-001
+- id: act-S40-0331-032
+  timestamp: '2026-03-31T12:11:05.188570'
+  session: S40
+  verb: closed_sequence
+  target: seq-S40-001
+  context: "action_ledger: open \u2192 closed"
+  params:
+    subsystem: action_ledger
+    from_state: open
+    to_state: closed
+    action_count: 3.0
+  produced: []
+  routes:
+  - kind: continues
+    target: seq-S40-001
+    amount: 0.0
+  origin: emitted
+  sequence_id: seq-S40-001
+- id: act-S42-0331-078
+  timestamp: '2026-03-31T12:11:05.283766'
+  session: S42
+  verb: closed_sequence
+  target: seq-S42-001
+  context: "action_ledger: open \u2192 closed"
+  params:
+    subsystem: action_ledger
+    from_state: open
+    to_state: closed
+    action_count: 3.0
+  produced: []
+  routes:
+  - kind: continues
+    target: seq-S42-001
+    amount: 0.0
+  origin: emitted
+  sequence_id: seq-S42-001
+- id: act-_sys-0331-009
+  timestamp: '2026-03-31T12:11:05.388805'
+  session: _sys
+  verb: completed_campaign_action
+  target: test
+  context: "contrib_engine: pending \u2192 completed"
+  params:
+    subsystem: contrib_engine
+    from_state: pending
+    to_state: completed
+    phase: unblock
+  produced: []
+  routes:
+  - kind: continues
+    target: test
+    amount: 0.0
+  origin: emitted
+  sequence_id: seq-_sys-001
+- id: act-_sys-0331-010
+  timestamp: '2026-03-31T16:36:16.554749'
+  session: _sys
+  verb: absorption_advanced
+  target: abs-001
+  context: "contrib_engine: detected \u2192 formalized"
+  params:
+    subsystem: contrib_engine
+    from_state: detected
+    to_state: formalized
+    pattern: reader-side-resolution
+  produced: []
+  routes:
+  - kind: continues
+    target: abs-001
+    amount: 0.0
+  origin: emitted
+  sequence_id: seq-_sys-001
+- id: act-_sys-0331-011
+  timestamp: '2026-03-31T16:36:16.648855'
+  session: _sys
+  verb: absorption_deposited
+  target: abs-001
+  context: "contrib_engine: formalized \u2192 deposited"
+  params:
+    subsystem: contrib_engine
+    from_state: formalized
+    to_state: deposited
+    organ: I
+  produced:
+  - type: backflow
+    ref: backflow:I:reader-side-resolution
+  routes:
+  - kind: continues
+    target: abs-001
+    amount: 0.0
+  origin: emitted
+  sequence_id: seq-_sys-001
+- id: act-S42-0331-079
+  timestamp: '2026-03-31T16:36:16.747894'
+  session: S42
+  verb: closed_sequence
+  target: seq-S42-001
+  context: "action_ledger: open \u2192 closed"
+  params:
+    subsystem: action_ledger
+    from_state: open
+    to_state: closed
+    action_count: 1.0
+  produced: []
+  routes:
+  - kind: continues
+    target: seq-S42-001
+    amount: 0.0
+  origin: emitted
+  sequence_id: seq-S42-001
+- id: act-S42-0331-080
+  timestamp: '2026-03-31T16:36:16.843414'
+  session: S42
+  verb: closed_sequence
+  target: seq-S42-001
+  context: "action_ledger: open \u2192 closed"
+  params:
+    subsystem: action_ledger
+    from_state: open
+    to_state: closed
+    action_count: 1.0
+  produced: []
+  routes:
+  - kind: continues
+    target: seq-S42-001
+    amount: 0.0
+  origin: emitted
+  sequence_id: seq-S42-001
+- id: act-S42-0331-081
+  timestamp: '2026-03-31T16:36:16.947206'
+  session: S42
+  verb: closed_session
+  target: S42
+  context: "action_ledger: active \u2192 closed"
+  params:
+    subsystem: action_ledger
+    from_state: active
+    to_state: closed
+    sequence_count: 1.0
+  produced:
+  - type: chain
+    ref: chain-S42-001
+  routes:
+  - kind: continues
+    target: S42
+    amount: 0.0
+  origin: emitted
+  sequence_id: seq-S42-001
+- id: act-S42-0331-082
+  timestamp: '2026-03-31T16:36:17.045716'
+  session: S42
+  verb: composed_chain
+  target: chain-S42-001
+  context: "action_ledger: sequences \u2192 chain"
+  params:
+    subsystem: action_ledger
+    from_state: sequences
+    to_state: chain
+    sequence_count: 1.0
+  produced:
+  - type: chain
+    ref: chain-S42-001
+  routes:
+  - kind: continues
+    target: chain-S42-001
+    amount: 0.0
+  origin: emitted
+  sequence_id: seq-S42-001
+- id: act-S42-0331-083
+  timestamp: '2026-03-31T16:36:17.144125'
+  session: S42
+  verb: composed_chain
+  target: chain-S42-001
+  context: "action_ledger: sequences \u2192 chain"
+  params:
+    subsystem: action_ledger
+    from_state: sequences
+    to_state: chain
+    sequence_count: 1.0
+  produced:
+  - type: chain
+    ref: chain-S42-001
+  routes:
+  - kind: continues
+    target: chain-S42-001
+    amount: 0.0
+  origin: emitted
+  sequence_id: seq-S42-001
+- id: act-S42-0331-084
+  timestamp: '2026-03-31T16:36:17.242649'
+  session: S42
+  verb: composed_chain
+  target: chain-S42-001
+  context: "action_ledger: sequences \u2192 chain"
+  params:
+    subsystem: action_ledger
+    from_state: sequences
+    to_state: chain
+    sequence_count: 1.0
+  produced:
+  - type: chain
+    ref: chain-S42-001
+  routes:
+  - kind: continues
+    target: chain-S42-001
+    amount: 0.0
+  origin: emitted
+  sequence_id: seq-S42-001
+- id: act-S42-0331-085
+  timestamp: '2026-03-31T16:36:17.344822'
+  session: S42
+  verb: composed_chain
+  target: chain-S42-001
+  context: "action_ledger: sequences \u2192 chain"
+  params:
+    subsystem: action_ledger
+    from_state: sequences
+    to_state: chain
+    sequence_count: 1.0
+  produced:
+  - type: chain
+    ref: chain-S42-001
+  routes:
+  - kind: continues
+    target: chain-S42-001
+    amount: 0.0
+  origin: emitted
+  sequence_id: seq-S42-001
+- id: act-S42-0331-086
+  timestamp: '2026-03-31T16:36:17.445389'
+  session: S42
+  verb: closed_session
+  target: S42
+  context: "action_ledger: active \u2192 closed"
+  params:
+    subsystem: action_ledger
+    from_state: active
+    to_state: closed
+    sequence_count: 1.0
+  produced:
+  - type: chain
+    ref: chain-S42-001
+  routes:
+  - kind: continues
+    target: S42
+    amount: 0.0
+  origin: emitted
+  sequence_id: seq-S42-001
+- id: act-S42-0331-087
+  timestamp: '2026-03-31T16:36:17.545714'
+  session: S42
+  verb: closed_sequence
+  target: seq-S42-001
+  context: "action_ledger: open \u2192 closed"
+  params:
+    subsystem: action_ledger
+    from_state: open
+    to_state: closed
+    action_count: 1.0
+  produced: []
+  routes:
+  - kind: continues
+    target: seq-S42-001
+    amount: 0.0
+  origin: emitted
+  sequence_id: seq-S42-001
+- id: act-S42-0331-088
+  timestamp: '2026-03-31T16:36:17.646449'
+  session: S42
+  verb: closed_sequence
+  target: seq-S42-002
+  context: "action_ledger: open \u2192 closed"
+  params:
+    subsystem: action_ledger
+    from_state: open
+    to_state: closed
+    action_count: 1.0
+  produced: []
+  routes:
+  - kind: continues
+    target: seq-S42-002
+    amount: 0.0
+  origin: emitted
+  sequence_id: seq-S42-001
+- id: act-S42-0331-089
+  timestamp: '2026-03-31T16:36:17.749762'
+  session: S42
+  verb: composed_chain
+  target: chain-S42-001
+  context: "action_ledger: sequences \u2192 chain"
+  params:
+    subsystem: action_ledger
+    from_state: sequences
+    to_state: chain
+    sequence_count: 2.0
+  produced:
+  - type: chain
+    ref: chain-S42-001
+  routes:
+  - kind: continues
+    target: chain-S42-001
+    amount: 0.0
+  origin: emitted
+  sequence_id: seq-S42-001
+- id: act-S38-0331-025
+  timestamp: '2026-03-31T16:36:17.850098'
+  session: S38
+  verb: closed_sequence
+  target: seq-S38-001
+  context: "action_ledger: open \u2192 closed"
+  params:
+    subsystem: action_ledger
+    from_state: open
+    to_state: closed
+    action_count: 3.0
+  produced: []
+  routes:
+  - kind: continues
+    target: seq-S38-001
+    amount: 0.0
+  origin: emitted
+  sequence_id: seq-S38-001
+- id: act-S40-0331-033
+  timestamp: '2026-03-31T16:36:17.951923'
+  session: S40
+  verb: closed_sequence
+  target: seq-S40-001
+  context: "action_ledger: open \u2192 closed"
+  params:
+    subsystem: action_ledger
+    from_state: open
+    to_state: closed
+    action_count: 3.0
+  produced: []
+  routes:
+  - kind: continues
+    target: seq-S40-001
+    amount: 0.0
+  origin: emitted
+  sequence_id: seq-S40-001
+- id: act-S42-0331-090
+  timestamp: '2026-03-31T16:36:18.058493'
+  session: S42
+  verb: closed_sequence
+  target: seq-S42-001
+  context: "action_ledger: open \u2192 closed"
+  params:
+    subsystem: action_ledger
+    from_state: open
+    to_state: closed
+    action_count: 3.0
+  produced: []
+  routes:
+  - kind: continues
+    target: seq-S42-001
+    amount: 0.0
+  origin: emitted
+  sequence_id: seq-S42-001
+- id: act-S38-0331-026
+  timestamp: '2026-03-31T16:36:18.160779'
+  session: S38
+  verb: closed_sequence
+  target: seq-S38-001
+  context: "action_ledger: open \u2192 closed"
+  params:
+    subsystem: action_ledger
+    from_state: open
+    to_state: closed
+    action_count: 3.0
+  produced: []
+  routes:
+  - kind: continues
+    target: seq-S38-001
+    amount: 0.0
+  origin: emitted
+  sequence_id: seq-S38-001
+- id: act-S40-0331-034
+  timestamp: '2026-03-31T16:36:18.261660'
+  session: S40
+  verb: closed_sequence
+  target: seq-S40-001
+  context: "action_ledger: open \u2192 closed"
+  params:
+    subsystem: action_ledger
+    from_state: open
+    to_state: closed
+    action_count: 3.0
+  produced: []
+  routes:
+  - kind: continues
+    target: seq-S40-001
+    amount: 0.0
+  origin: emitted
+  sequence_id: seq-S40-001
+- id: act-S42-0331-091
+  timestamp: '2026-03-31T16:36:18.366749'
+  session: S42
+  verb: closed_sequence
+  target: seq-S42-001
+  context: "action_ledger: open \u2192 closed"
+  params:
+    subsystem: action_ledger
+    from_state: open
+    to_state: closed
+    action_count: 3.0
+  produced: []
+  routes:
+  - kind: continues
+    target: seq-S42-001
+    amount: 0.0
+  origin: emitted
+  sequence_id: seq-S42-001
+- id: act-S38-0331-027
+  timestamp: '2026-03-31T16:36:18.474975'
+  session: S38
+  verb: closed_sequence
+  target: seq-S38-001
+  context: "action_ledger: open \u2192 closed"
+  params:
+    subsystem: action_ledger
+    from_state: open
+    to_state: closed
+    action_count: 3.0
+  produced: []
+  routes:
+  - kind: continues
+    target: seq-S38-001
+    amount: 0.0
+  origin: emitted
+  sequence_id: seq-S38-001
+- id: act-S40-0331-035
+  timestamp: '2026-03-31T16:36:18.580516'
+  session: S40
+  verb: closed_sequence
+  target: seq-S40-001
+  context: "action_ledger: open \u2192 closed"
+  params:
+    subsystem: action_ledger
+    from_state: open
+    to_state: closed
+    action_count: 3.0
+  produced: []
+  routes:
+  - kind: continues
+    target: seq-S40-001
+    amount: 0.0
+  origin: emitted
+  sequence_id: seq-S40-001
+- id: act-S42-0331-092
+  timestamp: '2026-03-31T16:36:18.686556'
+  session: S42
+  verb: closed_sequence
+  target: seq-S42-001
+  context: "action_ledger: open \u2192 closed"
+  params:
+    subsystem: action_ledger
+    from_state: open
+    to_state: closed
+    action_count: 3.0
+  produced: []
+  routes:
+  - kind: continues
+    target: seq-S42-001
+    amount: 0.0
+  origin: emitted
+  sequence_id: seq-S42-001
+- id: act-S38-0331-028
+  timestamp: '2026-03-31T16:36:18.794286'
+  session: S38
+  verb: closed_sequence
+  target: seq-S38-001
+  context: "action_ledger: open \u2192 closed"
+  params:
+    subsystem: action_ledger
+    from_state: open
+    to_state: closed
+    action_count: 3.0
+  produced: []
+  routes:
+  - kind: continues
+    target: seq-S38-001
+    amount: 0.0
+  origin: emitted
+  sequence_id: seq-S38-001
+- id: act-S40-0331-036
+  timestamp: '2026-03-31T16:36:18.908204'
+  session: S40
+  verb: closed_sequence
+  target: seq-S40-001
+  context: "action_ledger: open \u2192 closed"
+  params:
+    subsystem: action_ledger
+    from_state: open
+    to_state: closed
+    action_count: 3.0
+  produced: []
+  routes:
+  - kind: continues
+    target: seq-S40-001
+    amount: 0.0
+  origin: emitted
+  sequence_id: seq-S40-001
+- id: act-S42-0331-093
+  timestamp: '2026-03-31T16:36:19.017824'
+  session: S42
+  verb: closed_sequence
+  target: seq-S42-001
+  context: "action_ledger: open \u2192 closed"
+  params:
+    subsystem: action_ledger
+    from_state: open
+    to_state: closed
+    action_count: 3.0
+  produced: []
+  routes:
+  - kind: continues
+    target: seq-S42-001
+    amount: 0.0
+  origin: emitted
+  sequence_id: seq-S42-001
+- id: act-S38-0331-029
+  timestamp: '2026-03-31T16:36:19.126450'
+  session: S38
+  verb: closed_sequence
+  target: seq-S38-001
+  context: "action_ledger: open \u2192 closed"
+  params:
+    subsystem: action_ledger
+    from_state: open
+    to_state: closed
+    action_count: 3.0
+  produced: []
+  routes:
+  - kind: continues
+    target: seq-S38-001
+    amount: 0.0
+  origin: emitted
+  sequence_id: seq-S38-001
+- id: act-S40-0331-037
+  timestamp: '2026-03-31T16:36:19.241026'
+  session: S40
+  verb: closed_sequence
+  target: seq-S40-001
+  context: "action_ledger: open \u2192 closed"
+  params:
+    subsystem: action_ledger
+    from_state: open
+    to_state: closed
+    action_count: 3.0
+  produced: []
+  routes:
+  - kind: continues
+    target: seq-S40-001
+    amount: 0.0
+  origin: emitted
+  sequence_id: seq-S40-001
+- id: act-S42-0331-094
+  timestamp: '2026-03-31T16:36:19.349232'
+  session: S42
+  verb: closed_sequence
+  target: seq-S42-001
+  context: "action_ledger: open \u2192 closed"
+  params:
+    subsystem: action_ledger
+    from_state: open
+    to_state: closed
+    action_count: 3.0
+  produced: []
+  routes:
+  - kind: continues
+    target: seq-S42-001
+    amount: 0.0
+  origin: emitted
+  sequence_id: seq-S42-001
+- id: act-S40-0331-038
+  timestamp: '2026-03-31T16:36:19.458666'
+  session: S40
+  verb: closed_sequence
+  target: seq-S40-001
+  context: "action_ledger: open \u2192 closed"
+  params:
+    subsystem: action_ledger
+    from_state: open
+    to_state: closed
+    action_count: 1.0
+  produced: []
+  routes:
+  - kind: continues
+    target: seq-S40-001
+    amount: 0.0
+  origin: emitted
+  sequence_id: seq-S40-001
+- id: act-S41-0331-009
+  timestamp: '2026-03-31T16:36:19.568020'
+  session: S41
+  verb: closed_sequence
+  target: seq-S41-001
+  context: "action_ledger: open \u2192 closed"
+  params:
+    subsystem: action_ledger
+    from_state: open
+    to_state: closed
+    action_count: 1.0
+  produced: []
+  routes:
+  - kind: continues
+    target: seq-S41-001
+    amount: 0.0
+  origin: emitted
+  sequence_id: seq-S41-001
+- id: act-S42-0331-095
+  timestamp: '2026-03-31T16:36:19.683075'
+  session: S42
+  verb: closed_sequence
+  target: seq-S42-001
+  context: "action_ledger: open \u2192 closed"
+  params:
+    subsystem: action_ledger
+    from_state: open
+    to_state: closed
+    action_count: 1.0
+  produced: []
+  routes:
+  - kind: continues
+    target: seq-S42-001
+    amount: 0.0
+  origin: emitted
+  sequence_id: seq-S42-001
+- id: act-S43-0331-009
+  timestamp: '2026-03-31T16:36:19.794685'
+  session: S43
+  verb: closed_sequence
+  target: seq-S43-001
+  context: "action_ledger: open \u2192 closed"
+  params:
+    subsystem: action_ledger
+    from_state: open
+    to_state: closed
+    action_count: 1.0
+  produced: []
+  routes:
+  - kind: continues
+    target: seq-S43-001
+    amount: 0.0
+  origin: emitted
+  sequence_id: seq-S43-001
+- id: act-S40-0331-039
+  timestamp: '2026-03-31T16:36:19.907692'
+  session: S40
+  verb: closed_sequence
+  target: seq-S40-001
+  context: "action_ledger: open \u2192 closed"
+  params:
+    subsystem: action_ledger
+    from_state: open
+    to_state: closed
+    action_count: 1.0
+  produced: []
+  routes:
+  - kind: continues
+    target: seq-S40-001
+    amount: 0.0
+  origin: emitted
+  sequence_id: seq-S40-001
+- id: act-S41-0331-010
+  timestamp: '2026-03-31T16:36:20.025426'
+  session: S41
+  verb: closed_sequence
+  target: seq-S41-001
+  context: "action_ledger: open \u2192 closed"
+  params:
+    subsystem: action_ledger
+    from_state: open
+    to_state: closed
+    action_count: 1.0
+  produced: []
+  routes:
+  - kind: continues
+    target: seq-S41-001
+    amount: 0.0
+  origin: emitted
+  sequence_id: seq-S41-001
+- id: act-S42-0331-096
+  timestamp: '2026-03-31T16:36:20.138411'
+  session: S42
+  verb: closed_sequence
+  target: seq-S42-001
+  context: "action_ledger: open \u2192 closed"
+  params:
+    subsystem: action_ledger
+    from_state: open
+    to_state: closed
+    action_count: 1.0
+  produced: []
+  routes:
+  - kind: continues
+    target: seq-S42-001
+    amount: 0.0
+  origin: emitted
+  sequence_id: seq-S42-001
+- id: act-S43-0331-010
+  timestamp: '2026-03-31T16:36:20.251556'
+  session: S43
+  verb: closed_sequence
+  target: seq-S43-001
+  context: "action_ledger: open \u2192 closed"
+  params:
+    subsystem: action_ledger
+    from_state: open
+    to_state: closed
+    action_count: 1.0
+  produced: []
+  routes:
+  - kind: continues
+    target: seq-S43-001
+    amount: 0.0
+  origin: emitted
+  sequence_id: seq-S43-001
+- id: act-S38-0331-030
+  timestamp: '2026-03-31T16:36:20.366992'
+  session: S38
+  verb: closed_sequence
+  target: seq-S38-001
+  context: "action_ledger: open \u2192 closed"
+  params:
+    subsystem: action_ledger
+    from_state: open
+    to_state: closed
+    action_count: 3.0
+  produced: []
+  routes:
+  - kind: continues
+    target: seq-S38-001
+    amount: 0.0
+  origin: emitted
+  sequence_id: seq-S38-001
+- id: act-S40-0331-040
+  timestamp: '2026-03-31T16:36:20.486885'
+  session: S40
+  verb: closed_sequence
+  target: seq-S40-001
+  context: "action_ledger: open \u2192 closed"
+  params:
+    subsystem: action_ledger
+    from_state: open
+    to_state: closed
+    action_count: 3.0
+  produced: []
+  routes:
+  - kind: continues
+    target: seq-S40-001
+    amount: 0.0
+  origin: emitted
+  sequence_id: seq-S40-001
+- id: act-S42-0331-097
+  timestamp: '2026-03-31T16:36:20.601374'
+  session: S42
+  verb: closed_sequence
+  target: seq-S42-001
+  context: "action_ledger: open \u2192 closed"
+  params:
+    subsystem: action_ledger
+    from_state: open
+    to_state: closed
+    action_count: 3.0
+  produced: []
+  routes:
+  - kind: continues
+    target: seq-S42-001
+    amount: 0.0
+  origin: emitted
+  sequence_id: seq-S42-001
+- id: act-_sys-0331-012
+  timestamp: '2026-03-31T16:36:20.725254'
+  session: _sys
+  verb: completed_campaign_action
+  target: test
+  context: "contrib_engine: pending \u2192 completed"
+  params:
+    subsystem: contrib_engine
+    from_state: pending
+    to_state: completed
+    phase: unblock
+  produced: []
+  routes:
+  - kind: continues
+    target: test
+    amount: 0.0
+  origin: emitted
+  sequence_id: seq-_sys-001
+- id: act-_sys-0331-013
+  timestamp: '2026-03-31T16:39:00.011580'
+  session: _sys
+  verb: absorption_advanced
+  target: abs-001
+  context: "contrib_engine: detected \u2192 formalized"
+  params:
+    subsystem: contrib_engine
+    from_state: detected
+    to_state: formalized
+    pattern: reader-side-resolution
+  produced: []
+  routes:
+  - kind: continues
+    target: abs-001
+    amount: 0.0
+  origin: emitted
+  sequence_id: seq-_sys-001
+- id: act-_sys-0331-014
+  timestamp: '2026-03-31T16:39:00.131849'
+  session: _sys
+  verb: absorption_deposited
+  target: abs-001
+  context: "contrib_engine: formalized \u2192 deposited"
+  params:
+    subsystem: contrib_engine
+    from_state: formalized
+    to_state: deposited
+    organ: I
+  produced:
+  - type: backflow
+    ref: backflow:I:reader-side-resolution
+  routes:
+  - kind: continues
+    target: abs-001
+    amount: 0.0
+  origin: emitted
+  sequence_id: seq-_sys-001
+- id: act-S42-0331-098
+  timestamp: '2026-03-31T16:39:00.256572'
+  session: S42
+  verb: closed_sequence
+  target: seq-S42-001
+  context: "action_ledger: open \u2192 closed"
+  params:
+    subsystem: action_ledger
+    from_state: open
+    to_state: closed
+    action_count: 1.0
+  produced: []
+  routes:
+  - kind: continues
+    target: seq-S42-001
+    amount: 0.0
+  origin: emitted
+  sequence_id: seq-S42-001
+- id: act-S42-0331-099
+  timestamp: '2026-03-31T16:39:00.381240'
+  session: S42
+  verb: closed_sequence
+  target: seq-S42-001
+  context: "action_ledger: open \u2192 closed"
+  params:
+    subsystem: action_ledger
+    from_state: open
+    to_state: closed
+    action_count: 1.0
+  produced: []
+  routes:
+  - kind: continues
+    target: seq-S42-001
+    amount: 0.0
+  origin: emitted
+  sequence_id: seq-S42-001
+- id: act-S42-0331-100
+  timestamp: '2026-03-31T16:39:00.510152'
+  session: S42
+  verb: closed_session
+  target: S42
+  context: "action_ledger: active \u2192 closed"
+  params:
+    subsystem: action_ledger
+    from_state: active
+    to_state: closed
+    sequence_count: 1.0
+  produced:
+  - type: chain
+    ref: chain-S42-001
+  routes:
+  - kind: continues
+    target: S42
+    amount: 0.0
+  origin: emitted
+  sequence_id: seq-S42-001
+- id: act-S42-0331-101
+  timestamp: '2026-03-31T16:39:00.632849'
+  session: S42
+  verb: composed_chain
+  target: chain-S42-001
+  context: "action_ledger: sequences \u2192 chain"
+  params:
+    subsystem: action_ledger
+    from_state: sequences
+    to_state: chain
+    sequence_count: 1.0
+  produced:
+  - type: chain
+    ref: chain-S42-001
+  routes:
+  - kind: continues
+    target: chain-S42-001
+    amount: 0.0
+  origin: emitted
+  sequence_id: seq-S42-001
+- id: act-S42-0331-102
+  timestamp: '2026-03-31T16:39:00.759157'
+  session: S42
+  verb: composed_chain
+  target: chain-S42-001
+  context: "action_ledger: sequences \u2192 chain"
+  params:
+    subsystem: action_ledger
+    from_state: sequences
+    to_state: chain
+    sequence_count: 1.0
+  produced:
+  - type: chain
+    ref: chain-S42-001
+  routes:
+  - kind: continues
+    target: chain-S42-001
+    amount: 0.0
+  origin: emitted
+  sequence_id: seq-S42-001
+- id: act-S42-0331-103
+  timestamp: '2026-03-31T16:39:00.882410'
+  session: S42
+  verb: composed_chain
+  target: chain-S42-001
+  context: "action_ledger: sequences \u2192 chain"
+  params:
+    subsystem: action_ledger
+    from_state: sequences
+    to_state: chain
+    sequence_count: 1.0
+  produced:
+  - type: chain
+    ref: chain-S42-001
+  routes:
+  - kind: continues
+    target: chain-S42-001
+    amount: 0.0
+  origin: emitted
+  sequence_id: seq-S42-001
+- id: act-S42-0331-104
+  timestamp: '2026-03-31T16:39:01.006517'
+  session: S42
+  verb: composed_chain
+  target: chain-S42-001
+  context: "action_ledger: sequences \u2192 chain"
+  params:
+    subsystem: action_ledger
+    from_state: sequences
+    to_state: chain
+    sequence_count: 1.0
+  produced:
+  - type: chain
+    ref: chain-S42-001
+  routes:
+  - kind: continues
+    target: chain-S42-001
+    amount: 0.0
+  origin: emitted
+  sequence_id: seq-S42-001
+- id: act-S42-0331-105
+  timestamp: '2026-03-31T16:39:01.131788'
+  session: S42
+  verb: closed_session
+  target: S42
+  context: "action_ledger: active \u2192 closed"
+  params:
+    subsystem: action_ledger
+    from_state: active
+    to_state: closed
+    sequence_count: 1.0
+  produced:
+  - type: chain
+    ref: chain-S42-001
+  routes:
+  - kind: continues
+    target: S42
+    amount: 0.0
+  origin: emitted
+  sequence_id: seq-S42-001
+- id: act-S42-0331-106
+  timestamp: '2026-03-31T16:39:01.259921'
+  session: S42
+  verb: closed_sequence
+  target: seq-S42-001
+  context: "action_ledger: open \u2192 closed"
+  params:
+    subsystem: action_ledger
+    from_state: open
+    to_state: closed
+    action_count: 1.0
+  produced: []
+  routes:
+  - kind: continues
+    target: seq-S42-001
+    amount: 0.0
+  origin: emitted
+  sequence_id: seq-S42-001
+- id: act-S42-0331-107
+  timestamp: '2026-03-31T16:39:01.384569'
+  session: S42
+  verb: closed_sequence
+  target: seq-S42-002
+  context: "action_ledger: open \u2192 closed"
+  params:
+    subsystem: action_ledger
+    from_state: open
+    to_state: closed
+    action_count: 1.0
+  produced: []
+  routes:
+  - kind: continues
+    target: seq-S42-002
+    amount: 0.0
+  origin: emitted
+  sequence_id: seq-S42-001
+- id: act-S42-0331-108
+  timestamp: '2026-03-31T16:39:01.512212'
+  session: S42
+  verb: composed_chain
+  target: chain-S42-001
+  context: "action_ledger: sequences \u2192 chain"
+  params:
+    subsystem: action_ledger
+    from_state: sequences
+    to_state: chain
+    sequence_count: 2.0
+  produced:
+  - type: chain
+    ref: chain-S42-001
+  routes:
+  - kind: continues
+    target: chain-S42-001
+    amount: 0.0
+  origin: emitted
+  sequence_id: seq-S42-001
+- id: act-S38-0331-031
+  timestamp: '2026-03-31T16:39:01.641336'
+  session: S38
+  verb: closed_sequence
+  target: seq-S38-001
+  context: "action_ledger: open \u2192 closed"
+  params:
+    subsystem: action_ledger
+    from_state: open
+    to_state: closed
+    action_count: 3.0
+  produced: []
+  routes:
+  - kind: continues
+    target: seq-S38-001
+    amount: 0.0
+  origin: emitted
+  sequence_id: seq-S38-001
+- id: act-S40-0331-041
+  timestamp: '2026-03-31T16:39:01.768791'
+  session: S40
+  verb: closed_sequence
+  target: seq-S40-001
+  context: "action_ledger: open \u2192 closed"
+  params:
+    subsystem: action_ledger
+    from_state: open
+    to_state: closed
+    action_count: 3.0
+  produced: []
+  routes:
+  - kind: continues
+    target: seq-S40-001
+    amount: 0.0
+  origin: emitted
+  sequence_id: seq-S40-001
+- id: act-S42-0331-109
+  timestamp: '2026-03-31T16:39:01.903592'
+  session: S42
+  verb: closed_sequence
+  target: seq-S42-001
+  context: "action_ledger: open \u2192 closed"
+  params:
+    subsystem: action_ledger
+    from_state: open
+    to_state: closed
+    action_count: 3.0
+  produced: []
+  routes:
+  - kind: continues
+    target: seq-S42-001
+    amount: 0.0
+  origin: emitted
+  sequence_id: seq-S42-001
+- id: act-S38-0331-032
+  timestamp: '2026-03-31T16:39:02.032230'
+  session: S38
+  verb: closed_sequence
+  target: seq-S38-001
+  context: "action_ledger: open \u2192 closed"
+  params:
+    subsystem: action_ledger
+    from_state: open
+    to_state: closed
+    action_count: 3.0
+  produced: []
+  routes:
+  - kind: continues
+    target: seq-S38-001
+    amount: 0.0
+  origin: emitted
+  sequence_id: seq-S38-001
+- id: act-S40-0331-042
+  timestamp: '2026-03-31T16:39:02.160867'
+  session: S40
+  verb: closed_sequence
+  target: seq-S40-001
+  context: "action_ledger: open \u2192 closed"
+  params:
+    subsystem: action_ledger
+    from_state: open
+    to_state: closed
+    action_count: 3.0
+  produced: []
+  routes:
+  - kind: continues
+    target: seq-S40-001
+    amount: 0.0
+  origin: emitted
+  sequence_id: seq-S40-001
+- id: act-S42-0331-110
+  timestamp: '2026-03-31T16:39:02.295800'
+  session: S42
+  verb: closed_sequence
+  target: seq-S42-001
+  context: "action_ledger: open \u2192 closed"
+  params:
+    subsystem: action_ledger
+    from_state: open
+    to_state: closed
+    action_count: 3.0
+  produced: []
+  routes:
+  - kind: continues
+    target: seq-S42-001
+    amount: 0.0
+  origin: emitted
+  sequence_id: seq-S42-001
+- id: act-S38-0331-033
+  timestamp: '2026-03-31T16:39:02.426229'
+  session: S38
+  verb: closed_sequence
+  target: seq-S38-001
+  context: "action_ledger: open \u2192 closed"
+  params:
+    subsystem: action_ledger
+    from_state: open
+    to_state: closed
+    action_count: 3.0
+  produced: []
+  routes:
+  - kind: continues
+    target: seq-S38-001
+    amount: 0.0
+  origin: emitted
+  sequence_id: seq-S38-001
+- id: act-S40-0331-043
+  timestamp: '2026-03-31T16:39:02.558799'
+  session: S40
+  verb: closed_sequence
+  target: seq-S40-001
+  context: "action_ledger: open \u2192 closed"
+  params:
+    subsystem: action_ledger
+    from_state: open
+    to_state: closed
+    action_count: 3.0
+  produced: []
+  routes:
+  - kind: continues
+    target: seq-S40-001
+    amount: 0.0
+  origin: emitted
+  sequence_id: seq-S40-001
+- id: act-S42-0331-111
+  timestamp: '2026-03-31T16:39:02.695259'
+  session: S42
+  verb: closed_sequence
+  target: seq-S42-001
+  context: "action_ledger: open \u2192 closed"
+  params:
+    subsystem: action_ledger
+    from_state: open
+    to_state: closed
+    action_count: 3.0
+  produced: []
+  routes:
+  - kind: continues
+    target: seq-S42-001
+    amount: 0.0
+  origin: emitted
+  sequence_id: seq-S42-001
+- id: act-S38-0331-034
+  timestamp: '2026-03-31T16:39:02.828697'
+  session: S38
+  verb: closed_sequence
+  target: seq-S38-001
+  context: "action_ledger: open \u2192 closed"
+  params:
+    subsystem: action_ledger
+    from_state: open
+    to_state: closed
+    action_count: 3.0
+  produced: []
+  routes:
+  - kind: continues
+    target: seq-S38-001
+    amount: 0.0
+  origin: emitted
+  sequence_id: seq-S38-001
+- id: act-S40-0331-044
+  timestamp: '2026-03-31T16:39:02.971560'
+  session: S40
+  verb: closed_sequence
+  target: seq-S40-001
+  context: "action_ledger: open \u2192 closed"
+  params:
+    subsystem: action_ledger
+    from_state: open
+    to_state: closed
+    action_count: 3.0
+  produced: []
+  routes:
+  - kind: continues
+    target: seq-S40-001
+    amount: 0.0
+  origin: emitted
+  sequence_id: seq-S40-001
+- id: act-S42-0331-112
+  timestamp: '2026-03-31T16:39:03.105622'
+  session: S42
+  verb: closed_sequence
+  target: seq-S42-001
+  context: "action_ledger: open \u2192 closed"
+  params:
+    subsystem: action_ledger
+    from_state: open
+    to_state: closed
+    action_count: 3.0
+  produced: []
+  routes:
+  - kind: continues
+    target: seq-S42-001
+    amount: 0.0
+  origin: emitted
+  sequence_id: seq-S42-001
+- id: act-S38-0331-035
+  timestamp: '2026-03-31T16:39:03.245721'
+  session: S38
+  verb: closed_sequence
+  target: seq-S38-001
+  context: "action_ledger: open \u2192 closed"
+  params:
+    subsystem: action_ledger
+    from_state: open
+    to_state: closed
+    action_count: 3.0
+  produced: []
+  routes:
+  - kind: continues
+    target: seq-S38-001
+    amount: 0.0
+  origin: emitted
+  sequence_id: seq-S38-001
+- id: act-S40-0331-045
+  timestamp: '2026-03-31T16:39:03.382890'
+  session: S40
+  verb: closed_sequence
+  target: seq-S40-001
+  context: "action_ledger: open \u2192 closed"
+  params:
+    subsystem: action_ledger
+    from_state: open
+    to_state: closed
+    action_count: 3.0
+  produced: []
+  routes:
+  - kind: continues
+    target: seq-S40-001
+    amount: 0.0
+  origin: emitted
+  sequence_id: seq-S40-001
+- id: act-S42-0331-113
+  timestamp: '2026-03-31T16:39:03.522422'
+  session: S42
+  verb: closed_sequence
+  target: seq-S42-001
+  context: "action_ledger: open \u2192 closed"
+  params:
+    subsystem: action_ledger
+    from_state: open
+    to_state: closed
+    action_count: 3.0
+  produced: []
+  routes:
+  - kind: continues
+    target: seq-S42-001
+    amount: 0.0
+  origin: emitted
+  sequence_id: seq-S42-001
+- id: act-S40-0331-046
+  timestamp: '2026-03-31T16:39:03.659267'
+  session: S40
+  verb: closed_sequence
+  target: seq-S40-001
+  context: "action_ledger: open \u2192 closed"
+  params:
+    subsystem: action_ledger
+    from_state: open
+    to_state: closed
+    action_count: 1.0
+  produced: []
+  routes:
+  - kind: continues
+    target: seq-S40-001
+    amount: 0.0
+  origin: emitted
+  sequence_id: seq-S40-001
+- id: act-S41-0331-011
+  timestamp: '2026-03-31T16:39:03.801805'
+  session: S41
+  verb: closed_sequence
+  target: seq-S41-001
+  context: "action_ledger: open \u2192 closed"
+  params:
+    subsystem: action_ledger
+    from_state: open
+    to_state: closed
+    action_count: 1.0
+  produced: []
+  routes:
+  - kind: continues
+    target: seq-S41-001
+    amount: 0.0
+  origin: emitted
+  sequence_id: seq-S41-001
+- id: act-S42-0331-114
+  timestamp: '2026-03-31T16:39:03.944528'
+  session: S42
+  verb: closed_sequence
+  target: seq-S42-001
+  context: "action_ledger: open \u2192 closed"
+  params:
+    subsystem: action_ledger
+    from_state: open
+    to_state: closed
+    action_count: 1.0
+  produced: []
+  routes:
+  - kind: continues
+    target: seq-S42-001
+    amount: 0.0
+  origin: emitted
+  sequence_id: seq-S42-001
+- id: act-S43-0331-011
+  timestamp: '2026-03-31T16:39:04.088091'
+  session: S43
+  verb: closed_sequence
+  target: seq-S43-001
+  context: "action_ledger: open \u2192 closed"
+  params:
+    subsystem: action_ledger
+    from_state: open
+    to_state: closed
+    action_count: 1.0
+  produced: []
+  routes:
+  - kind: continues
+    target: seq-S43-001
+    amount: 0.0
+  origin: emitted
+  sequence_id: seq-S43-001
+- id: act-S40-0331-047
+  timestamp: '2026-03-31T16:39:04.231467'
+  session: S40
+  verb: closed_sequence
+  target: seq-S40-001
+  context: "action_ledger: open \u2192 closed"
+  params:
+    subsystem: action_ledger
+    from_state: open
+    to_state: closed
+    action_count: 1.0
+  produced: []
+  routes:
+  - kind: continues
+    target: seq-S40-001
+    amount: 0.0
+  origin: emitted
+  sequence_id: seq-S40-001
+- id: act-S41-0331-012
+  timestamp: '2026-03-31T16:39:04.374383'
+  session: S41
+  verb: closed_sequence
+  target: seq-S41-001
+  context: "action_ledger: open \u2192 closed"
+  params:
+    subsystem: action_ledger
+    from_state: open
+    to_state: closed
+    action_count: 1.0
+  produced: []
+  routes:
+  - kind: continues
+    target: seq-S41-001
+    amount: 0.0
+  origin: emitted
+  sequence_id: seq-S41-001
+- id: act-S42-0331-115
+  timestamp: '2026-03-31T16:39:04.513970'
+  session: S42
+  verb: closed_sequence
+  target: seq-S42-001
+  context: "action_ledger: open \u2192 closed"
+  params:
+    subsystem: action_ledger
+    from_state: open
+    to_state: closed
+    action_count: 1.0
+  produced: []
+  routes:
+  - kind: continues
+    target: seq-S42-001
+    amount: 0.0
+  origin: emitted
+  sequence_id: seq-S42-001
+- id: act-S43-0331-012
+  timestamp: '2026-03-31T16:39:04.659907'
+  session: S43
+  verb: closed_sequence
+  target: seq-S43-001
+  context: "action_ledger: open \u2192 closed"
+  params:
+    subsystem: action_ledger
+    from_state: open
+    to_state: closed
+    action_count: 1.0
+  produced: []
+  routes:
+  - kind: continues
+    target: seq-S43-001
+    amount: 0.0
+  origin: emitted
+  sequence_id: seq-S43-001
+- id: act-S38-0331-036
+  timestamp: '2026-03-31T16:39:04.803368'
+  session: S38
+  verb: closed_sequence
+  target: seq-S38-001
+  context: "action_ledger: open \u2192 closed"
+  params:
+    subsystem: action_ledger
+    from_state: open
+    to_state: closed
+    action_count: 3.0
+  produced: []
+  routes:
+  - kind: continues
+    target: seq-S38-001
+    amount: 0.0
+  origin: emitted
+  sequence_id: seq-S38-001
+- id: act-S40-0331-048
+  timestamp: '2026-03-31T16:39:04.945733'
+  session: S40
+  verb: closed_sequence
+  target: seq-S40-001
+  context: "action_ledger: open \u2192 closed"
+  params:
+    subsystem: action_ledger
+    from_state: open
+    to_state: closed
+    action_count: 3.0
+  produced: []
+  routes:
+  - kind: continues
+    target: seq-S40-001
+    amount: 0.0
+  origin: emitted
+  sequence_id: seq-S40-001
+- id: act-S42-0331-116
+  timestamp: '2026-03-31T16:39:05.094446'
+  session: S42
+  verb: closed_sequence
+  target: seq-S42-001
+  context: "action_ledger: open \u2192 closed"
+  params:
+    subsystem: action_ledger
+    from_state: open
+    to_state: closed
+    action_count: 3.0
+  produced: []
+  routes:
+  - kind: continues
+    target: seq-S42-001
+    amount: 0.0
+  origin: emitted
+  sequence_id: seq-S42-001
+- id: act-_sys-0331-015
+  timestamp: '2026-03-31T16:39:05.267750'
+  session: _sys
+  verb: completed_campaign_action
+  target: test
+  context: "contrib_engine: pending \u2192 completed"
+  params:
+    subsystem: contrib_engine
+    from_state: pending
+    to_state: completed
+    phase: unblock
+  produced: []
+  routes:
+  - kind: continues
+    target: test
+    amount: 0.0
+  origin: emitted
+  sequence_id: seq-_sys-001

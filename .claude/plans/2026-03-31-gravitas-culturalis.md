@@ -1,3 +1,12 @@
+---
+session: S-gravitas-culturalis
+date: 2026-03-31
+supersedes: []
+continues: []
+status: active
+tags: [gravitas-culturalis, theory, spec-021, essay, engine]
+---
+
 # Gravitas Culturalis — Full Vertical Plan
 
 ## Context
@@ -188,3 +197,17 @@ orbit:
 4. `inventory.md` — Term definitions and concept relationships
 
 Then commit to the post-flood repo.
+
+## Forward
+
+### Next Session Context
+- Layer 0 (SPEC-021) completed: 4 files in `meta-organvm/post-flood/specs/SPEC-021-gravitas-culturalis/`
+- GRC issues #280-#283 created for Layers 1-4
+- Layers 1-4 unbuilt — each is a separate session
+
+### Handoff Prompt
+> Gravitas Culturalis Layer 0 is complete. Resume with Layer 1 (GRC-002, issue #280): engine module + Pydantic schema in `meta-organvm/organvm-engine/`. The theory doc (grounding.md) defines the formal model. Follow the hot-hands rule — one layer per session.
+
+### Open Questions
+- Which organ gets the essay (Layer 3)? Likely ORGAN-V (Logos)
+- The alchemia pipeline extension (Layer 4) requires coordination with ORGAN-II

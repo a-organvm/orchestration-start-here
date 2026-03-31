@@ -45,6 +45,7 @@ def register_ledger_commands(
     show.add_argument("--session", default="", help="Filter by session")
     show.add_argument("--verb", default="", help="Filter by verb")
     show.add_argument("--target", default="", help="Filter by target (substring)")
+    show.add_argument("--origin", default="", help="Filter by origin (manual, emitted)")
     show.add_argument("--routes", action="store_true", help="Show routes")
     show.set_defaults(func=_cmd_show)
 
@@ -236,16 +237,18 @@ def _cmd_show(args: argparse.Namespace) -> None:
         actions = [a for a in actions if a.verb == args.verb]
     if args.target:
         actions = [a for a in actions if args.target in a.target]
+    if args.origin:
+        actions = [a for a in actions if a.origin == args.origin]
 
     if not actions:
         print("No actions found.")
         return
 
-    print(f"{'ID':<28s}  {'Session':>7s}  {'Verb':<12s}  {'Target':<25s}  Context")
-    print("-" * 100)
+    print(f"{'ID':<28s}  {'Session':>7s}  {'Verb':<12s}  {'Target':<25s}  {'Origin':<8s}  Context")
+    print("-" * 110)
     for a in actions:
         ctx = a.context[:35] if a.context else ""
-        print(f"{a.id:<28s}  {a.session:>7s}  {a.verb:<12s}  {a.target:<25s}  {ctx}")
+        print(f"{a.id:<28s}  {a.session:>7s}  {a.verb:<12s}  {a.target:<25s}  {a.origin:<8s}  {ctx}")
         if args.routes and a.routes:
             for r in a.routes:
                 print(f"  -> {r.kind.value}: {r.target} (amount={r.effective_amount():.1f})")

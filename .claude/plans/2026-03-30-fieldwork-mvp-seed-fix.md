@@ -1,3 +1,12 @@
+---
+session: S-fieldwork-mvp
+date: 2026-03-30
+supersedes: []
+continues: []
+status: completed
+tags: [fieldwork, intelligence, seed-yaml, contrib-engine]
+---
+
 # Fieldwork Intelligence System MVP + seed.yaml P0 Fix
 
 ## Context

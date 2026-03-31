@@ -16,6 +16,7 @@ import yaml
 from action_ledger.schemas import (
     Action,
     ActionIndex,
+    ActionOrigin,
     Chain,
     ChainIndex,
     ParamRegistry,
@@ -141,6 +142,7 @@ def record(
     params: dict[str, float | str] | None = None,
     produced: list[dict[str, str]] | None = None,
     routes: list[dict[str, str | float]] | None = None,
+    origin: ActionOrigin = ActionOrigin.MANUAL,
 ) -> Action:
     """Record an action — atomically appends, composes, and manifests.
 
@@ -168,6 +170,7 @@ def record(
         params=params,
         produced=produced_models,
         routes=route_models,
+        origin=origin,
     )
 
     # --- 1. Append to stream ---
@@ -208,6 +211,7 @@ def close_sequence(
     sequence_index: SequenceIndex,
     session: str,
     outcome: str = "",
+    emit: bool = True,
 ) -> Sequence | None:
     """Close the active sequence for a session, optionally recording its outcome."""
     active = sequence_index.active_for_session(session)
@@ -216,6 +220,17 @@ def close_sequence(
     active.closed = True
     if outcome:
         active.outcome = outcome
+    if emit:
+        from action_ledger.emissions import emit_state_change
+        emit_state_change(
+            subsystem="action_ledger",
+            verb="closed_sequence",
+            target=active.id,
+            from_state="open",
+            to_state="closed",
+            session=session,
+            params={"action_count": float(len(active.action_ids))},
+        )
     return active
 
 
@@ -317,6 +332,7 @@ def compose_chain(
     session: str,
     prompt_essence: str = "",
     produced_artifacts: list[str] | None = None,
+    emit: bool = True,
 ) -> Chain | None:
     """Compose all sequences for a session into a chain.
 
@@ -342,6 +358,19 @@ def compose_chain(
     for seq in session_seqs:
         seq.chain_id = chain.id
 
+    if emit:
+        from action_ledger.emissions import emit_state_change
+        emit_state_change(
+            subsystem="action_ledger",
+            verb="composed_chain",
+            target=chain.id,
+            from_state="sequences",
+            to_state="chain",
+            session=session,
+            params={"sequence_count": float(len(session_seqs))},
+            produced=[{"type": "chain", "ref": chain.id}],
+        )
+
     return chain
 
 
@@ -351,6 +380,7 @@ def close_session(
     session: str,
     prompt_essence: str = "",
     produced_artifacts: list[str] | None = None,
+    emit: bool = True,
 ) -> Chain | None:
     """Close a session: close the active sequence, compose a chain.
 
@@ -358,12 +388,28 @@ def close_session(
     1. Closes the active sequence (if any)
     2. Composes all session sequences into a chain
     """
-    # Close any open sequence
-    close_sequence(sequence_index, session)
+    # Close any open sequence — suppress its emission; close_session emits instead
+    close_sequence(sequence_index, session, emit=False)
 
-    # Compose into chain
-    return compose_chain(
+    # Compose into chain — suppress its emission; close_session is the boundary event
+    chain = compose_chain(
         sequence_index, chain_index, session,
         prompt_essence=prompt_essence,
         produced_artifacts=produced_artifacts,
+        emit=False,
     )
+
+    if emit and chain:
+        from action_ledger.emissions import emit_state_change
+        emit_state_change(
+            subsystem="action_ledger",
+            verb="closed_session",
+            target=session,
+            from_state="active",
+            to_state="closed",
+            session=session,
+            params={"sequence_count": float(len(chain.sequence_ids))},
+            produced=[{"type": "chain", "ref": chain.id}],
+        )
+
+    return chain

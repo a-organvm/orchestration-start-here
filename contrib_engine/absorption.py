@@ -480,9 +480,22 @@ def mark_formalized(
     """
     for item in index.items:
         if item.id == item_id:
+            old_status = item.status
             item.status = AbsorptionStatus.FORMALIZED
             item.pattern_name = pattern_name
             item.organ = organ or infer_organ(item)
+            try:
+                from action_ledger.emissions import emit_state_change
+                emit_state_change(
+                    subsystem="contrib_engine",
+                    verb="absorption_advanced",
+                    target=item_id,
+                    from_state=old_status.value,
+                    to_state="formalized",
+                    params={"pattern": pattern_name},
+                )
+            except Exception:
+                logger.debug("Emission failed for absorption %s", item_id)
             return item
     return None
 
@@ -517,6 +530,20 @@ def deposit_to_backflow(
     # Update absorption item
     item.status = AbsorptionStatus.DEPOSITED
     item.backflow_ref = f"backflow:{item.organ}:{item.pattern_name}"
+
+    try:
+        from action_ledger.emissions import emit_state_change
+        emit_state_change(
+            subsystem="contrib_engine",
+            verb="absorption_deposited",
+            target=item.id,
+            from_state="formalized",
+            to_state="deposited",
+            params={"organ": item.organ or "unknown"},
+            produced=[{"type": "backflow", "ref": item.backflow_ref}],
+        )
+    except Exception:
+        logger.debug("Emission failed for deposit %s", item.id)
 
     return backflow
 
