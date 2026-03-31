@@ -9,6 +9,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- **Memory persistence backup (2026-03-31)** — `.meta/memory/` snapshot of 26 Claude Code memory files committed to repo. Soul persists in git; local:remote = 1:1 for all artifacts.
+- **Fieldwork Intelligence MVP (2026-03-31)** — Layer 1 built: `fieldwork.py` (record + show), `FieldObservation` model, `FieldworkIndex`, 10 categories, 5-level spectrum, 14 tests. Layers 2-4 designed (issue #145).
+- **Superproject Topology Audit SOP (2026-03-31)** — formalized from 5-agent arrhythmic trace into 7+1 step reproducible procedure (`docs/superproject-topology-audit.md`).
+- **Action Ledger design (2026-03-31)** — system-wide process recording with synthesizer paradigm. Plan at `.claude/plans/scalable-baking-conway.md`, spec pending.
 - **ORGAN-IV Remediation Complete (2026-03-31)** — achieved 0% gap ratio in superproject boundary; all 14 repositories (`cvrsvs-honorvm`, `aerarium--res-publica`, etc.) declared and synced.
 - **System Audit (2026-03-31)** — identified casing drift in `cvrsvs-honorvm` functional class and archive candidacy for `announcement-templates`.
 - Documentation sync — updated `GEMINI.md` and `AGENTS.md` with current 14-repo boundary and sync timestamps.
