@@ -30,7 +30,7 @@ axes:
     - 3.0
     description: ''
     first_seen: '2026-03-31'
-    frequency: 180
+    frequency: 270
   sequence_count:
     name: sequence_count
     range:
@@ -38,4 +38,4 @@ axes:
     - 2.0
     description: ''
     first_seen: '2026-03-31'
-    frequency: 42
+    frequency: 63
