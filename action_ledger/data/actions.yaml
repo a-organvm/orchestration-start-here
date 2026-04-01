@@ -6604,3 +6604,64 @@ actions:
     amount: 0.0
   origin: emitted
   sequence_id: seq-_sys-001
+- id: act-ROUTER-0331-001
+  timestamp: '2026-03-31T20:28:11.112719'
+  session: ROUTER
+  verb: received_intake
+  target: intake:housekeeping
+  context: "IRF update for intake router build, GitHub issue creation, plan file persistence,\
+    \ operator-prompts doc status fix \u2014 all housekeeping propagation for session\
+    \ S-energy-emission closeout"
+  params:
+    domain: housekeeping
+    keywords: irf, issue, housekeeping
+    tension: 0.51
+    archetype: IV
+    agent: codex/gemini
+    workspace: /Users/4jp/Workspace/meta-organvm/organvm-corpvs-testamentvm
+    token_budget: large
+    subsystem: intake_router
+  produced: []
+  routes:
+  - kind: feeds
+    target: /Users/4jp/Workspace/meta-organvm/organvm-corpvs-testamentvm
+    amount: 0.0
+  - kind: feeds
+    target: archetype:IV
+    amount: 0.0
+  origin: manual
+  sequence_id: seq-ROUTER-001
+- id: act-ROUTER-0331-002
+  timestamp: '2026-03-31T20:28:11.327099'
+  session: ROUTER
+  verb: routed_intake
+  target: intake_router:housekeeping
+  context: "intake_router: received \u2192 dispatched"
+  params:
+    subsystem: intake_router
+    from_state: received
+    to_state: dispatched
+    domain: housekeeping
+    keywords: irf, issue, housekeeping
+    tension: 0.51
+    archetype: IV
+    agent: codex/gemini
+    workspace: /Users/4jp/Workspace/meta-organvm/organvm-corpvs-testamentvm
+    token_budget: large
+    intake_action_id: act-ROUTER-0331-001
+  produced: []
+  routes:
+  - kind: continues
+    target: intake_router:housekeeping
+    amount: 0.0
+  - kind: informed_by
+    target: act-ROUTER-0331-001
+    amount: 0.0
+  - kind: feeds
+    target: /Users/4jp/Workspace/meta-organvm/organvm-corpvs-testamentvm
+    amount: 0.0
+  - kind: feeds
+    target: archetype:IV
+    amount: 0.0
+  origin: emitted
+  sequence_id: seq-ROUTER-001

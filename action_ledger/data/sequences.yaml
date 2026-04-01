@@ -755,3 +755,16 @@ sequences:
   outcome: ''
   chain_id: ''
   closed: false
+- id: seq-ROUTER-001
+  session: ROUTER
+  intent: ''
+  action_ids:
+  - act-ROUTER-0331-001
+  - act-ROUTER-0331-002
+  automation:
+    tension:
+    - 0.51
+    - 0.51
+  outcome: ''
+  chain_id: ''
+  closed: false
