@@ -1,14 +1,31 @@
 # Operator Prompts & Plans — 72 Hours (2026-03-29 to 2026-03-31)
 
-All human prompts extracted from terminal sessions. All plans across all workspaces.
+All human prompts extracted from Claude Code JSONL session files. All plans across all workspaces.
 Normalized, cross-referenced, status-tagged.
+
+**Source of truth for raw prompts:** `docs/operator-prompts-raw-423.txt` (extracted from JSONL)
 
 ---
 
-## Part I: Operator Prompts (Raw Intake — Chronological)
+## Part 0: Prompt Census (from JSONL session files)
 
-Every prompt the operator typed across all sessions in the 72-hour window,
-extracted from session transcripts. Normalized to remove terminal artifacts.
+| Workspace | Sessions | Prompts |
+|-----------|----------|---------|
+| a-organvm | 2 | 8 |
+| application-pipeline | 7 | 97 |
+| meta-organvm | 5 | 121 |
+| orchestration-start-here | 7 | 68 |
+| workspace-root (~/Workspace) | 6+ | 129 |
+| **Total** | **27+** | **423** |
+
+The raw 423 prompts are in `docs/operator-prompts-raw-423.txt`.
+Below: the 26 prompts from THIS conductor session + key prompts from other sessions.
+
+---
+
+## Part I: Operator Prompts (This Conductor Session — Chronological)
+
+Prompts typed in this session only. For the full 423, see the raw file.
 
 ### Session: orchestration-start-here (S-energy-emission)
 
