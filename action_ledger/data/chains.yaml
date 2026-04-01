@@ -1,0 +1,13 @@
+generated: ''
+chains:
+- id: chain-S48-001
+  session: S48
+  prompt_essence: "intake\u2192commit\u2192relay: orchestration event shape \u2014\
+    \ receive raw, redact, persist, hand off without re-analysis"
+  sequence_ids:
+  - seq-S48-001
+  arc:
+    abstraction: oscillated
+    maturity: oscillated
+  produced_artifacts: []
+  routes: []

@@ -768,3 +768,23 @@ sequences:
   outcome: ''
   chain_id: ''
   closed: false
+- id: seq-S48-001
+  session: S48
+  intent: ''
+  action_ids:
+  - act-S48-0401-001
+  - act-S48-0401-002
+  - act-S48-0401-003
+  automation:
+    abstraction:
+    - 0.2
+    - 0.1
+    - 0.5
+    maturity:
+    - 0.6
+    - 0.7
+    - 0.4
+  outcome: 72h reconciliation committed + handoff relayed; instrument needs refinement,
+    data self-describes
+  chain_id: chain-S48-001
+  closed: true
