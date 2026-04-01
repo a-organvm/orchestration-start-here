@@ -11,3 +11,41 @@ chains:
     maturity: oscillated
   produced_artifacts: []
   routes: []
+- id: chain-S48-002
+  session: S48
+  prompt_essence: "mail triage orchestration event formalized: sweep\u2192classify\u2192\
+    investigate\u2192route\u2192record. 7 actions across seq-S48-002 (triage cycle),\
+    \ event shape defined in seq-S48-003, daily cron set at 09:43 local. 3 P0 routed\
+    \ to human, 1 P1 to contrib engine, 2 P2 closed."
+  sequence_ids:
+  - seq-S48-001
+  - seq-S48-002
+  - seq-S48-003
+  arc:
+    abstraction: oscillated
+    maturity: oscillated
+    urgency: oscillated
+  produced_artifacts: []
+  routes: []
+- id: chain-S50-001
+  session: S50
+  prompt_essence: "find--work-vacuums: four-axis parallel scan (git heat, hanging state,
+    registry drift, infrastructure gaps) \u2192 16 vacuums classified into structural/operational/coverage/governance
+    \u2192 12 dispatch items across P0\u2013P3 tiers. Key findings: ORGAN-II dormant,
+    META zero CI, ledger.py sequence-close bug, 14 backflow items undeposited, 3 LaunchAgents
+    failing."
+  sequence_ids:
+  - seq-S50-001
+  arc:
+    abstraction: oscillated
+    maturity: stable-high
+    urgency: oscillated
+  produced_artifacts:
+  - docs/work-vacuums-S50-2026-04-01.md
+  routes:
+  - kind: feeds
+    target: human-action-queue
+    amount: 0.0
+  - kind: feeds
+    target: agent-dispatch-queue
+    amount: 0.0

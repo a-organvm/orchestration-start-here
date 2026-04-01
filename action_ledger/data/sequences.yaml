@@ -786,5 +786,76 @@ sequences:
     - 0.4
   outcome: 72h reconciliation committed + handoff relayed; instrument needs refinement,
     data self-describes
-  chain_id: chain-S48-001
+  chain_id: chain-S48-002
+  closed: true
+- id: seq-S48-002
+  session: S48
+  intent: ''
+  action_ids:
+  - act-S48-0401-006
+  - act-S48-0401-007
+  - act-S48-0401-008
+  - act-S48-0401-009
+  - act-S48-0401-010
+  - act-S48-0401-011
+  - act-S48-0401-012
+  automation:
+    urgency:
+    - 0.9
+    - 1.0
+    - 0.95
+    - 0.85
+    - 0.6
+    - 0.0
+    - 0.0
+    abstraction:
+    - 0.2
+    - 0.1
+    - 0.1
+    - 0.3
+    - 0.4
+    maturity:
+    - 0.8
+  outcome: 3 P0 routed to human/agent, 1 P1 routed to contrib engine, 2 P2 closed.
+    Investigation agents dispatched for MET4VERS.IO criticality, ucc-mca-api ownership,
+    a2a-python PR diff.
+  chain_id: chain-S48-002
+  closed: true
+- id: seq-S48-003
+  session: S48
+  intent: ''
+  action_ids:
+  - act-S48-0401-014
+  automation:
+    abstraction:
+    - 0.8
+    maturity:
+    - 0.9
+    urgency:
+    - 0.5
+  outcome: ''
+  chain_id: chain-S48-002
+  closed: true
+- id: seq-S50-001
+  session: S50
+  intent: "find--work-vacuums: systematic scan for gaps, stalls, drift, and unfinished work across all organs"
+  action_ids:
+  - act-S50-0401-001
+  - act-S50-0401-002
+  - act-S50-0401-003
+  automation:
+    abstraction:
+    - 0.3
+    - 0.6
+    - 0.4
+    maturity:
+    - 0.8
+    - 0.7
+    - 0.8
+    urgency:
+    - 0.7
+    - 0.5
+    - 0.9
+  outcome: "16 vacuums mapped across 4 types. 3 P0-NOW items surfaced. ORGAN-II dormancy confirmed. META CI gap is critical. Sequence close bug discovered in ledger.py."
+  chain_id: chain-S50-001
   closed: true
