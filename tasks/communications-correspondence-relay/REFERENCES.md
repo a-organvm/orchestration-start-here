@@ -1,70 +1,57 @@
-# References: External Pointers
+# Keys — Doors Requiring Opening
 
-Everything outside this portal that the task touches.
-
----
-
-## Files to Read (before writing anything)
-
-### Structural Templates
-| File | Read for |
-|------|----------|
-| `docs/sop-war-master-protocol.md` | SOP format: authority, purpose, preconditions, laws/phases, injection pattern |
-| `docs/score-rehearse-perform.md` | PR lifecycle phases — this task's own delivery follows this |
-
-### Prior Art (subsystems being unified)
-| File | Read for |
-|------|----------|
-| `docs/mail-triage-2026-04-01.md` | Phase 1-2 shape: formal sort, P0-P2 classification, handler assignment, ledger state |
-| `docs/handoff-72h-reconciliation.md` | Phase 4 shape: handoff format, forward blocks, relay prompts |
-| `docs/handoff-maddie-spiral-path-2026-04-01.md` | Phase 4 shape: large intake handoff, 13-section structure |
-
-### Code to Understand
-| File | Read for |
-|------|----------|
-| `action_ledger/schemas.py` | `Action`, `Sequence`, `Chain`, `RouteKind`, `ActionOrigin` — the data model for ledger entries |
-| `action_ledger/ledger.py` | `record()`, `compose_chain()`, `close_session()` — the functions to call |
-| `action_ledger/emissions.py` | `emit_state_change()` — auto-emission on state transitions |
-| `intake_router/router.py` | `IntakeDomain`, `DOMAIN_KEYWORDS`, `ROUTING_TABLE` — where to add CORRESPONDENCE |
-
-### Event Catalog
-| File | Read for |
-|------|----------|
-| `docs/event-catalog.yaml` | Inter-organ dispatch event schema — correspondence events may need to be cataloged here |
+Only the files that need to be read, modified, or created. Nothing else.
 
 ---
 
-## Channels
+## Doors to Open (files to modify or create)
 
-| Channel | Access Method | Agent Capability |
-|---------|--------------|------------------|
-| Email (Gmail) | Gmail API via MCP / `mcp__claude_ai_Gmail__*` | Read, search, draft |
-| GitHub | `gh` CLI / GitHub MCP / `mcp__github__*` | Issues, PRs, comments, reviews |
-| iMessage | Manual (human handler) | Read-only (screenshot PDF) |
-| LinkedIn | Manual (human handler) | No API access |
-| Slack | Slack API (if configured) | Messages, channels |
-| USPS (physical) | Informed Delivery email | Read-only, informational |
-
----
-
-## People / Counterparties (from mail-triage)
-
-| Name | Channel | Context |
-|------|---------|---------|
-| Ryan McKellips | Email | Grafana Labs recruiter — P0 scheduling |
-| Ivan Shymko (ishymko) | GitHub | a2aproject maintainer — PR #915 split |
-| Alex Morris | Email/web | tribecode.ai — MCP wave inbound lead |
-| Maddie | iMessage/Drive | Spiral Path collaborator — ORGAN-III |
+| Key | Door | Operation | Why |
+|-----|------|-----------|-----|
+| K1 | `docs/sop-communications-correspondence.md` | **CREATE** | The SOP. Does not exist. This is the primary artifact. |
+| K2 | `intake_router/router.py` lines 25-34, 83-132, 134-166 | **EDIT** | Add CORRESPONDENCE to `IntakeDomain` enum, `DOMAIN_KEYWORDS`, `ROUTING_TABLE` |
+| K3 | `action_ledger/data/actions.yaml` | **APPEND** | 3 actions for S51 event |
+| K4 | `action_ledger/data/sequences.yaml` | **APPEND** | 1 sequence for S51 |
+| K5 | `action_ledger/data/chains.yaml` | **APPEND** | 1 chain for S51 |
 
 ---
 
-## Memory Files (contextual)
+## Context Stream — Minimum Data to Proceed
 
-| Memory | Relevance |
-|--------|-----------|
-| `feedback_pr_comment_discipline.md` | GitHub correspondence constraints |
-| `feedback_realm_boundary_handoff.md` | Handoff relay pattern origin |
-| `feedback_network_routing_mode.md` | Act as routing junction, not executor |
-| `project_mail_triage_event.md` | Mail-triage event shape — Phase 1-2 source |
-| `project_inbound_tribecode.md` | Active outbound correspondence target |
-| `user_maddie_relationship.md` | Communication style context |
+Read these before touching anything. This is the complete picture required for matter-disturbance.
+
+### The Shape (what the SOP looks like)
+
+| File | What it gives you | Read depth |
+|------|-------------------|------------|
+| `docs/sop-war-master-protocol.md` | SOP structural template — authority, purpose, laws, phases, injection pattern | Full |
+| `docs/mail-triage-2026-04-01.md` | Phase 1-2 prior art — formal sort table, P0/P1/P2/Noise classification, handler assignment, ledger state footer | Full |
+| `docs/handoff-72h-reconciliation.md` | Phase 4 prior art — handoff format, "What Needs Doing" sections, integration points | Full |
+
+### The Wiring (how artifacts connect to code)
+
+| File | What it gives you | Read depth |
+|------|-------------------|------------|
+| `action_ledger/schemas.py` lines 15-30, 57-97 | `ActionOrigin`, `RouteKind`, `Route`, `Action` — the data types for ledger entries | Targeted |
+| `intake_router/router.py` lines 25-34, 83-166 | `IntakeDomain` enum, `DOMAIN_KEYWORDS` dict, `ROUTING_TABLE` dict — the three extension points | Targeted |
+
+### The Tension (what must NOT be broken)
+
+| Constraint | Source | Consequence of violation |
+|------------|--------|--------------------------|
+| Mail-triage format must survive as Phase 1-2 | `docs/mail-triage-2026-04-01.md` | Future triage events depend on this structure |
+| Handoff CONTEXT/TASK block format must survive as Phase 4 | `docs/handoff-*.md` | Existing handoff relay prompts would break |
+| Action ledger append-only | `action_ledger/ledger.py` | Never overwrite existing YAML entries |
+| Intake router enum order | `intake_router/router.py` | UNKNOWN must remain last |
+| 240 tests must still pass | `tests/` | `python -m pytest tests/ -q` |
+
+---
+
+## Channels (for SOP content, not for this task)
+
+The SOP must document these channels. You do not need API access to write the SOP — you need to know the channel landscape exists:
+
+```
+Email (Gmail API/MCP) · GitHub (gh CLI/MCP) · iMessage (manual)
+LinkedIn (manual) · Slack (API) · USPS (Informed Delivery)
+```
