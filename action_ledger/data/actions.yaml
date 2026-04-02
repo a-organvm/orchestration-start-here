@@ -7124,3 +7124,71 @@ actions:
     amount: 0.0
   origin: manual
   sequence_id: seq-RECON72H-001
+- id: act-S51-0401-001
+  timestamp: '2026-04-02T14:00:00.000000'
+  session: S51
+  verb: formalized_sop
+  target: communications-correspondence-relay
+  context: "SOP: Communications & Correspondence — Relay Protocol. Unified 4 fragmented subsystems under one lifecycle."
+  params:
+    abstraction: 0.9
+    maturity: 0.7
+  produced:
+  - type: sop
+    ref: docs/sop-communications-correspondence.md
+  routes:
+  - kind: produces
+    target: docs/sop-communications-correspondence.md
+    amount: 0.0
+  origin: manual
+  sequence_id: seq-S51-001
+- id: act-S51-0401-002
+  timestamp: '2026-04-02T14:00:01.000000'
+  session: S51
+  verb: defined_lifecycle
+  target: relay-protocol-6-phase
+  context: "SWEEP>CLASSIFY>COMPOSE>DISPATCH>VERIFY. State: RECEIVED>TRIAGED>COMPOSED>DISPATCHED>CONFIRMED>CLOSED"
+  params:
+    abstraction: 0.8
+    maturity: 0.4
+  produced: []
+  routes:
+  - kind: refines
+    target: docs/mail-triage-2026-04-01.md
+    amount: 0.0
+  origin: manual
+  sequence_id: seq-S51-001
+- id: act-S51-0401-003
+  timestamp: '2026-04-02T14:00:02.000000'
+  session: S51
+  verb: unified_subsystems
+  target: mail-triage+handoff+relay+dispatch
+  context: "4 fragmented patterns > 1 SOP. Mail-triage=Phase 1-2. Handoff=Phase 4. New: Phase 3,5,6"
+  params:
+    abstraction: 0.5
+    maturity: 0.6
+  produced: []
+  routes:
+  - kind: continues
+    target: act-S48-0401-006
+    amount: 0.0
+  origin: manual
+  sequence_id: seq-S51-001
+- id: act-S51-0401-004
+  timestamp: '2026-04-02T14:00:03.000000'
+  session: S51
+  verb: extended_router
+  target: intake-domain-correspondence
+  context: "Added IntakeDomain.CORRESPONDENCE with keywords: correspondence, email, outbound, inbound, reply, draft, follow-up, message, contact"
+  params:
+    abstraction: 0.7
+    maturity: 0.8
+  produced:
+  - type: code
+    ref: intake_router/router.py
+  routes:
+  - kind: produces
+    target: intake_router/router.py
+    amount: 0.0
+  origin: manual
+  sequence_id: seq-S51-001

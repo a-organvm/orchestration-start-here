@@ -24,9 +24,9 @@ The divergence between reality and ideal exists at the module scale: four commun
 One SOP. Six phases. One state machine. All channels.
 
 ```
-SWEEP → CLASSIFY → COMPOSE → RELAY → DISPATCH → VERIFY
+SWEEP → CLASSIFY → COMPOSE → DISPATCH → VERIFY
   ↓         ↓          ↓         ↓         ↓          ↓
-RECEIVED → TRIAGED → COMPOSED → RELAYED → DISPATCHED → CONFIRMED → CLOSED
+RECEIVED → TRIAGED → COMPOSED → DISPATCHED → CONFIRMED → CLOSED
 ```
 
 A received email already knows it will be triaged, may need composition, will be dispatched, must be verified. The system anticipates. The format evolves. New channels absorb into the protocol without structural surgery.

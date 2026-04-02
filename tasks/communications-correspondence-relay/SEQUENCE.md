@@ -111,7 +111,7 @@ IntakeDomain.CORRESPONDENCE: RouteTarget(
   session: S51
   verb: defined_lifecycle
   target: relay-protocol-6-phase
-  context: "SWEEP>CLASSIFY>COMPOSE>RELAY>DISPATCH>VERIFY. State: RECEIVED>TRIAGED>COMPOSED>DISPATCHED>CONFIRMED>CLOSED"
+  context: "SWEEP>CLASSIFY>COMPOSE>DISPATCH>VERIFY. State: RECEIVED>TRIAGED>COMPOSED>DISPATCHED>CONFIRMED>CLOSED"
   params:
     abstraction: 0.8
     maturity: 0.4

@@ -49,3 +49,20 @@ chains:
   - kind: feeds
     target: agent-dispatch-queue
     amount: 0.0
+- id: chain-S51-001
+  session: S51
+  prompt_essence: "Communications & Correspondence Relay Protocol: unify 4 fragmented subsystems (mail-triage, handoff, PR discipline, outbound) under one SOP with 6-phase lifecycle and state machine"
+  sequence_ids:
+  - seq-S51-001
+  arc:
+    abstraction: stable-high
+    maturity: stable-high
+  produced_artifacts:
+  - docs/sop-communications-correspondence.md
+  routes:
+  - kind: produces
+    target: docs/sop-communications-correspondence.md
+    amount: 0.0
+  - kind: feeds
+    target: intake_router:correspondence
+    amount: 0.0

@@ -31,6 +31,7 @@ class IntakeDomain(StrEnum):
     HOUSEKEEPING = "housekeeping"
     PIPELINE = "pipeline"
     BILLING = "billing"
+    CORRESPONDENCE = "correspondence"
     UNKNOWN = "unknown"
 
 
@@ -129,6 +130,17 @@ DOMAIN_KEYWORDS: dict[IntakeDomain, tuple[str, ...]] = {
         "github org",
         "copilot",
     ),
+    IntakeDomain.CORRESPONDENCE: (
+        "correspondence",
+        "email",
+        "outbound",
+        "inbound",
+        "reply",
+        "draft",
+        "follow-up",
+        "message",
+        "contact",
+    ),
 }
 
 ROUTING_TABLE: dict[IntakeDomain, RouteTarget] = {
@@ -162,11 +174,31 @@ ROUTING_TABLE: dict[IntakeDomain, RouteTarget] = {
         token_budget="large",
     ),
     IntakeDomain.BILLING: RouteTarget(agent="human"),
+    IntakeDomain.CORRESPONDENCE: RouteTarget(
+        workspace="~/Workspace/organvm-iv-taxis/orchestration-start-here",
+        archetype="RELAY-CIRCUIT",
+        agent="claude",
+        token_budget="medium",
+    ),
     IntakeDomain.UNKNOWN: RouteTarget(agent="claude", token_budget="small"),
 }
 
-_ORGANISM_SECOND_PROMPT = {"signal", "gate", "query", "aesthetic", "teaching", "triptych"}
-_TRANSMUTATION_BUILD_PROMPT = {"build", "implement", "parser", "generator", "rectification", "cli"}
+_ORGANISM_SECOND_PROMPT = {
+    "signal",
+    "gate",
+    "query",
+    "aesthetic",
+    "teaching",
+    "triptych",
+}
+_TRANSMUTATION_BUILD_PROMPT = {
+    "build",
+    "implement",
+    "parser",
+    "generator",
+    "rectification",
+    "cli",
+}
 _URGENCY_TERMS = ("p0", "p1", "urgent", "critical", "blocker", "tonight", "asap", "now")
 
 
@@ -371,7 +403,9 @@ def _build_prompt(
     return "\n".join(lines).strip()
 
 
-def _dispatch_params(dispatch: Dispatch, include_subsystem: bool) -> dict[str, float | str]:
+def _dispatch_params(
+    dispatch: Dispatch, include_subsystem: bool
+) -> dict[str, float | str]:
     params: dict[str, float | str] = {
         "domain": dispatch.item.domain.value,
         "keywords": ", ".join(dispatch.item.keywords) or "none",
@@ -389,7 +423,9 @@ def _dispatch_params(dispatch: Dispatch, include_subsystem: bool) -> dict[str, f
 def _manual_routes(dispatch: Dispatch) -> list[dict[str, str]]:
     routes = [{"kind": RouteKind.FEEDS.value, "target": _route_target(dispatch)}]
     if dispatch.archetype != "new":
-        routes.append({"kind": RouteKind.FEEDS.value, "target": f"archetype:{dispatch.archetype}"})
+        routes.append(
+            {"kind": RouteKind.FEEDS.value, "target": f"archetype:{dispatch.archetype}"}
+        )
     return routes
 
 
@@ -408,9 +444,17 @@ def _select_prompt(item: IntakeItem, archetype: str) -> PromptTemplate | None:
     if not prompts:
         return None
     lowered = item.raw.lower()
-    if archetype == "I" and len(prompts) > 1 and _ORGANISM_SECOND_PROMPT.intersection(item.keywords):
+    if (
+        archetype == "I"
+        and len(prompts) > 1
+        and _ORGANISM_SECOND_PROMPT.intersection(item.keywords)
+    ):
         return prompts[1]
-    if archetype == "II" and len(prompts) > 1 and any(term in lowered for term in _TRANSMUTATION_BUILD_PROMPT):
+    if (
+        archetype == "II"
+        and len(prompts) > 1
+        and any(term in lowered for term in _TRANSMUTATION_BUILD_PROMPT)
+    ):
         return prompts[1]
     return prompts[0]
 
@@ -420,7 +464,9 @@ def _load_prompt_templates() -> dict[str, list[PromptTemplate]]:
     if not ARCHETYPE_PLAN.exists():
         return {}
     text = ARCHETYPE_PLAN.read_text(encoding="utf-8")
-    sections = list(re.finditer(r"^## Archetype (?P<id>[IVX]+):.*$", text, flags=re.MULTILINE))
+    sections = list(
+        re.finditer(r"^## Archetype (?P<id>[IVX]+):.*$", text, flags=re.MULTILINE)
+    )
     prompts: dict[str, list[PromptTemplate]] = {}
     for index, match in enumerate(sections):
         start = match.end()
@@ -428,7 +474,9 @@ def _load_prompt_templates() -> dict[str, list[PromptTemplate]]:
         archetype = match.group("id")
         section_text = text[start:end]
         prompts[archetype] = [
-            PromptTemplate(title=prompt.group("title").strip(), body=prompt.group("body").strip())
+            PromptTemplate(
+                title=prompt.group("title").strip(), body=prompt.group("body").strip()
+            )
             for prompt in re.finditer(
                 r"^### Prompt: (?P<title>.+?)\n\n```(?:\w+)?\n(?P<body>.*?)\n```",
                 section_text,

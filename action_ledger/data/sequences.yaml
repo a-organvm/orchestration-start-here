@@ -909,3 +909,23 @@ sequences:
   outcome: ''
   chain_id: ''
   closed: false
+- id: seq-S51-001
+  session: S51
+  intent: Communications & Correspondence Relay Protocol — unify 4 fragmented subsystems under one SOP
+  action_ids:
+  - act-S51-0401-001
+  - act-S51-0401-002
+  - act-S51-0401-003
+  - act-S51-0401-004
+  automation:
+    phases:
+    - INJECT
+    - CREATE
+    - OPERATE
+    - VERIFY
+    - PRECIPITATE
+    - STOP
+    state_machine: RECEIVED>TRIAGED>COMPOSED>DISPATCHED>CONFIRMED>CLOSED
+  outcome: ''
+  chain_id: chain-S51-001
+  closed: true
