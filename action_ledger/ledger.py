@@ -387,6 +387,11 @@ def close_session(
     This is the session-boundary operation. It:
     1. Closes the active sequence (if any)
     2. Composes all session sequences into a chain
+
+    Note: emission is deferred — the caller must save sequences/chains FIRST,
+    then call emit_session_closed() if emit=True. This avoids a stale-read
+    race where emit_state_change re-reads sequences.yaml from disk before
+    the caller has persisted the close mutation.
     """
     # Close any open sequence — suppress its emission; close_session emits instead
     close_sequence(sequence_index, session, emit=False)
@@ -399,17 +404,27 @@ def close_session(
         emit=False,
     )
 
-    if emit and chain:
-        from action_ledger.emissions import emit_state_change
-        emit_state_change(
-            subsystem="action_ledger",
-            verb="closed_session",
-            target=session,
-            from_state="active",
-            to_state="closed",
-            session=session,
-            params={"sequence_count": float(len(chain.sequence_ids))},
-            produced=[{"type": "chain", "ref": chain.id}],
-        )
-
     return chain
+
+
+def emit_session_closed(
+    session: str,
+    chain: Chain,
+) -> None:
+    """Emit the session-closed event. Call AFTER persisting sequences/chains.
+
+    Separated from close_session to avoid a stale-read race: emit_state_change
+    does its own load/save cycle, which would overwrite unpersisted close
+    mutations if called before the caller saves.
+    """
+    from action_ledger.emissions import emit_state_change
+    emit_state_change(
+        subsystem="action_ledger",
+        verb="closed_session",
+        target=session,
+        from_state="active",
+        to_state="closed",
+        session=session,
+        params={"sequence_count": float(len(chain.sequence_ids))},
+        produced=[{"type": "chain", "ref": chain.id}],
+    )

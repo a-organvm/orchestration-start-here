@@ -360,9 +360,9 @@ sequences:
     - 1.0
     - 1.0
     - 2.0
-  outcome: ''
+  outcome: 'bulk-closed: session never formally closed via CLI (repair 2026-04-02)'
   chain_id: ''
-  closed: false
+  closed: true
 - id: seq-S38-001
   session: S38
   intent: ''
@@ -477,9 +477,9 @@ sequences:
     - 3.0
     - 3.0
     - 3.0
-  outcome: ''
+  outcome: 'bulk-closed: session never formally closed via CLI (repair 2026-04-02)'
   chain_id: ''
-  closed: false
+  closed: true
 - id: seq-S40-001
   session: S40
   intent: ''
@@ -630,9 +630,9 @@ sequences:
     - 1.0
     - 1.0
     - 3.0
-  outcome: ''
+  outcome: 'bulk-closed: session never formally closed via CLI (repair 2026-04-02)'
   chain_id: ''
-  closed: false
+  closed: true
 - id: seq-S41-001
   session: S41
   intent: ''
@@ -675,9 +675,9 @@ sequences:
     - 1.0
     - 1.0
     - 1.0
-  outcome: ''
+  outcome: 'bulk-closed: session never formally closed via CLI (repair 2026-04-02)'
   chain_id: ''
-  closed: false
+  closed: true
 - id: seq-S43-001
   session: S43
   intent: ''
@@ -720,9 +720,9 @@ sequences:
     - 1.0
     - 1.0
     - 1.0
-  outcome: ''
+  outcome: 'bulk-closed: session never formally closed via CLI (repair 2026-04-02)'
   chain_id: ''
-  closed: false
+  closed: true
 - id: seq-_sys-001
   session: _sys
   intent: ''
@@ -838,7 +838,8 @@ sequences:
   closed: true
 - id: seq-S50-001
   session: S50
-  intent: "find--work-vacuums: systematic scan for gaps, stalls, drift, and unfinished work across all organs"
+  intent: 'find--work-vacuums: systematic scan for gaps, stalls, drift, and unfinished
+    work across all organs'
   action_ids:
   - act-S50-0401-001
   - act-S50-0401-002
@@ -856,6 +857,7 @@ sequences:
     - 0.7
     - 0.5
     - 0.9
-  outcome: "16 vacuums mapped across 4 types. 3 P0-NOW items surfaced. ORGAN-II dormancy confirmed. META CI gap is critical. Sequence close bug discovered in ledger.py."
+  outcome: 16 vacuums mapped across 4 types. 3 P0-NOW items surfaced. ORGAN-II dormancy
+    confirmed. META CI gap is critical. Sequence close bug discovered in ledger.py.
   chain_id: chain-S50-001
   closed: true

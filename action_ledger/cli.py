@@ -333,6 +333,7 @@ def _cmd_chain_show(args: argparse.Namespace) -> None:
 def _cmd_chain_close_session(args: argparse.Namespace) -> None:
     from action_ledger.ledger import (
         close_session,
+        emit_session_closed,
         load_chains,
         load_sequences,
         save_chains,
@@ -349,8 +350,10 @@ def _cmd_chain_close_session(args: argparse.Namespace) -> None:
     )
 
     if chain:
+        # Persist BEFORE emitting — avoids stale-read race in emit_state_change
         save_sequences(sequences)
         save_chains(chains)
+        emit_session_closed(args.session, chain)
         print(f"Session closed: {chain.id}")
         if chain.arc:
             for axis, trajectory in chain.arc.items():

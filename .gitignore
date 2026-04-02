@@ -62,3 +62,6 @@ coverage.xml
 .nyc_output/
 
 contrib_engine/inbound-opportunity-protocol.zip
+
+# Claude Code
+.claude/scheduled_tasks.lock
