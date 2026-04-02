@@ -229,7 +229,10 @@
 | 18:08 | orchestration-start-here | so--stay-expired--my-friend-delay: | Conceptual intake without direct keyword trace; 7 commits landed within 8h |
 | 18:24 | orchestration-start-here | the sessions are saved though--we can resume them and so forth...also, this is not the protocol im imagining... | Conceptual intake without direct keyword trace; 6 commits landed within 8h |
 
-## Unresolved (116)
+## Dispatched to IRF/Tending (116)
+
+*The items below have been clustered and dispatched to IRF work orders IRF-AOR-009, IRF-SYS-050, IRF-APP-080, IRF-OSS-042, and IRF-OSS-043. Research notes and sketches have been left in logical locations (`a-organvm/cultvra--logos.md`, `ONTOLOGY-V2-SKETCH.md`, etc.) as planned.*
+
 
 | Time | Workspace | Prompt Summary | Route / Evidence |
 |------|-----------|----------------|------------------|

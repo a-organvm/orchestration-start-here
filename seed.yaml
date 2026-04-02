@@ -70,6 +70,7 @@ metadata:
       - render_post001.py
       - render_post002.py
       - render_post002_audit.py
+      - ACTION-LEDGER-V1.md
   test_count: 240
 produces:
 - type: governance_rules
