@@ -1,0 +1,16 @@
+generated: ''
+observations:
+- id: fo-orchestration-start-here-0402-001
+  workspace: orchestration-start-here
+  timestamp: '2026-04-02T11:21:49.758793'
+  category: tooling
+  signal: Reconciliation must use prompt timestamps rather than JSONL file mtimes,
+    and steering confirmations must not be counted as outcome-bearing work.
+  spectrum: 2
+  strategic:
+  - fortress
+  source: automated
+  evidence: scripts/reconcile-72h.py; docs/reconciliation-72h.md
+  scored_by: agent
+  related_absorption_ids: []
+  atom_id: ''

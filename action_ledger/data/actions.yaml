@@ -7101,3 +7101,26 @@ actions:
   routes: []
   origin: manual
   sequence_id: seq-S52-001
+- id: act-RECON72H-0402-001
+  timestamp: '2026-04-02T11:21:49.895702'
+  session: RECON72H
+  verb: reconciled
+  target: scripts/reconcile-72h.py
+  context: Fixed March 29-31 reconciliation windowing, steering/noise separation,
+    absorbed-vs-unresolved triage, and report redaction.
+  params:
+    raw_prompts: 352.0
+    unique_prompts: 303.0
+    duplicates: 49.0
+    commits: 159.0
+    delivery_rate: 36.6
+    unresolved_rate: 41.6
+  produced:
+  - type: artifact
+    ref: docs/reconciliation-72h.md
+  routes:
+  - kind: produced
+    target: docs/reconciliation-72h.md
+    amount: 0.0
+  origin: manual
+  sequence_id: seq-RECON72H-001

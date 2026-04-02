@@ -1,26 +1,45 @@
 #!/usr/bin/env python3
-"""Prompt-to-Outcome Reconciliation — 72h automated cross-reference.
+"""Prompt-to-outcome reconciliation for the March 29-31, 2026 window.
 
-Reads operator prompts from JSONL session files, reads git logs from all
-workspaces, classifies each prompt, matches to outcomes, produces the
-reconciliation report.
+Reads operator prompts from Claude JSONL session files, cross-references them
+against commit activity across the tracked workspaces, and emits a markdown
+report. The report distinguishes:
 
-Run: python3 scripts/reconcile-72h.py > docs/reconciliation-72h.md
+- `STEERING`: dispatch confirmations / routing signals
+- `ABSORBED`: conceptual intake likely folded into nearby work without direct
+  commit-message keyword trace
+- `UNRESOLVED`: prompts that still need explicit follow-on work
+
+Run:
+    python3 scripts/reconcile-72h.py > docs/reconciliation-72h.md
 """
 
 from __future__ import annotations
 
 import hashlib
 import json
-import os
 import re
 import subprocess
 import sys
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 from datetime import datetime, timedelta
 from pathlib import Path
 
-# ── Configuration ──────────────────────────────────────────────────────
+REPO_ROOT = Path(__file__).resolve().parents[1]
+if str(REPO_ROOT) not in sys.path:
+    sys.path.insert(0, str(REPO_ROOT))
+
+try:
+    from intake_router.router import classify as classify_intake
+    from intake_router.router import route as route_intake
+except Exception:
+    classify_intake = None
+    route_intake = None
+
+
+WINDOW_START = datetime(2026, 3, 29, 0, 0).astimezone()
+WINDOW_END = datetime(2026, 4, 1, 0, 0).astimezone()
+WINDOW_LABEL = "2026-03-29 to 2026-03-31"
 
 WORKSPACES = {
     "orchestration-start-here": Path.home()
@@ -43,457 +62,610 @@ SESSION_DIRS = {
     "workspace-root": Path.home() / ".claude/projects/-Users-4jp-Workspace",
 }
 
-CUTOFF = datetime(2026, 3, 29, 0, 0)
-
-# ── Classification keywords ───────────────────────────────────────────
-
-CLASSIFY_PATTERNS: dict[str, list[str]] = {
-    "BUILD": ["build", "implement", "create", "write", "add", "wire", "fix", "feat", "embodiment", "function"],
-    "PLAN": ["plan", "spec", "design", "approach", "strategy", "architecture", "propose"],
-    "AUDIT": ["audit", "check", "verify", "sisyphus", "hall-monitor", "safe to close", "certain", "review"],
-    "TRIAGE": ["triage", "sort", "compress", "prioritize", "reduce", "group", "rank"],
-    "RESEARCH": ["explore", "investigate", "what is", "state of affairs", "provide", "overview", "analyze"],
-    "DECISION": ["recommend", "which", "choose", "decision", "option", "accept", "select"],
-    "META": ["token", "process", "workflow", "session", "prompt", "recording", "remember", "memory"],
+CLASSIFY_PATTERNS: dict[str, tuple[str, ...]] = {
+    "BUILD": (
+        "build",
+        "implement",
+        "create",
+        "write",
+        "add",
+        "wire",
+        "fix",
+        "feat",
+        "embodiment",
+        "function",
+    ),
+    "PLAN": ("plan", "spec", "design", "approach", "strategy", "architecture", "propose"),
+    "AUDIT": (
+        "audit",
+        "check",
+        "verify",
+        "sisyphus",
+        "hall-monitor",
+        "safe to close",
+        "certain",
+        "review",
+    ),
+    "TRIAGE": ("triage", "sort", "compress", "prioritize", "reduce", "group", "rank"),
+    "RESEARCH": (
+        "explore",
+        "investigate",
+        "what is",
+        "state of affairs",
+        "provide",
+        "overview",
+        "analyze",
+    ),
+    "DECISION": ("recommend", "which", "choose", "decision", "option", "accept", "select"),
+    "META": ("token", "process", "workflow", "session", "prompt", "recording", "remember", "memory"),
 }
 
-# Steering keywords — only match on SHORT prompts (dispatch confirmations, not paragraphs)
-STEERING_KEYWORDS = [
-    "proceed", "continue", "yes", "logic dictates order", "all of the above",
-    "hell yes", "go", "next", "carry on", "sounds good", "makes sense",
-    "do it", "do that", "let's go", "approved", "confirmed", "okay", "ok", "sure",
-    "y", "yep", "do so", "execute", "run it",
-]
+NOISE_PATTERNS = (
+    re.compile(r"^\s*$", re.IGNORECASE),
+    re.compile(r"^\[request interrupted", re.IGNORECASE),
+    re.compile(r"^<command-name>", re.IGNORECASE),
+    re.compile(r"^<local-command", re.IGNORECASE),
+    re.compile(r"^<task-notification>", re.IGNORECASE),
+    re.compile(r"^<user-prompt-submit-hook>", re.IGNORECASE),
+    re.compile(r"^\s*↵\s*$", re.IGNORECASE),
+    re.compile(r"^/model", re.IGNORECASE),
+    re.compile(r"^/clear", re.IGNORECASE),
+    re.compile(r"^/init", re.IGNORECASE),
+    re.compile(r"^proceed$", re.IGNORECASE),
+    re.compile(r"^continue$", re.IGNORECASE),
+    re.compile(r"^yes$", re.IGNORECASE),
+    re.compile(r"^❯", re.IGNORECASE),
+    re.compile(r"^\[image", re.IGNORECASE),
+)
 
-# Max character length for a prompt to qualify as STEERING
-STEERING_MAX_LEN = 120
+STEERING_PATTERNS = (
+    re.compile(r"^proceed with all(?:,?\s+logic dictat(?:es|eth) order)?[;.!]*$", re.IGNORECASE),
+    re.compile(r"^all of the above[;.!]*$", re.IGNORECASE),
+    re.compile(r"^hell yes[;.!]*$", re.IGNORECASE),
+    re.compile(r"^subagent driven proceed[;.!]*$", re.IGNORECASE),
+    re.compile(r"^what'?s logically next\b.*$", re.IGNORECASE),
+    re.compile(r"^return[;.!]*$", re.IGNORECASE),
+    re.compile(r"^(?:close|receive|handoff|intake|review|return|new)(?:--[a-z0-9-]+)+$", re.IGNORECASE),
+)
 
-NOISE_PATTERNS = [
-    r"^\s*$",
-    r"^\[Request interrupted",
-    r"^<command-name>",
-    r"^<local-command",
-    r"^<task-notification>",
-    r"^<user-prompt-submit-hook>",
-    r"^\s*↵\s*$",
-    r"^/model",
-    r"^/clear",
-    r"^/init",
-    r"^❯",
-    r"^\[Image",
-]
+ABSORBABLE_CLASSIFICATIONS = {"META", "PLAN", "RESEARCH", "AUDIT", "DECISION"}
+ABSORBED_PHRASES = (
+    "provide an overview",
+    "all that was",
+    "all that is",
+    "all that needs to be",
+    "what's logically next",
+    "what is happening",
+    "why is this happening",
+    "the shape",
+    "the reason i am",
+    "i want to codify",
+    "law dictates order",
+    "logic dictates order",
+    "physics of the universe",
+    "soul persists",
+    "safe to close",
+)
+ABSORBED_TERMS = (
+    "overview",
+    "session",
+    "context",
+    "shape",
+    "system",
+    "signal",
+    "pattern",
+    "portal",
+    "formalize",
+    "codify",
+    "universe",
+    "physics",
+    "memory",
+    "handoff",
+)
 
+STOP_WORDS = {
+    "this",
+    "that",
+    "with",
+    "from",
+    "have",
+    "will",
+    "been",
+    "what",
+    "when",
+    "where",
+    "which",
+    "their",
+    "there",
+    "about",
+    "would",
+    "could",
+    "should",
+    "these",
+    "those",
+    "your",
+    "they",
+    "them",
+    "than",
+    "then",
+    "into",
+    "just",
+    "like",
+    "make",
+    "does",
+    "also",
+    "want",
+    "need",
+    "here",
+    "because",
+    "been",
+}
 
-# ── Data structures ───────────────────────────────────────────────────
+SECRET_VALUE_PATTERNS = (
+    (re.compile(r"(?im)^\s*[a-z]{4}(?: [a-z]{4}){3}\s*$"), "[REDACTED_APP_PASSWORD]"),
+    (re.compile(r"\bgh[pousr]_[A-Za-z0-9]{10,}\b"), "[REDACTED_GITHUB_TOKEN]"),
+    (re.compile(r"\bsk-[A-Za-z0-9]{10,}\b"), "[REDACTED_API_KEY]"),
+    (re.compile(r"\bAKIA[0-9A-Z]{16}\b"), "[REDACTED_AWS_KEY]"),
+)
+SECRET_LABEL_PATTERNS = (
+    re.compile(r"(?i)(app password|password|secret|token|api key)\s*:\s*[^\n]+"),
+    re.compile(r"(?i)(1password ref)\s*:\s*[^\n]+"),
+)
 
 
 @dataclass
 class Prompt:
     timestamp: str
+    dt: datetime
     workspace: str
     session_id: str
     text: str
-    text_hash: str = ""
+    normalized_text: str
+    text_hash: str
+    repetitions: int = 1
     classification: str = ""
     summary: str = ""
     outcome: str = ""
     evidence: str = ""
+    route_hint: str = ""
+    keyword_overlap: int = 0
 
 
 @dataclass
 class Commit:
     hash: str
-    date: str
+    timestamp: str
+    dt: datetime
     message: str
     workspace: str
+    message_lower: str
 
 
-# ── Extract prompts from JSONL ────────────────────────────────────────
+def parse_datetime(raw: str) -> datetime | None:
+    """Parse ISO timestamps from Claude JSONL and git logs into local aware datetimes."""
+    if not raw:
+        return None
+
+    candidates = [raw.strip(), raw.strip()[:19]]
+    for candidate in candidates:
+        try:
+            dt = datetime.fromisoformat(candidate.replace("Z", "+00:00"))
+        except ValueError:
+            continue
+        if dt.tzinfo is None:
+            return dt.replace(tzinfo=WINDOW_START.tzinfo)
+        return dt.astimezone(WINDOW_START.tzinfo)
+    return None
+
+
+def in_window(dt: datetime | None) -> bool:
+    return dt is not None and WINDOW_START <= dt < WINDOW_END
+
+
+def normalize_text(text: str) -> str:
+    return re.sub(r"\s+", " ", text).strip()
+
+
+def redact_text(text: str) -> str:
+    redacted = text
+    for pattern, replacement in SECRET_VALUE_PATTERNS:
+        redacted = pattern.sub(replacement, redacted)
+    for pattern in SECRET_LABEL_PATTERNS:
+        redacted = pattern.sub(lambda m: m.group(0).split(":", 1)[0] + ": [REDACTED]", redacted)
+    return redacted
+
+
+def extract_prompt_text(obj: dict[str, object]) -> str:
+    msg = obj.get("message", {})
+    if not isinstance(msg, dict):
+        return ""
+    content = msg.get("content", "")
+    if isinstance(content, list):
+        return " ".join(
+            part.get("text", "") if isinstance(part, dict) else str(part)
+            for part in content
+        ).strip()
+    return str(content).strip()
+
+
+def prompt_hash(text: str) -> str:
+    return hashlib.sha256(text.lower().encode("utf-8")).hexdigest()[:16]
 
 
 def extract_prompts() -> list[Prompt]:
     prompts: list[Prompt] = []
 
-    for ws_name, ws_dir in SESSION_DIRS.items():
-        if not ws_dir.exists():
+    for workspace, session_dir in SESSION_DIRS.items():
+        if not session_dir.exists():
             continue
-        for jf in sorted(ws_dir.glob("*.jsonl")):
-            mtime = datetime.fromtimestamp(jf.stat().st_mtime)
-            if mtime < CUTOFF:
-                continue
-
-            session_id = jf.stem[:8]
-            with open(jf) as fh:
-                for line in fh:
+        for jsonl_file in sorted(session_dir.glob("*.jsonl")):
+            session_id = jsonl_file.stem[:8]
+            with open(jsonl_file, encoding="utf-8") as handle:
+                for line in handle:
                     try:
-                        obj = json.loads(line.strip())
-                        if obj.get("type") != "user" or obj.get("isMeta", False):
-                            continue
-                        msg = obj.get("message", {})
-                        content = msg.get("content", "")
-                        if isinstance(content, list):
-                            text = " ".join(
-                                p.get("text", "") if isinstance(p, dict) else str(p)
-                                for p in content
-                            ).strip()
-                        else:
-                            text = str(content).strip()
-
-                        if len(text) < 5:
-                            continue
-
-                        ts = obj.get("timestamp", "")[:19]
-                        text_hash = hashlib.sha256(text.encode()).hexdigest()[:16]
-                        prompts.append(
-                            Prompt(
-                                timestamp=ts,
-                                workspace=ws_name,
-                                session_id=session_id,
-                                text=text,
-                                text_hash=text_hash,
-                            )
+                        obj = json.loads(line)
+                    except json.JSONDecodeError:
+                        continue
+                    if obj.get("type") != "user" or obj.get("isMeta", False):
+                        continue
+                    dt = parse_datetime(str(obj.get("timestamp", "")))
+                    if not in_window(dt):
+                        continue
+                    raw_text = extract_prompt_text(obj)
+                    if len(raw_text) < 5:
+                        continue
+                    normalized = normalize_text(raw_text)
+                    prompts.append(
+                        Prompt(
+                            timestamp=dt.isoformat(timespec="seconds"),
+                            dt=dt,
+                            workspace=workspace,
+                            session_id=session_id,
+                            text=raw_text,
+                            normalized_text=normalized,
+                            text_hash=prompt_hash(normalized),
                         )
-                    except Exception:
-                        pass
+                    )
 
-    return sorted(prompts, key=lambda p: p.timestamp)
+    return sorted(prompts, key=lambda prompt: prompt.dt)
 
 
-# ── Classify prompts ──────────────────────────────────────────────────
+def deduplicate_prompts(prompts: list[Prompt]) -> tuple[list[Prompt], int]:
+    unique: list[Prompt] = []
+    seen: dict[str, Prompt] = {}
+    duplicates = 0
+
+    for prompt in prompts:
+        first = seen.get(prompt.text_hash)
+        if first is None:
+            seen[prompt.text_hash] = prompt
+            unique.append(prompt)
+            continue
+        first.repetitions += 1
+        duplicates += 1
+
+    return unique, duplicates
 
 
 def is_noise(text: str) -> bool:
-    for pat in NOISE_PATTERNS:
-        if re.match(pat, text):
-            return True
-    return False
+    return any(pattern.match(text.strip()) for pattern in NOISE_PATTERNS)
+
+
+def is_steering(text: str) -> bool:
+    normalized = normalize_text(text)
+    return any(pattern.match(normalized) for pattern in STEERING_PATTERNS)
 
 
 def classify(prompt: Prompt) -> str:
-    if is_noise(prompt.text):
+    text = prompt.normalized_text
+    text_lower = text.lower()
+
+    if is_noise(text):
         return "NOISE"
+    if is_steering(text):
+        return "STEERING"
 
-    text_lower = prompt.text.lower().strip()
-    text_len = len(prompt.text.strip())
-
-    scores: dict[str, int] = {}
-    for cat, keywords in CLASSIFY_PATTERNS.items():
-        scores[cat] = sum(1 for kw in keywords if kw in text_lower)
-
-    # STEERING: short prompts that are dispatch confirmations, not substantive tasks
-    if text_len <= STEERING_MAX_LEN:
-        steering_hits = sum(1 for kw in STEERING_KEYWORDS if kw in text_lower)
-        if steering_hits > 0:
-            # Only classify as STEERING if it dominates substantive categories
-            task_score = sum(scores.values())
-            if steering_hits > task_score:
-                return "STEERING"
-
+    scores = {
+        category: sum(1 for keyword in keywords if keyword in text_lower)
+        for category, keywords in CLASSIFY_PATTERNS.items()
+    }
     if max(scores.values(), default=0) == 0:
-        return "META"  # default for unclassifiable non-noise
+        return "META"
+    return max(scores, key=lambda category: scores[category])
 
-    return max(scores, key=lambda k: scores[k])
 
-
-def summarize(text: str) -> str:
-    """First meaningful line, truncated."""
-    clean = text.replace("↵", "\n").strip()
+def summarize(text: str, repetitions: int = 1) -> str:
+    clean = redact_text(text.replace("↵", "\n")).strip()
     lines = [
-        l.strip()
-        for l in clean.split("\n")
-        if l.strip() and not l.strip().startswith("<")
+        line.strip()
+        for line in clean.splitlines()
+        if line.strip() and not line.strip().startswith("<")
     ]
     if not lines:
-        return "(empty)"
-    first = lines[0][:120]
-    return first + ("..." if len(lines[0]) > 120 else "")
-
-
-# ── Extract commits ───────────────────────────────────────────────────
+        summary = "(empty)"
+    else:
+        first = lines[0][:120]
+        summary = first + ("..." if len(lines[0]) > 120 else "")
+    if repetitions > 1:
+        summary = f"{summary} (x{repetitions})"
+    return summary
 
 
 def extract_commits() -> list[Commit]:
     commits: list[Commit] = []
-    for ws_name, ws_dir in WORKSPACES.items():
-        if not ws_dir.exists():
+
+    for workspace, repo_dir in WORKSPACES.items():
+        if not repo_dir.exists():
             continue
-        try:
-            result = subprocess.run(
-                [
-                    "git",
-                    "log",
-                    "--oneline",
-                    "--since=72 hours ago",
-                    "--format=%h|%ad|%s",
-                    "--date=short",
-                ],
-                capture_output=True,
-                text=True,
-                cwd=ws_dir,
-                timeout=10,
+        result = subprocess.run(
+            [
+                "git",
+                "log",
+                f"--since={WINDOW_START.isoformat()}",
+                f"--until={WINDOW_END.isoformat()}",
+                "--format=%h|%aI|%s",
+            ],
+            capture_output=True,
+            text=True,
+            cwd=repo_dir,
+            timeout=10,
+            check=False,
+        )
+        for line in result.stdout.splitlines():
+            if "|" not in line:
+                continue
+            commit_hash, raw_timestamp, message = line.split("|", 2)
+            dt = parse_datetime(raw_timestamp)
+            if not in_window(dt):
+                continue
+            commits.append(
+                Commit(
+                    hash=commit_hash,
+                    timestamp=dt.isoformat(timespec="seconds"),
+                    dt=dt,
+                    message=message,
+                    workspace=workspace,
+                    message_lower=message.lower(),
+                )
             )
-            for line in result.stdout.strip().split("\n"):
-                if "|" not in line:
-                    continue
-                parts = line.split("|", 2)
-                if len(parts) == 3:
-                    commits.append(
-                        Commit(
-                            hash=parts[0],
-                            date=parts[1],
-                            message=parts[2],
-                            workspace=ws_name,
-                        )
-                    )
-        except Exception:
-            pass
 
-    return commits
+    return sorted(commits, key=lambda commit: commit.dt)
 
 
-# ── Match prompts to outcomes ─────────────────────────────────────────
+def meaningful_words(text: str) -> set[str]:
+    return set(re.findall(r"[a-z][a-z0-9-]{3,}", text.lower())) - STOP_WORDS
+
+
+def commit_match_score(prompt: Prompt, commit: Commit, words: set[str]) -> tuple[float, int]:
+    overlap = sum(1 for word in words if word in commit.message_lower)
+    if overlap == 0:
+        return 0.0, 0
+
+    delta = commit.dt - prompt.dt
+    delta_hours = abs(delta.total_seconds()) / 3600
+    time_bonus = 0.0
+    if timedelta() <= delta <= timedelta(hours=6):
+        time_bonus = 0.75
+    elif timedelta() <= delta <= timedelta(hours=24):
+        time_bonus = 0.35
+    elif delta_hours <= 48:
+        time_bonus = 0.1
+
+    return overlap + time_bonus, overlap
+
+
+def nearby_commit_count(prompt: Prompt, commits: list[Commit], hours: int = 8) -> int:
+    horizon = prompt.dt + timedelta(hours=hours)
+    return sum(1 for commit in commits if prompt.dt <= commit.dt <= horizon)
+
+
+def is_absorbable(prompt: Prompt, active_commit_window: int) -> bool:
+    if prompt.classification not in ABSORBABLE_CLASSIFICATIONS:
+        return False
+    if active_commit_window == 0:
+        return False
+
+    text_lower = prompt.normalized_text.lower()
+    if any(phrase in text_lower for phrase in ABSORBED_PHRASES):
+        return True
+
+    abstract_hits = sum(1 for term in ABSORBED_TERMS if term in text_lower)
+    return abstract_hits >= 1 and len(meaningful_words(text_lower)) >= 8
+
+
+def build_route_hint(prompt: Prompt) -> str:
+    if classify_intake is None or route_intake is None:
+        return ""
+    try:
+        intake = classify_intake(prompt.normalized_text)
+        dispatch = route_intake(intake)
+    except Exception:
+        return ""
+
+    workspace = Path(dispatch.workspace).name if dispatch.workspace else "operator-decision"
+    if intake.domain.value == "unknown":
+        return f"unknown -> {dispatch.agent}"
+    return f"{intake.domain.value} -> {workspace} ({dispatch.agent})"
 
 
 def match_outcomes(prompts: list[Prompt], commits: list[Commit]) -> None:
-    """For each prompt, try to find a matching commit or plan."""
-    commit_messages_lower = [(c, c.message.lower()) for c in commits]
-
-    for p in prompts:
-        if p.classification == "NOISE":
+    for prompt in prompts:
+        if prompt.classification == "NOISE":
             continue
 
-        text_lower = p.text.lower()[:300]
+        if prompt.classification == "STEERING":
+            prompt.outcome = "STEERING"
+            prompt.evidence = "Routing confirmation or dispatch command"
+            continue
 
-        # Extract key words from the prompt (>4 chars, not common)
-        stop_words = {
-            "this",
-            "that",
-            "with",
-            "from",
-            "have",
-            "will",
-            "been",
-            "what",
-            "when",
-            "where",
-            "which",
-            "their",
-            "there",
-            "about",
-            "would",
-            "could",
-            "should",
-            "these",
-            "those",
-            "your",
-            "they",
-            "them",
-            "than",
-            "then",
-            "into",
-            "just",
-            "like",
-            "make",
-            "does",
-            "also",
-            "want",
-            "need",
-            "here",
-        }
-        words = set(re.findall(r"[a-z]{4,}", text_lower)) - stop_words
+        text_lower = prompt.normalized_text.lower()
+        words = meaningful_words(text_lower)
 
-        # Find best matching commit
-        best_score = 0
-        best_commit = None
-        for c, msg_lower in commit_messages_lower:
-            score = sum(1 for w in words if w in msg_lower)
+        best_score = 0.0
+        best_overlap = 0
+        best_commit: Commit | None = None
+        for commit in commits:
+            score, overlap = commit_match_score(prompt, commit, words)
             if score > best_score:
                 best_score = score
-                best_commit = c
+                best_overlap = overlap
+                best_commit = commit
 
-        if best_score >= 3:
-            p.outcome = "DELIVERED"
-            p.evidence = f"{best_commit.hash} ({best_commit.workspace}): {best_commit.message[:80]}"
-        elif best_score >= 2:
-            p.outcome = "PARTIAL"
-            p.evidence = f"Possible: {best_commit.hash} ({best_commit.workspace}): {best_commit.message[:80]}"
-        # STEERING prompts are dispatch confirmations, not tasks - no outcome needed
-        # Moved after DELIVERED/PARTIAL to ensure real tasks containing "go" get matched
-        elif p.classification == "STEERING":
-            p.outcome = "STEERING"
-            p.evidence = "Routing confirmation - no deliverable tracked"
-        elif any(w in text_lower for w in ["billing", "enterprise", "copilot", "ghas"]):
-            p.outcome = "HUMAN-ACTION"
-            p.evidence = "Requires operator action (billing/infra)"
-        elif any(
-            w in text_lower for w in ["irf", "irf-", "future", "next session", "later"]
-        ):
-            p.outcome = "DEFERRED"
-            p.evidence = "Referenced as future work"
-        else:
-            p.outcome = "HANGING"
-            p.evidence = ""
+        prompt.keyword_overlap = best_overlap
+
+        if best_overlap >= 3 and best_commit is not None:
+            prompt.outcome = "DELIVERED"
+            prompt.evidence = (
+                f"{best_commit.hash} ({best_commit.workspace}): {best_commit.message[:90]}"
+            )
+            continue
+
+        if best_overlap >= 2 and best_commit is not None:
+            prompt.outcome = "PARTIAL"
+            prompt.evidence = (
+                f"Possible: {best_commit.hash} ({best_commit.workspace}): "
+                f"{best_commit.message[:90]}"
+            )
+            continue
+
+        if any(term in text_lower for term in ("billing", "enterprise", "copilot", "ghas")):
+            prompt.outcome = "HUMAN-ACTION"
+            prompt.evidence = "Requires operator action (billing / infrastructure)"
+            continue
+
+        if any(term in text_lower for term in ("irf", "irf-", "future", "next session", "later")):
+            prompt.outcome = "DEFERRED"
+            prompt.evidence = "Explicit future reference"
+            continue
+
+        active_commit_window = nearby_commit_count(prompt, commits)
+        if is_absorbable(prompt, active_commit_window):
+            prompt.outcome = "ABSORBED"
+            prompt.evidence = (
+                "Conceptual intake without direct keyword trace; "
+                f"{active_commit_window} commits landed within 8h"
+            )
+            continue
+
+        prompt.outcome = "UNRESOLVED"
+        prompt.route_hint = build_route_hint(prompt)
+        if prompt.route_hint:
+            prompt.evidence = f"Route hint: {prompt.route_hint}"
 
 
-# ── Report generation ─────────────────────────────────────────────────
+def counts_by(values: list[str]) -> dict[str, int]:
+    counts: dict[str, int] = {}
+    for value in values:
+        counts[value] = counts.get(value, 0) + 1
+    return counts
 
 
-def generate_report(prompts: list[Prompt], commits: list[Commit]) -> str:
+def generate_report(raw_prompt_count: int, duplicate_count: int, prompts: list[Prompt], commits: list[Commit]) -> str:
     lines: list[str] = []
 
-    noise_count = sum(1 for p in prompts if p.classification == "NOISE")
-    actionable = [p for p in prompts if p.classification != "NOISE"]
+    noise_count = sum(1 for prompt in prompts if prompt.classification == "NOISE")
+    actionable = [prompt for prompt in prompts if prompt.classification != "NOISE"]
 
     lines.append("# Prompt-to-Outcome Reconciliation — 72 Hours")
-    lines.append(f"\n**Generated:** {datetime.now().isoformat()[:19]}")
-    lines.append(f"**Window:** 2026-03-29 to 2026-03-31")
-    lines.append(f"**Total prompts:** {len(prompts)}")
+    lines.append(f"\n**Generated:** {datetime.now().isoformat(timespec='seconds')}")
+    lines.append(f"**Window:** {WINDOW_LABEL}")
+    lines.append(f"**Raw prompts in window:** {raw_prompt_count}")
+    lines.append(f"**Duplicates collapsed:** {duplicate_count}")
+    lines.append(f"**Unique prompts:** {len(prompts)}")
     lines.append(f"**Noise filtered:** {noise_count}")
     lines.append(f"**Actionable:** {len(actionable)}")
     lines.append(f"**Commits available:** {len(commits)}")
 
-    # ── Statistics ──
-    outcomes = {}
-    for p in actionable:
-        outcomes[p.outcome] = outcomes.get(p.outcome, 0) + 1
-
+    outcomes = counts_by([prompt.outcome for prompt in actionable])
     lines.append("\n## Statistics\n")
     lines.append("| Outcome | Count | % |")
     lines.append("|---------|-------|---|")
-    for outcome in [
+    for outcome in (
         "DELIVERED",
         "PARTIAL",
         "STEERING",
-        "HANGING",
+        "ABSORBED",
+        "UNRESOLVED",
         "DEFERRED",
         "HUMAN-ACTION",
-    ]:
+    ):
         count = outcomes.get(outcome, 0)
-        pct = f"{count / len(actionable) * 100:.1f}" if actionable else "0"
+        pct = f"{(count / len(actionable) * 100):.1f}" if actionable else "0.0"
         lines.append(f"| {outcome} | {count} | {pct}% |")
 
-    # ── Classification breakdown ──
-    classifications = {}
-    for p in actionable:
-        classifications[p.classification] = classifications.get(p.classification, 0) + 1
+    lines.append("\n## Triage of Former Hanging Work\n")
+    lines.append("| Bucket | Count | Meaning |")
+    lines.append("|--------|-------|---------|")
+    lines.append(f"| STEERING | {outcomes.get('STEERING', 0)} | Routing / confirmation prompts that do not imply a deliverable |")
+    lines.append(f"| ABSORBED | {outcomes.get('ABSORBED', 0)} | Conceptual intake likely folded into nearby work without direct commit-message trace |")
+    lines.append(f"| UNRESOLVED | {outcomes.get('UNRESOLVED', 0)} | Still needs explicit follow-on action |")
 
+    classifications = counts_by([prompt.classification for prompt in actionable])
     lines.append("\n## Classification Breakdown\n")
     lines.append("| Type | Count |")
     lines.append("|------|-------|")
-    for cls in sorted(classifications, key=lambda k: -classifications[k]):
-        lines.append(f"| {cls} | {classifications[cls]} |")
+    for classification in sorted(classifications, key=lambda key: (-classifications[key], key)):
+        lines.append(f"| {classification} | {classifications[classification]} |")
 
-    # ── By workspace ──
-    ws_counts: dict[str, dict[str, int]] = {}
-    for p in actionable:
-        ws = p.workspace
-        if ws not in ws_counts:
-            ws_counts[ws] = {}
-        ws_counts[ws][p.outcome] = ws_counts[ws].get(p.outcome, 0) + 1
+    by_workspace: dict[str, dict[str, int]] = {}
+    for prompt in actionable:
+        workspace_counts = by_workspace.setdefault(prompt.workspace, {})
+        workspace_counts[prompt.outcome] = workspace_counts.get(prompt.outcome, 0) + 1
 
     lines.append("\n## By Workspace\n")
-    lines.append(
-        "| Workspace | Delivered | Partial | Steering | Hanging | Deferred | Human |"
+    lines.append("| Workspace | Delivered | Partial | Steering | Absorbed | Unresolved | Deferred | Human |")
+    lines.append("|-----------|-----------|---------|----------|----------|------------|----------|-------|")
+    for workspace in sorted(by_workspace):
+        counts = by_workspace[workspace]
+        lines.append(
+            f"| {workspace} | {counts.get('DELIVERED', 0)} | {counts.get('PARTIAL', 0)} | "
+            f"{counts.get('STEERING', 0)} | {counts.get('ABSORBED', 0)} | "
+            f"{counts.get('UNRESOLVED', 0)} | {counts.get('DEFERRED', 0)} | "
+            f"{counts.get('HUMAN-ACTION', 0)} |"
+        )
+
+    sections = (
+        ("Delivered", "DELIVERED", "| Time | Workspace | Prompt Summary | Evidence |"),
+        ("Partial", "PARTIAL", "| Time | Workspace | Prompt Summary | Evidence |"),
+        ("Steering", "STEERING", "| Time | Workspace | Prompt Summary | Evidence |"),
+        ("Absorbed", "ABSORBED", "| Time | Workspace | Prompt Summary | Evidence |"),
+        ("Unresolved", "UNRESOLVED", "| Time | Workspace | Prompt Summary | Route / Evidence |"),
+        ("Deferred", "DEFERRED", "| Time | Workspace | Prompt Summary | Evidence |"),
     )
-    lines.append(
-        "|-----------|-----------|---------|----------|---------|----------|-------|"
-    )
-    for ws in sorted(ws_counts):
-        d = ws_counts[ws]
-        lines.append(
-            f"| {ws} | {d.get('DELIVERED', 0)} | {d.get('PARTIAL', 0)} | {d.get('STEERING', 0)} | {d.get('HANGING', 0)} | {d.get('DEFERRED', 0)} | {d.get('HUMAN-ACTION', 0)} |"
-        )
 
-    # ── Delivered ──
-    delivered = [p for p in actionable if p.outcome == "DELIVERED"]
-    lines.append(f"\n## Delivered ({len(delivered)})\n")
-    lines.append("| Time | Workspace | Prompt Summary | Evidence |")
-    lines.append("|------|-----------|----------------|----------|")
-    for p in delivered[:80]:
-        lines.append(
-            f"| {p.timestamp[11:16]} | {p.workspace} | {p.summary} | {p.evidence} |"
-        )
+    for title, outcome, header in sections:
+        items = [prompt for prompt in actionable if prompt.outcome == outcome]
+        lines.append(f"\n## {title} ({len(items)})\n")
+        lines.append(header)
+        lines.append("|------|-----------|----------------|------------------|")
+        for prompt in items:
+            detail = prompt.evidence or prompt.route_hint or ""
+            lines.append(
+                f"| {prompt.timestamp[11:16]} | {prompt.workspace} | {prompt.summary} | {detail} |"
+            )
 
-    # ── Hanging ──
-    hanging = [p for p in actionable if p.outcome == "HANGING"]
-    lines.append(f"\n## Hanging ({len(hanging)})\n")
-    lines.append("| Time | Workspace | Prompt Summary |")
-    lines.append("|------|-----------|----------------|")
-    for p in hanging:
-        lines.append(f"| {p.timestamp[11:16]} | {p.workspace} | {p.summary} |")
-
-    # ── Deferred ──
-    deferred = [p for p in actionable if p.outcome == "DEFERRED"]
-    lines.append(f"\n## Deferred ({len(deferred)})\n")
-    lines.append("| Time | Workspace | Prompt Summary | Evidence |")
-    lines.append("|------|-----------|----------------|----------|")
-    for p in deferred:
-        lines.append(
-            f"| {p.timestamp[11:16]} | {p.workspace} | {p.summary} | {p.evidence} |"
-        )
-
-    # ── Steering ──
-    steering = [p for p in actionable if p.outcome == "STEERING"]
-    lines.append(f"\n## Steering ({len(steering)})\n")
-    lines.append("| Time | Workspace | Prompt Summary |")
-    lines.append("|------|-----------|----------------|")
-    for p in steering:
-        lines.append(f"| {p.timestamp[11:16]} | {p.workspace} | {p.summary} |")
-
-    # ── Human Action ──
-    human = [p for p in actionable if p.outcome == "HUMAN-ACTION"]
+    human = [prompt for prompt in actionable if prompt.outcome == "HUMAN-ACTION"]
     lines.append(f"\n## Human Action Required ({len(human)})\n")
-    for p in human:
-        lines.append(f"- [{p.timestamp[11:16]}] {p.summary}")
+    for prompt in human:
+        lines.append(f"- [{prompt.timestamp[11:16]}] {prompt.summary}")
 
     lines.append("\n---")
-    lines.append(
-        "*Generated by scripts/reconcile-72h.py — keyword matching against git logs.*"
-    )
-    lines.append(
-        "*Accuracy: DELIVERED is high-confidence (3+ keyword matches). HANGING may include*"
-    )
-    lines.append(
-        "*prompts whose outcomes were captured by a different workspace's commit.*"
-    )
-
+    lines.append("*Generated by `scripts/reconcile-72h.py` using prompt timestamps, deduplicated prompt hashes, and pooled commit matching across all tracked workspaces.*")
+    lines.append("*Report summaries are redacted for credential-like material.*")
     return "\n".join(lines)
 
 
-# ── Main ──────────────────────────────────────────────────────────────
-
-
 def main() -> None:
-    prompts = extract_prompts()
+    raw_prompts = extract_prompts()
+    prompts, duplicate_count = deduplicate_prompts(raw_prompts)
 
-    # Deduplicate by text hash - O(n)
-    unique_prompts: list[Prompt] = []
-    seen_hashes: dict[str, int] = {}  # hash -> count
-    hash_to_prompt: dict[str, Prompt] = {}
-
-    for p in prompts:
-        if p.text_hash in seen_hashes:
-            seen_hashes[p.text_hash] += 1
-        else:
-            seen_hashes[p.text_hash] = 1
-            hash_to_prompt[p.text_hash] = p
-            unique_prompts.append(p)
-
-    # Apply classifications and summaries
-    for p in unique_prompts:
-        p.classification = classify(p)
-        p.summary = summarize(p.text)
-        # Annotate repetitions if any
-        count = seen_hashes[p.text_hash]
-        if count > 1:
-            p.summary = f"{p.summary} (x{count})"
+    for prompt in prompts:
+        prompt.classification = classify(prompt)
+        prompt.summary = summarize(prompt.text, prompt.repetitions)
 
     commits = extract_commits()
-
-    match_outcomes(unique_prompts, commits)
-
-    report = generate_report(unique_prompts, commits)
-    print(report)
+    match_outcomes(prompts, commits)
+    print(generate_report(len(raw_prompts), duplicate_count, prompts, commits))
 
 
 if __name__ == "__main__":

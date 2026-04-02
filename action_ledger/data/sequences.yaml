@@ -888,3 +888,24 @@ sequences:
   outcome: ''
   chain_id: ''
   closed: false
+- id: seq-RECON72H-001
+  session: RECON72H
+  intent: ''
+  action_ids:
+  - act-RECON72H-0402-001
+  automation:
+    raw_prompts:
+    - 352.0
+    unique_prompts:
+    - 303.0
+    duplicates:
+    - 49.0
+    commits:
+    - 159.0
+    delivery_rate:
+    - 36.6
+    unresolved_rate:
+    - 41.6
+  outcome: ''
+  chain_id: ''
+  closed: false
