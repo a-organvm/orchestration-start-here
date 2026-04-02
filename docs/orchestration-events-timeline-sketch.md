@@ -4,7 +4,7 @@
 
 | Repo | Sessions | Primary Focus |
 |------|----------|----------------|
-| `organvm-iv-taxis/orchestration-start-here` | S48-S51 | Orchestration infrastructure, Maddie handoff |
+| `organvm-iv-taxis/orchestration-start-here` | S48-S52 | Orchestration infrastructure, Maddie handoff, session review |
 | `4444J99/application-pipeline` | S43-S49 | Job applications, IRF management, precision mode |
 
 ---
@@ -19,6 +19,7 @@
 | S49 | 2026-04-01 | Maddie Spiral Path intake | 527-line handoff, 127 files, 2 memories |
 | S50 | 2026-04-01 | work-vacuums system scan | `docs/work-vacuums-S50-2026-04-01.md` |
 | S51 | 2026-04-01 | dispatch portal pattern | `tasks/communications-correspondence-relay/` (4-file genome) |
+| S52 | 2026-04-02 | review-sessions--improvements-all | 15 improvements cataloged, emission race fix, 5 orphaned sequences closed, YAML health audit (21 errors in app-pipeline) |
 
 **Directory Structure:**
 ```
