@@ -524,3 +524,79 @@ subset of an existing one. More indicates the domain should be split.
   increment major. New domains or optional features increment minor.
 - **Review cadence:** After every 5th Xenograft engagement, review atom definitions
   for adequacy and reconciliation thresholds for calibration.
+
+---
+
+## Appendix: Sovereign Systems Instance
+
+First full-scale deployment of the Xenograft Protocol. Documented here as the reference
+instance for future engagements.
+
+### Engagement Summary
+
+- **Source:** Sovereign Systems client engagement (ORGAN-III)
+- **Corpus:** 127 files, ~360,000 words
+- **Atom yield:** 1,821 atoms decomposed
+- **Domain:** Client engagement (extended schema)
+
+### 17-Field Atom Schema
+
+The generic 7-field atom schema (§2 Phase 4) was extended to 17 fields to capture the
+full dimensionality of a large client engagement:
+
+| # | Field | Description |
+|---|-------|-------------|
+| 1 | `id` | Unique atom identifier (ATM-NNNN) |
+| 2 | `domain` | Routing domain (client, system, editorial, etc.) |
+| 3 | `type` | Domain-specific atom type (requirement, decision, etc.) |
+| 4 | `source_file` | Origin file in converted/ |
+| 5 | `source_section` | Section heading within source |
+| 6 | `source_line` | Line number in source |
+| 7 | `summary` | Human-readable atom description |
+| 8 | `confidence` | Verification confidence (HIGH/REVIEW/LOW) |
+| 9 | `provenance` | Who authored/provided this content and when |
+| 10 | `nature` | Content nature: directive, observation, artifact, question |
+| 11 | `tier` | Signal classification: SIGNAL, CONTEXT, or NOISE |
+| 12 | `pillar` | Strategic pillar the atom contributes to |
+| 13 | `editorial` | Editorial judgment: publish, internal-only, discard |
+| 14 | `build_state` | Implementation state: unbuilt, in-progress, complete, blocked |
+| 15 | `nodes` | Connected nodes in the dependency/reference graph |
+| 16 | `actionability` | Immediate, blocked, or deferred |
+| 17 | `strike_id` | Assigned strike (STR-NNNN) after Phase 7, null before |
+
+### SIGNAL / CONTEXT / NOISE Tiering
+
+A three-tier classification applied during atomization (Phase 4) to separate
+actionable content from supporting material and discardable filler:
+
+| Tier | Count | Pct | Definition |
+|------|-------|-----|------------|
+| **SIGNAL** | 1,153 | 63.4% | Directly actionable — motivates a strike, a decision, or a deliverable |
+| **CONTEXT** | 557 | 30.6% | Supporting material — informs but does not independently motivate action |
+| **NOISE** | 111 | 6.1% | Boilerplate, duplicates, metadata — excluded from strike planning |
+
+This tiering replaced the binary "covered / excluded" model from Phase 6. CONTEXT atoms
+are retained in the registry for traceability but do not generate strikes. NOISE atoms
+are documented with exclusion justifications per the Phase 6 invariant.
+
+### Three-Way Verification Configuration
+
+The multi-model verification (Phase 5) was configured as follows:
+
+```yaml
+dispatch:
+  primary: claude              # Strategic decomposition — full 127-file corpus
+  verifiers:
+    - gemini                   # Coverage breadth — high recall, catches missed atoms
+    - claude-blind             # Same model, zero shared context — tests prompt stability
+  reconciliation: claude       # Arbitration on conflicts
+```
+
+**claude-blind** denotes a separate Claude session with no access to the primary
+decomposition, atom counts, or intermediate notes. This tests whether the protocol's
+atom definitions are sufficiently precise to produce convergent results from the same
+model architecture without shared state — a stronger test than cross-model agreement
+alone.
+
+Agreement rate: 91% (above the 70% threshold). 34 atoms added from verification.
+12 conflicts resolved via human arbitration.
