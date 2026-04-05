@@ -71,7 +71,7 @@ metadata:
       - render_post002.py
       - render_post002_audit.py
       - ACTION-LEDGER-V1.md
-  test_count: 240
+  test_count: 246
 produces:
 - type: governance_rules
   description: Codified governance articles enforcing dependency flow, promotion states, and registry authority.
