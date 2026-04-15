@@ -18,6 +18,7 @@ This repo participates in the **ORGAN-IV (Orchestration)** swarm.
 - **Produce** `absorption_data` for unspecified
 - **Produce** `fieldwork_data` for unspecified
 - **Produce** `action_ledger_data` for unspecified
+- **Produce** `threshold_topology` for unspecified
 
 ### External Dependencies
 - **Consume** `github_pr_states` from `unspecified`
@@ -27,18 +28,5 @@ This repo participates in the **ORGAN-IV (Orchestration)** swarm.
 - Adhere to unidirectional flow: I→II→III
 - Never commit secrets or credentials
 
-*Last synced: 2026-04-04T23:09:29Z*
-
-## Active Handoff Protocol
-
-If `.conductor/active-handoff.md` exists, read it before starting work.
-It contains constraints you must honor, files you must not modify, and
-conventions you must follow. Violating these constraints will cause your
-work to be rejected during cross-verification.
-
-Key sections to obey:
-- **Locked Constraints** — decisions you cannot override
-- **Locked Files** — files you cannot modify
-- **Conventions** — naming/style rules to follow exactly
-- **Receiver Restrictions** — file patterns you must not touch
+*Last synced: 2026-04-14T21:31:58Z*
 <!-- ORGANVM:AUTO:END -->
