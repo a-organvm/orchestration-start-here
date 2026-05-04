@@ -9,7 +9,7 @@ description = "ORGAN-IV central orchestration hub — registry, governance, cont
 requires-python = ">=3.11"
 license = { text = "MIT" }
 dependencies = [
-    "pydantic>=2.0",
+    "pydantic>=2.10,<3.0",
     "click>=8.0",
     "pyyaml>=6.0",
     "requests>=2.28",
