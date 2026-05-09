@@ -5,9 +5,8 @@ This repository was audited as part of a **REPRWA (Repository World Analysis Met
 ## Canonical deliverable
 
 - **Repo**: [`meta-organvm/meta-organvm--superproject`](https://github.com/meta-organvm/meta-organvm--superproject)
-- **Branch**: `claude/repo-world-analysis-NNyj1`
-- **PR**: [#7](https://github.com/meta-organvm/meta-organvm--superproject/pull/7)
-- **Path**: `docs/audits/`
+- **PR**: [#7](https://github.com/meta-organvm/meta-organvm--superproject/pull/7) (durable reference; tracks the audit through merge)
+- **Path** (post-merge, on `main`): `docs/audits/`
 - **Companion JSON**: `docs/audits/STRUCTURED-CANDIDATES.json`
 - **Templates**: `docs/audits/templates/`
 
@@ -27,7 +26,14 @@ Strongest candidates anchored to this repo (with composite priority):
 - **P-023 POSSE Distribution Pipeline** (3.1) — Mastodon + Discord template.
 - **P-008 governance-thresholds.json Topology** (2.3) — DOCUMENT_FIRST: T-series semantics undocumented.
 
-Specific gaps flagged: governance-thresholds.json black box, Logos documentation layer (telos/pragma/praxis/receptio — explicitly MISSING per CLAUDE.md), Amendment H "Temporal Manifestation" cryptographic-philosophical depth unexplained, dreamcatcher subsystem opaque, contrib_engine income-weighting algorithm not visible, test claims (240 passing) unverified in public surface.
+## Specific gaps flagged
+
+- **`governance-thresholds.json` black box** — T-series origins, radii, wave classification semantics undocumented.
+- **Logos documentation layer** — `telos.md` / `pragma.md` / `praxis.md` / `receptio.md` explicitly MISSING (Symmetry: 0.5 GHOST per CLAUDE.md).
+- **Amendment H "Temporal Manifestation"** — cryptographic-philosophical depth unexplained in practical terms.
+- **`dreamcatcher` subsystem** — referenced in `src/`, role unclear.
+- **`contrib_engine` income-weighting algorithm** — not visible in available docs.
+- **Test claims** — 240 passing tests cited in CLAUDE.md, but `tests/` structure is undocumented in the public surface.
 
 ## Top-level audit findings (cross-cutting)
 
@@ -39,13 +45,13 @@ Specific gaps flagged: governance-thresholds.json black box, Logos documentation
 
 ## How to engage
 
-- Read the canonical PR description at meta-organvm/meta-organvm--superproject#7 for the executive summary.
-- Pull the branch `claude/repo-world-analysis-NNyj1` on the superproject for the full deliverable.
+- Read the canonical PR description at [meta-organvm/meta-organvm--superproject#7](https://github.com/meta-organvm/meta-organvm--superproject/pull/7) for the executive summary.
+- After merge, the full deliverable lives on `main` of the superproject under `docs/audits/`.
 - For machine consumption, parse `STRUCTURED-CANDIDATES.json`.
 
 ## Status
 
-Draft pointer PR. Canonical PR (in superproject) is also draft.
+Audit pointer finalized.
 
 ---
 
