@@ -2,6 +2,10 @@
 
 import subprocess
 import sys
+from pathlib import Path
+
+# Repo root, resolved relative to this test file — never a hardcoded machine path.
+REPO_ROOT = Path(__file__).resolve().parent.parent
 
 
 class TestCliEntryPoint:
@@ -9,7 +13,7 @@ class TestCliEntryPoint:
         result = subprocess.run(
             [sys.executable, "-m", "contrib_engine", "--help"],
             capture_output=True, text=True,
-            cwd="/Users/4jp/Workspace/organvm-iv-taxis/orchestration-start-here",
+            cwd=REPO_ROOT,
         )
         assert result.returncode == 0
         assert "scan" in result.stdout
@@ -19,7 +23,7 @@ class TestCliEntryPoint:
         result = subprocess.run(
             [sys.executable, "-m", "contrib_engine", "scan", "--help"],
             capture_output=True, text=True,
-            cwd="/Users/4jp/Workspace/organvm-iv-taxis/orchestration-start-here",
+            cwd=REPO_ROOT,
         )
         assert result.returncode == 0
         assert "--no-github" in result.stdout
@@ -28,7 +32,7 @@ class TestCliEntryPoint:
         result = subprocess.run(
             [sys.executable, "-m", "contrib_engine", "nonexistent"],
             capture_output=True, text=True,
-            cwd="/Users/4jp/Workspace/organvm-iv-taxis/orchestration-start-here",
+            cwd=REPO_ROOT,
         )
         assert result.returncode != 0
 
@@ -36,7 +40,7 @@ class TestCliEntryPoint:
         result = subprocess.run(
             [sys.executable, "-m", "contrib_engine", "campaign", "--help"],
             capture_output=True, text=True,
-            cwd="/Users/4jp/Workspace/organvm-iv-taxis/orchestration-start-here",
+            cwd=REPO_ROOT,
         )
         assert result.returncode == 0
 
@@ -44,7 +48,7 @@ class TestCliEntryPoint:
         result = subprocess.run(
             [sys.executable, "-m", "contrib_engine", "outreach", "--help"],
             capture_output=True, text=True,
-            cwd="/Users/4jp/Workspace/organvm-iv-taxis/orchestration-start-here",
+            cwd=REPO_ROOT,
         )
         assert result.returncode == 0
 
@@ -52,7 +56,7 @@ class TestCliEntryPoint:
         result = subprocess.run(
             [sys.executable, "-m", "contrib_engine", "backflow", "--help"],
             capture_output=True, text=True,
-            cwd="/Users/4jp/Workspace/organvm-iv-taxis/orchestration-start-here",
+            cwd=REPO_ROOT,
         )
         assert result.returncode == 0
 
