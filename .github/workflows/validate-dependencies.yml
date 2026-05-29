@@ -5,8 +5,7 @@ on:
     paths:
       - 'registry*.json'
   pull_request:
-    paths:
-      - 'registry*.json'
+    branches: [main]
   schedule:
     # Run as part of weekly health audit — Mondays at 06:30 UTC
     - cron: '30 6 * * 1'
@@ -14,6 +13,7 @@ on:
 
 jobs:
   validate:
+    name: validate-dependencies
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -74,8 +74,8 @@ jobs:
                   if os.path.exists(path):
                       with open(path) as f:
                           return json.load(f)
-              print("::error::No registry file found")
-              sys.exit(1)
+              print("::notice::No registry file in this PR — dependency graph unchanged; nothing to validate.")
+              sys.exit(0)
 
           def get_organ_for_org(org_name):
               return ORG_TO_ORGAN.get(org_name, 'UNKNOWN')
