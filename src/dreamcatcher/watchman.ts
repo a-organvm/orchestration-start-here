@@ -8,7 +8,7 @@
 import { CircuitBreaker } from './circuit.js';
 import { ModelRouter } from './router.js';
 import { MetasystemManager } from '../orchestrator/metasystem-manager.js';
-import { SCENARIOS, Scenario } from './scenarios/index.js';
+import { SCENARIOS, type Scenario } from './scenarios/index.js';
 import { KnowledgeGraphIntegration } from './kg-integration.js';
 
 export class NightWatchman {

@@ -9,7 +9,7 @@ import path from 'path';
 import { OrchestratorScout } from './scout.js';
 import { OrchestratorAnalyst } from './analyst.js';
 import { OrchestratorTester } from './tester.js';
-import { TaskDispatcher, DispatchRequest, DispatchResult } from './dispatcher.js';
+import { TaskDispatcher } from './dispatcher.js';
 
 export interface WorkspaceHealth {
   name: string;

@@ -14,7 +14,7 @@ export interface DispatchRequest {
   taskType: string;
   title: string;
   description: string;
-  priority: 'normal' | 'high' | 'critical';
+  priority: 'low' | 'normal' | 'high' | 'critical';
 }
 
 export interface DispatchResult {
