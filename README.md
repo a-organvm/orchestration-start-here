@@ -198,13 +198,14 @@ The governance model is codified in `governance-rules.json` — a machine-readab
 
 Repositories progress through five states. No state may be skipped. The `promote-repo` workflow validates transitions against the governance rules before execution.
 
-```
-LOCAL ──→ CANDIDATE ──→ PUBLIC_PROCESS ──→ GRADUATED ──→ ARCHIVED
-  │           │               │                │            │
-  │  Ready    │  Documented   │  Publicly      │  Feature   │  End of
-  │  for      │  and meets    │  discussed     │  complete  │  active
-  │  review   │  quality      │  in ORGAN-V    │  and       │  development
-  │           │  gates        │  essays        │  stable    │
+```mermaid
+stateDiagram-v2
+    direction LR
+    LOCAL --> CANDIDATE : Ready for review
+    CANDIDATE --> PUBLIC_PROCESS : Documented and meets quality gates
+    PUBLIC_PROCESS --> GRADUATED : Publicly discussed in ORGAN-V essays
+    GRADUATED --> ARCHIVED : Feature complete and stable
+    ARCHIVED : End of active development
 ```
 
 **Transition requirements:**
@@ -225,6 +226,32 @@ Beyond the state machine, two specific cross-organ promotion paths exist:
 ### Dependency Direction Rules
 
 The dependency graph is strictly unidirectional. This prevents circular coupling and ensures that foundational work (theory) is never contaminated by implementation concerns (commerce).
+
+```mermaid
+flowchart TD
+    I[ORGAN-I Theory]
+    II[ORGAN-II Art]
+    III[ORGAN-III Commerce]
+    IV[ORGAN-IV Orchestration]
+    V[ORGAN-V Public Process]
+    VI[ORGAN-VI Community]
+    VII[ORGAN-VII Marketing]
+
+    II --> I
+    III --> I
+    III --> II
+    IV --> I
+    IV --> II
+    IV --> III
+    V --> I
+    V --> II
+    V --> III
+    V --> IV
+    VI --> I
+    VI --> II
+    VI --> III
+    VII --> V
+```
 
 | Source Organ | May Depend On |
 |-------------|---------------|
