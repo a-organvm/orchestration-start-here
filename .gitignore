@@ -65,3 +65,7 @@ contrib_engine/inbound-opportunity-protocol.zip
 
 # Claude Code
 .claude/scheduled_tasks.lock
+
+# removed inadvertently-committed local session artifacts (PII containment)
+docs/operator-prompts-raw-423.txt
+.history-analysis
