@@ -110,7 +110,7 @@ jobs:
           PYEOF
 
           git config user.name "Orchestration Bot"
-          git config user.email "bot@organvm.dev"
+          git config user.email "[email redacted]"
           git add registry.json
           git diff --cached --quiet || git commit -m "Monthly audit metrics — $(date +%Y-%m-%d)"
           git push || true

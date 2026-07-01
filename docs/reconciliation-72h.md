@@ -59,7 +59,7 @@
 | 09:17 | workspace-root | all of the above, logic dictating order--first review this sidebar: "gemini | d63baf1 (corpvs-testamentvm): fix: strike through last 2 stale sovereign-systems IRF items (036, 037) |
 | 09:25 | workspace-root | yeah let's pick this mass back up: "  The convergence point is 72 hours from now. | 385e0b6 (organvm-engine): feat(governance): implement validate_signal_closure (AX-6) — dispatched to OpenCode |
 | 09:55 | application-pipeline | howd gemini do on these tasks: "gemini | 37855374 (application-pipeline): feat: refine LinkedIn composer with Testament discipline & fixed mappings |
-| 10:31 | workspace-root | review as genetic material incorporation: /Users/4jp/Workspace/meta-organvm/organvm-corpvs-testamentvm/docs/genesis/Chat... | 88bef09 (corpvs-testamentvm): docs: track 5 genesis DNA documents — genetic material for Lex Naturalis |
+| 10:31 | workspace-root | review as genetic material incorporation: ~/Workspace/meta-organvm/organvm-corpvs-testamentvm/docs/genesis/Chat... | 88bef09 (corpvs-testamentvm): docs: track 5 genesis DNA documents — genetic material for Lex Naturalis |
 | 10:37 | workspace-root | all of this locked??? " Genetic Incorporation Audit | 385e0b6 (organvm-engine): feat(governance): implement validate_signal_closure (AX-6) — dispatched to OpenCode |
 | 10:58 | workspace-root | ah yes and it's phase state: "⏺ All tasks complete. Here's the final state: | c7cf01d (corpvs-testamentvm): feat: add Phase and Energy fields to IRF issue template |
 | 11:11 | workspace-root | this is tended to:  You're right that there's a door there. Let me help you see what's behind it. | aeccbb7 (corpvs-testamentvm): docs: Formation Chemistry spec — bonding rules of ORGANVM |
@@ -123,7 +123,7 @@
 | 10:57 | orchestration-start-here | intake: | add3902 (orchestration-start-here): feat: action ledger Phases 2-4 — routes, chains, cycle detection |
 | 11:00 | orchestration-start-here | > time represents mathetmatical micro to macro cycles, we dont need timezones--we need | b3391d7 (meta-organvm): genome: sync SEED.md — CHECKs 21-26 from Gemini agent |
 | 11:03 | orchestration-start-here | ingest: | fcbfdf2 (meta-organvm): docs: SPEC-021 Gravitas Culturalis — orbital emergence theory |
-| 11:04 | orchestration-start-here | Writ(/Users/4jp/.claude/projects/-Users-4jp-Workspace-organvm-iv-taxis-orchestration-sta | a3d96fb (orchestration-start-here): docs: session-close audit — backup memory, recover action_ledger, sync CHANGELOG |
+| 11:04 | orchestration-start-here | Writ(~/.claude/projects/-Users-[user]-Workspace-organvm-iv-taxis-orchestration-sta | a3d96fb (orchestration-start-here): docs: session-close audit — backup memory, recover action_ledger, sync CHANGELOG |
 | 11:04 | meta-organvm | i ❯ ❯ Provide an overview of all that was and all that is and all that needs to be based on this entire session's contex... | fb4d8ca1 (application-pipeline): chore: session S43 close — sync creative capital move, update metrics, hall-monitor audit |
 | 11:12 | workspace-root | Session-Close Audit — Final Verdict | 8c07c51 (orchestration-start-here): docs: sync memory backup — 2 new files + 2 updated for local:remote parity |
 | 11:15 | orchestration-start-here | FINAL STATE — Session Safe to Close | b5ed396 (corpvs-testamentvm): chore: IRF — 9 new items (APP-061→069) aligning GH issues with universal index |
@@ -253,7 +253,7 @@
 | 11:28 | workspace-root | yes--how any one thing done by one = how every thing is done by one; anything done needs doing w sincerity and earnestne... | Route hint: unknown -> claude |
 | 11:31 | workspace-root | quick universal primitive directive: | Route hint: unknown -> claude |
 | 11:32 | workspace-root | summon 3 critical lenses and review as  outsider's with a bone to pick | Route hint: unknown -> claude |
-| 11:52 | workspace-root | i believe we are attempting to solve that here: /Users/4jp/Workspace/organvm-iv-taxis/vox--architectura-gubernatio | Route hint: unknown -> claude |
+| 11:52 | workspace-root | i believe we are attempting to solve that here: ~/Workspace/organvm-iv-taxis/vox--architectura-gubernatio | Route hint: unknown -> claude |
 | 11:54 | workspace-root | well broadly, the process is life itself--not the destination; so embarking on a new voyage--the domain and purpose of v... | Route hint: unknown -> claude |
 | 11:56 | workspace-root | sure but to be clear time is of the essence | Route hint: unknown -> claude |
 | 12:12 | meta-organvm | not with a bang, but a whimper it begins again; | Route hint: unknown -> claude |
@@ -283,7 +283,7 @@
 | 14:40 | meta-organvm | how does the actualize in a tree directory from top to bottom? | Route hint: unknown -> claude |
 | 14:43 | meta-organvm | that isnt quite it--The goal is, of course, really to get everything into its most fundamental function and allow it to ... | Route hint: organism -> a-organvm (codex/gemini) |
 | 14:58 | application-pipeline | yes implement all ur suggestions | Route hint: unknown -> claude |
-| 15:46 | application-pipeline | so review this directory first: /Users/4jp/Workspace/meta-organvm/aerarium--res-publica | Route hint: organism -> a-organvm (codex/gemini) |
+| 15:46 | application-pipeline | so review this directory first: ~/Workspace/meta-organvm/aerarium--res-publica | Route hint: organism -> a-organvm (codex/gemini) |
 | 15:49 | meta-organvm | what about all the specs, theory, governance, science, society ideas and laws brought in for absorptiom | Route hint: transmutation -> organvm-engine (codex/gemini) |
 | 15:57 | application-pipeline | let's think of how these all connect and where they live | Route hint: unknown -> claude |
 | 16:03 | meta-organvm | would you say this whole plan is worth enacting or overwrought serious-self dumb dumb? | Route hint: unknown -> claude |
@@ -312,7 +312,7 @@
 | 00:58 | meta-organvm | providing info for your connecting IN A PROMPT SEQUENCE | Route hint: unknown -> claude |
 | 00:58 | meta-organvm | theres more | Route hint: unknown -> claude |
 | 01:15 | meta-organvm | next (not over): "❯ all the N/As suggest something imperative; it means their is a vacuum where something should be--res... | Route hint: unknown -> claude |
-| 01:22 | meta-organvm | review: /Users/4jp/Workspace/a-organvm | Route hint: organism -> a-organvm (codex/gemini) |
+| 01:22 | meta-organvm | review: ~/Workspace/a-organvm | Route hint: organism -> a-organvm (codex/gemini) |
 | 02:20 | meta-organvm | and what sequences via my prompting are patterns for formalizing; | Route hint: unknown -> claude |
 | 02:21 | meta-organvm | That's your translation of my prompt sequences from our history, or the data is coming from elsewhere. | Route hint: unknown -> claude |
 | 02:23 | meta-organvm | all your analysis of my prompts is saved? | Route hint: unknown -> claude |
@@ -335,7 +335,7 @@
 | 11:45 | a-organvm | proceed with all logicl and forward propulsions | Route hint: unknown -> claude |
 | 11:54 | orchestration-start-here | ensure: | Route hint: unknown -> claude |
 | 12:14 | application-pipeline | so prep todays full run thru Only report back when everything is done. I could log into a URL, apply for a job with the ... | Route hint: pipeline -> application-pipeline (codex/gemini) |
-| 12:50 | a-organvm | this is eve from which begets you adam: /Users/4jp/Workspace/meta-organvm/post-flood | Route hint: organism -> a-organvm (codex/gemini) |
+| 12:50 | a-organvm | this is eve from which begets you adam: ~/Workspace/meta-organvm/post-flood | Route hint: organism -> a-organvm (codex/gemini) |
 | 16:53 | orchestration-start-here | the opportunity arises (less than 14% of token usage left until friday am; i will pass you information--sort & let's att... (x2) | Route hint: unknown -> claude |
 | 17:07 | orchestration-start-here | there's more incoming intake | Route hint: unknown -> claude |
 | 17:54 | orchestration-start-here | oz-wizard--like reverence & ceremony: sacred war-master container attracts destructive-attractions & repels logical-anti... | Route hint: emission -> orchestration-start-here (codex/gemini) |

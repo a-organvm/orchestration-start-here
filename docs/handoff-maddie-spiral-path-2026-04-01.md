@@ -25,7 +25,7 @@
 | HTML V6 (Modern Web Animation) | 1 | HTML/JS | Three.js + GSAP, 14 nodes, shell only |
 | iMessage thread (PDF) | 5pp | Screenshot PDF | Conversation + logistics context |
 
-**Source root:** `/Users/4jp/Downloads/drive-download-20260401T143646Z-3-001/`
+**Source root:** `~/Downloads/drive-download-20260401T143646Z-3-001/`
 
 ---
 

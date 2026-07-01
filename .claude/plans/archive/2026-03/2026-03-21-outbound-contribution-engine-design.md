@@ -178,7 +178,7 @@ orchestration-start-here/
 - **Registry:** Orchestrator adds entries via Python (same pattern as Hive registration)
 - **IRF:** Orchestrator and Monitor update IRF completions
 - **ORGAN-VII:** Monitor triggers distribution on PR merge (future: Kerygma profile creation)
-- **LaunchAgent:** Monitor designed for periodic execution via `com.4jp.contrib-monitor.plist`
+- **LaunchAgent:** Monitor designed for periodic execution via `com.[user].contrib-monitor.plist`
 
 ---
 

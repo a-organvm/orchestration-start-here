@@ -122,7 +122,7 @@ def approve_and_initialize(
             public=True,
         )
         subprocess.run(
-            ["git", "remote", "add", "origin", f"git@github.com:organvm-iv-taxis/{ws_name}.git"],
+            ["git", "remote", "add", "origin", f"[email redacted]:organvm-iv-taxis/{ws_name}.git"],
             cwd=ws_path,
             capture_output=True,
         )
@@ -136,7 +136,7 @@ def approve_and_initialize(
     if not skip_submodule:
         subprocess.run(
             ["git", "submodule", "add", "-f",
-             f"git@github.com:organvm-iv-taxis/{ws_name}.git", ws_name],
+             f"[email redacted]:organvm-iv-taxis/{ws_name}.git", ws_name],
             cwd=ORGAN_IV_DIR,
             capture_output=True,
         )

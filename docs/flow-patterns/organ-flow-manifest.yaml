@@ -37,7 +37,7 @@ organs:
     role: "governance"
     description: "Meta-coordination. Dreamcatcher, agents, flow enforcement."
     status: "staging"
-    staging_path: "/Users/4jp/Workspace/ORG-IV-orchestration-staging"
+    staging_path: "~/Workspace/ORG-IV-orchestration-staging"
 
   V:
     name: "Public Process"
@@ -46,7 +46,7 @@ organs:
     role: "exposure"
     description: "Public APIs, SDKs, external developer interfaces."
     status: "staging"
-    staging_path: "/Users/4jp/Workspace/ORG-V-public-process-staging"
+    staging_path: "~/Workspace/ORG-V-public-process-staging"
 
   VI:
     name: "Community"
@@ -55,7 +55,7 @@ organs:
     role: "cultivation"
     description: "Community governance, contribution frameworks, salons."
     status: "staging"
-    staging_path: "/Users/4jp/Workspace/ORG-VI-community-staging"
+    staging_path: "~/Workspace/ORG-VI-community-staging"
 
   VII:
     name: "Marketing"
@@ -64,7 +64,7 @@ organs:
     role: "amplification"
     description: "Grants, content, press, analytics, market feedback."
     status: "staging"
-    staging_path: "/Users/4jp/Workspace/ORG-VII-marketing-staging"
+    staging_path: "~/Workspace/ORG-VII-marketing-staging"
 
 # Auxiliary organ (not numbered, but part of ecosystem)
 auxiliary:
@@ -184,7 +184,7 @@ discovery_flow:
 orchestration_responsibilities:
   canonical_index:
     description: "Maintains master list of all repos across all orgs."
-    location: "metasystem-manifest/4jp-metasystem.yaml"
+    location: "metasystem-manifest/[user]-metasystem.yaml"
 
   schema_governance:
     description: "Validates seed.yaml for all organs."

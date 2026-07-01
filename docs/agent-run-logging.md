@@ -135,7 +135,7 @@ Examples:
   "session_id": "550e8400-e29b-41d4-a716-446655440000",
   "agent_name": "claude-code",
   "agent_type": "interactive",
-  "repo_path": "/Users/4jp/Workspace/organvm-iv-taxis/orchestration-start-here",
+  "repo_path": "~/Workspace/organvm-iv-taxis/orchestration-start-here",
   "organ": "ORGAN-IV",
   "issue_ref": "#107",
   "start_time": "2026-03-08T10:00:00Z",

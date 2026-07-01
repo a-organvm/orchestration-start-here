@@ -2,7 +2,7 @@
 
 **Project:** Omni-Dromenon-Engine (Real-time audience-participatory performance system)
 **GitHub Org:** https://github.com/orgs/omni-dromenon-machina
-**Local Root:** `/Users/4jp/Desktop/omni-dromenon-machina/`
+**Local Root:** `~/Desktop/omni-dromenon-machina/`
 **Status:** Phase C (Deployment & Narrative) In Progress - Deliverables A2/D1 Drafted
 **Live Core:** https://omni-dromenon-core-dkxnci5fua-uc.a.run.app
 **Live SDK:** https://omni-dromenon-sdk-dkxnci5fua-uc.a.run.app
@@ -38,7 +38,7 @@ Three parallel deliverables with zero coordination required:
 
 ### Validation Commands
 ```bash
-cd /Users/4jp/Desktop/omni-dromenon-machina
+cd ~/Desktop/omni-dromenon-machina
 
 # Check A1
 cd core-engine && npm test

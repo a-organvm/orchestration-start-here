@@ -54,12 +54,12 @@ WORKSPACES = {
 
 SESSION_DIRS = {
     "orchestration-start-here": Path.home()
-    / ".claude/projects/-Users-4jp-Workspace-organvm-iv-taxis-orchestration-start-here",
-    "meta-organvm": Path.home() / ".claude/projects/-Users-4jp-Workspace-meta-organvm",
-    "a-organvm": Path.home() / ".claude/projects/-Users-4jp-Workspace-a-organvm",
+    / ".claude/projects/-Users-[user]-Workspace-organvm-iv-taxis-orchestration-start-here",
+    "meta-organvm": Path.home() / ".claude/projects/-Users-[user]-Workspace-meta-organvm",
+    "a-organvm": Path.home() / ".claude/projects/-Users-[user]-Workspace-a-organvm",
     "application-pipeline": Path.home()
-    / ".claude/projects/-Users-4jp-Workspace-4444J99-application-pipeline",
-    "workspace-root": Path.home() / ".claude/projects/-Users-4jp-Workspace",
+    / ".claude/projects/-Users-[user]-Workspace-4444J99-application-pipeline",
+    "workspace-root": Path.home() / ".claude/projects/-Users-[user]-Workspace",
 }
 
 CLASSIFY_PATTERNS: dict[str, tuple[str, ...]] = {

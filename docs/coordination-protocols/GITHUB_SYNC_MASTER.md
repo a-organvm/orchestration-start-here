@@ -1,7 +1,7 @@
 # OMNI-DROMENON-MACHINA: GITHUB ↔ LOCAL SYNCHRONIZATION
 
 **Status:** GitHub org `omni-dromenon-machina` is LIVE with 12 repos
-**Local State:** `/Users/4jp/Desktop/omni-dromenon-machina/` (11 repos + 2 .github drafts + 5 handoff docs)
+**Local State:** `~/Desktop/omni-dromenon-machina/` (11 repos + 2 .github drafts + 5 handoff docs)
 **Action:** Synchronize GitHub state with local + consolidate .github drafts + rename directory
 
 ---
@@ -28,7 +28,7 @@
 
 ## LOCAL STATE
 
-**Path:** `/Users/4jp/Desktop/omni-dromenon-machina/`
+**Path:** `~/Desktop/omni-dromenon-machina/`
 **Structure:**
 ```
 omni-dromenon-machina/
@@ -68,9 +68,9 @@ omni-dromenon-machina/
 ### TASK 1: CONSOLIDATE `.github` DRAFTS
 
 **Current:** 3 versions exist
-- `/Users/4jp/Desktop/omni-dromenon-machina/.github/` (current)
-- `/Users/4jp/Desktop/omni-dromenon-machina/.github-v1.zip`
-- `/Users/4jp/Desktop/omni-dromenon-machina/.github-v2.zip`
+- `~/Desktop/omni-dromenon-machina/.github/` (current)
+- `~/Desktop/omni-dromenon-machina/.github-v1.zip`
+- `~/Desktop/omni-dromenon-machina/.github-v2.zip`
 
 **Action:**
 1. Extract both zips to compare:
@@ -103,7 +103,7 @@ omni-dromenon-machina/
 
 **Action:**
 ```bash
-cd /Users/4jp/Desktop/omni-dromenon-machina/
+cd ~/Desktop/omni-dromenon-machina/
 mkdir client-sdk
 touch client-sdk/README.md
 cat > client-sdk/README.md << 'EOF'
@@ -123,8 +123,8 @@ EOF
 
 ### TASK 3: RENAME DIRECTORY TO MATCH GITHUB ORG
 
-**Current:** `/Users/4jp/Desktop/omni-dromenon-machina/`
-**Target:** `/Users/4jp/Desktop/omni-dromenon-machina/`
+**Current:** `~/Desktop/omni-dromenon-machina/`
+**Target:** `~/Desktop/omni-dromenon-machina/`
 
 **Action:**
 ```bash
@@ -197,7 +197,7 @@ EOF
 ## CONSOLIDATED FILE STRUCTURE (TARGET STATE)
 
 ```
-/Users/4jp/Desktop/omni-dromenon-machina/
+~/Desktop/omni-dromenon-machina/
 │
 ├── _COORDINATION_DOCS/                  ← Handoff infrastructure (Phase A-D)
 │   ├── HANDOFF_MASTER.md
@@ -275,7 +275,7 @@ EOF
 [ ] No .DS_Store or other clutter
 
 # 6. READY FOR PHASE A
-[ ] AI services can access /Users/4jp/Desktop/omni-dromenon-machina/
+[ ] AI services can access ~/Desktop/omni-dromenon-machina/
 [ ] All entry points from PER_REPO_KEYS.md are valid
 [ ] Handoff templates use correct paths
 ```
@@ -325,7 +325,7 @@ git push origin main
 
 ```bash
 # 1. Consolidate .github
-cd /Users/4jp/Desktop/omni-dromenon-machina
+cd ~/Desktop/omni-dromenon-machina
 unzip .github-v1.zip -d _v1_compare/
 unzip .github-v2.zip -d _v2_compare/
 # Compare files manually or with diff

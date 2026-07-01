@@ -51,14 +51,14 @@
 ## PHASE B: VALIDATION GATE (Dec 11 Morning)
 
 ### Pre-Review Checklist
-- [ ] Directory: `/Users/4jp/Desktop/omni-dromenon-machina/` exists
+- [ ] Directory: `~/Desktop/omni-dromenon-machina/` exists
 - [ ] Read: `PUSH_ACTION_CARD.txt` (quick reference)
 - [ ] Coffee ☕
 
 ### Check Task A1 (Consensus Algorithm - Jules)
 
 ```bash
-cd /Users/4jp/Desktop/omni-dromenon-machina/core-engine
+cd ~/Desktop/omni-dromenon-machina/core-engine
 
 # 1. Does file exist?
 [ -f src/consensus/weighted-consensus.ts ] && echo "✅ File exists" || echo "❌ File missing"
@@ -86,7 +86,7 @@ npm run benchmark
 ### Check Task A2 (Grant Narrative - Gemini)
 
 ```bash
-cd /Users/4jp/Desktop/omni-dromenon-machina
+cd ~/Desktop/omni-dromenon-machina
 
 # 1. Does file exist?
 [ -f GRANT_MATERIALS/ars-electronica-narrative-DRAFT.md ] && echo "✅ File exists" || echo "❌ File missing"
@@ -107,7 +107,7 @@ cat GRANT_MATERIALS/ars-electronica-narrative-DRAFT.md
 ### Check Task A3 (CI/CD Workflows - Copilot)
 
 ```bash
-cd /Users/4jp/Desktop/omni-dromenon-machina
+cd ~/Desktop/omni-dromenon-machina
 
 # 1. Do all 3 workflows exist?
 [ -f .github/workflows/test.yml ] && echo "✅ test.yml" || echo "❌ test.yml missing"
@@ -146,7 +146,7 @@ echo "✅ ALL PHASE A TASKS COMPLETE AND APPROVED"
 echo ""
 echo "Next steps:"
 echo "1. Commit all Phase A outputs to git"
-echo "2. Push to GitHub: /Users/4jp/Desktop/omni-dromenon-machina/PUSH_ALL_REPOS.sh"
+echo "2. Push to GitHub: ~/Desktop/omni-dromenon-machina/PUSH_ALL_REPOS.sh"
 echo "3. Brief Phase B AI services for demo/video work"
 echo "4. Execute Phase C (Dec 13-27)"
 ```
@@ -168,7 +168,7 @@ echo "4. Re-validate Dec 12 or later"
 
 ```bash
 # When you're ready to push all repos to GitHub:
-/Users/4jp/Desktop/omni-dromenon-machina/PUSH_ALL_REPOS.sh
+~/Desktop/omni-dromenon-machina/PUSH_ALL_REPOS.sh
 
 # Follow on-screen prompts
 # Expected: All 12 repos pushed to https://github.com/orgs/omni-dromenon-machina/

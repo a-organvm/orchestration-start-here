@@ -2,7 +2,7 @@
 
 **Session:** S52 | **Ledger sequence:** pending
 **Window:** 24h (2026-04-01 → 2026-04-02)
-**Source:** padavano.anthony@gmail.com
+**Source:** [email redacted]
 **Volume:** 76 messages (37 GitHub, 10 Grok automated, 5 LinkedIn, 24 other)
 
 ---
@@ -16,7 +16,7 @@
 | Field | Value |
 |-------|-------|
 | **Priority** | P0 (strategic decision) |
-| **Source** | Thomas King, Canteen community (thomas@contourdefinemilestone.com) |
+| **Source** | Thomas King, Canteen community ([email redacted]) |
 | **Subject** | Virtual invite-only hackathon: "Solana With Autonomous Running Machines" |
 | **Dates** | April 6 – May 11, 2026 |
 | **Overlap** | Agent swarm concepts (debate primitives, KV cache as agent memory, multi-agent coordination) align with `agentic-titan` topology patterns |

@@ -10,7 +10,7 @@ from pathlib import Path
 from typing import Iterable
 
 HOME = Path(os.path.expanduser("~"))
-MEMORY_DIR = HOME / ".claude" / "projects" / "-Users-4jp" / "memory"
+MEMORY_DIR = HOME / ".claude" / "projects" / "-Users-[user]" / "memory"
 PLANS_DIR = HOME / ".claude" / "plans"
 LEDGER_FILE = HOME / "Workspace" / "organvm" / "orchestration-start-here" / "action_ledger" / "data" / "actions.yaml"
 WORKSPACE_DIR = HOME / "Workspace"

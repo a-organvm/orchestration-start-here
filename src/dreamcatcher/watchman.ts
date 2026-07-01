@@ -99,7 +99,7 @@ export class NightWatchman {
     const plan = await this.router.callProvider(
       'ARCHITECT',
       scenario.prompt,
-      `Context: 4jp-metasystem.yaml\n${kgContext}`,
+      `Context: [user]-metasystem.yaml\n${kgContext}`,
       {
         projectName: 'omni-dromenon-machina',
         taskType: 'feature'
@@ -171,7 +171,7 @@ export class NightWatchman {
     const plan = await this.router.callProvider(
       'ARCHITECT',
       `Analyze drift in ${project.name}. Missing modules: ${project.missing_modules?.join(', ')}\n\n${kgContext}`,
-      `Context: 4jp-metasystem.yaml. Project Genome: ${project.name}`,
+      `Context: [user]-metasystem.yaml. Project Genome: ${project.name}`,
       {
         projectName: project.name,
         taskType: 'drift-fix'

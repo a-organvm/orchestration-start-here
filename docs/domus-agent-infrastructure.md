@@ -313,7 +313,7 @@ Chezmoi templates handle machine-specific differences:
 {{ if eq .chezmoi.os "darwin" }}
 export HOMEBREW_PREFIX="/opt/homebrew"
 {{ else }}
-export HOMEBREW_PREFIX="/home/linuxbrew/.linuxbrew"
+export HOMEBREW_PREFIX="~/.linuxbrew"
 {{ end }}
 ```
 

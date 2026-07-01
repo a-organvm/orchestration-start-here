@@ -63,7 +63,7 @@ From the transcript, extract:
    - Contains: source verification, what changed, existing issue map, new issues justified, recommended board outcome, remaining dependencies
 
 3. **Memory entries** (if new patterns/discoveries)
-   - Location: `.claude/projects/-Users-4jp-Workspace-.../memory/`
+   - Location: `.claude/projects/-Users-[user]-Workspace-.../memory/`
    - Contains: new patterns, converged findings, relationship updates
 
 4. **IRF propagation** (if work completed/discovered)

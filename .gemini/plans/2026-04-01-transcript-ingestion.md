@@ -38,7 +38,7 @@ To achieve 100% ingestion and correct the anomalies discovered by the hall-monit
 - **Commit:** `fix: YAML health — purge duplicate deferral and time keys, clean scratch files`
 
 ### 3. Memory Tracking (`a-organvm`)
-- **Chezmoi Addition:** Add `~/.claude/projects/-Users-4jp-Workspace-a-organvm/` to `chezmoi` so the autopoietic memory files have a remote backup. (This requires human action on the host, as requested in S48).
+- **Chezmoi Addition:** Add `~/.claude/projects/-Users-[user]-Workspace-a-organvm/` to `chezmoi` so the autopoietic memory files have a remote backup. (This requires human action on the host, as requested in S48).
 
 ### 4. Board Atomization & Intake
 - Generate `docs/superpowers/intakes/2026-04-01-s48-s49-board-atomization.md` mapping the remaining unblocked work to the operating board.

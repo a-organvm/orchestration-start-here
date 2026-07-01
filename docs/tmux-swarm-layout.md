@@ -102,7 +102,7 @@ Structured log output from agents, CI, or system processes.
 tail -f agent.log | jq '.'
 
 # MCP server logs
-tail -f /Users/4jp/System/Logs/mcp-servers.log
+tail -f ~/System/Logs/mcp-servers.log
 
 # CI log streaming (if using act for local CI)
 act --verbose 2>&1 | tail -f

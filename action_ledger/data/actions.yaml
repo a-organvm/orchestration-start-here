@@ -6618,13 +6618,13 @@ actions:
     tension: 0.51
     archetype: IV
     agent: codex/gemini
-    workspace: /Users/4jp/Workspace/meta-organvm/organvm-corpvs-testamentvm
+    workspace: ~/Workspace/meta-organvm/organvm-corpvs-testamentvm
     token_budget: large
     subsystem: intake_router
   produced: []
   routes:
   - kind: feeds
-    target: /Users/4jp/Workspace/meta-organvm/organvm-corpvs-testamentvm
+    target: ~/Workspace/meta-organvm/organvm-corpvs-testamentvm
     amount: 0.0
   - kind: feeds
     target: archetype:IV
@@ -6646,7 +6646,7 @@ actions:
     tension: 0.51
     archetype: IV
     agent: codex/gemini
-    workspace: /Users/4jp/Workspace/meta-organvm/organvm-corpvs-testamentvm
+    workspace: ~/Workspace/meta-organvm/organvm-corpvs-testamentvm
     token_budget: large
     intake_action_id: act-ROUTER-0331-001
   produced: []
@@ -6658,7 +6658,7 @@ actions:
     target: act-ROUTER-0331-001
     amount: 0.0
   - kind: feeds
-    target: /Users/4jp/Workspace/meta-organvm/organvm-corpvs-testamentvm
+    target: ~/Workspace/meta-organvm/organvm-corpvs-testamentvm
     amount: 0.0
   - kind: feeds
     target: archetype:IV

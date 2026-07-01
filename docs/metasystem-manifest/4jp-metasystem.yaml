@@ -1,7 +1,7 @@
-# /Users/4jp/Workspace/omni-dromenon-machina/4jp-metasystem.yaml
+# ~/Workspace/omni-dromenon-machina/[user]-metasystem.yaml
 
 version: 1
-name: "4jp-metasystem"
+name: "[user]-metasystem"
 description: >
   Meta-system for autonomous development orchestration.
   omni-dromenon-machina orchestrates development across managed workspaces.
@@ -122,5 +122,5 @@ relationships:
 
 metadata:
   created: "2025-12-27"
-  owner: "4jp"
+  owner: "[user]"
   purpose: "Autonomous identity system development ecosystem"

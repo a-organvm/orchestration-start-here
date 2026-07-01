@@ -16,7 +16,7 @@ If `Systemic_Friction_Events > Local_Resolutions` OR if `Portfolio_Recombination
 
 ### The Protocol
 1. **The Halt:** The Reflexive Loop suspends all autonomous policy adjustments (e.g., modifying `agent-rules.yaml` or `scoring-rubric.yaml`).
-2. **The Prompt:** The system generates an Ask Packet (via MCP) directed at the Human (4jp).
+2. **The Prompt:** The system generates an Ask Packet (via MCP) directed at the Human ([user]).
 3. **The Stranger Presentation:** The report is presented NOT in system jargon (no "vacua", "strata", "substrate"), but in raw impact metrics: "You spent 14 hours on Organs I and II, but Organ III produced the only client signal. Are we avoiding commerce?"
 4. **The Human Override:** The Human must explicitly reply with:
    - `[ANCHOR: AFFIRM]` - The system's diagnosis is correct. Proceed with policy adjustment.

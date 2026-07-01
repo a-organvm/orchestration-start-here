@@ -14,7 +14,7 @@
 
 ### Phase A1: Consensus Algorithm (Jules)
 - **Task:** Implement weighted consensus + tests + benchmark
-- **Location:** `/Users/4jp/Desktop/omni-dromenon-machina/core-engine/`
+- **Location:** `~/Desktop/omni-dromenon-machina/core-engine/`
 - **Specification:** See PHASE_A_BRIEFING_TEMPLATES.md
 - **Output Files:**
   - `src/consensus/weighted-consensus.ts` (main algorithm)
@@ -29,7 +29,7 @@
 
 ### Phase A2: Grant Narrative (Gemini)
 - **Task:** Write 1200-word grant narrative for Ars Electronica
-- **Location:** `/Users/4jp/Desktop/omni-dromenon-machina/`
+- **Location:** `~/Desktop/omni-dromenon-machina/`
 - **Specification:** See PHASE_A_BRIEFING_TEMPLATES.md
 - **Output File:** `GRANT_MATERIALS/ars-electronica-narrative-DRAFT.md`
 - **Structure (Word counts):**
@@ -48,7 +48,7 @@
 
 ### Phase A3: CI/CD Workflows (Copilot)
 - **Task:** Create 3 GitHub Actions workflows
-- **Location:** `/Users/4jp/Desktop/omni-dromenon-machina/.github/workflows/`
+- **Location:** `~/Desktop/omni-dromenon-machina/.github/workflows/`
 - **Specification:** See PHASE_A_BRIEFING_TEMPLATES.md
 - **Output Files:**
   - `test.yml` (run tests on push/PR)
@@ -80,7 +80,7 @@
 - **⏸️ HOLD:** Critical issues → Debug, re-validate later
 
 ### If Approved
-- Push all repos to GitHub using: `/Users/4jp/Desktop/omni-dromenon-machina/PUSH_ALL_REPOS.sh`
+- Push all repos to GitHub using: `~/Desktop/omni-dromenon-machina/PUSH_ALL_REPOS.sh`
 - Proceed to Phase C briefing
 
 ---

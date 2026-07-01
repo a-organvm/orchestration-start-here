@@ -4,7 +4,7 @@
 **Date:** 2026-05-04
 **Scope:** System-wide (any agent, any session, any decision)
 **Lifecycle Stage:** ABSORB (codified 2026-05-04; second run 2026-05-05 "proceed w all" session exercised all five phases against the 6-item handoff list)
-**Provenance:** Codified from `~/.claude/projects/-Users-4jp/memory/feedback_protocol_precedent_layered_framework.md` and plan `~/.claude/plans/if-protocol-doesn-t-dictate-expressive-cat.md`. Triggers: user corrections 2026-05-02 (`feedback_protocols_dictate_actions`) + 2026-05-04 (`If protocol doesn't dictate, then precedent might dictate` + `Further exploration required until impossible certainty`).
+**Provenance:** Codified from `~/.claude/projects/-Users-[user]/memory/feedback_protocol_precedent_layered_framework.md` and plan `~/.claude/plans/if-protocol-doesn-t-dictate-expressive-cat.md`. Triggers: user corrections 2026-05-02 (`feedback_protocols_dictate_actions`) + 2026-05-04 (`If protocol doesn't dictate, then precedent might dictate` + `Further exploration required until impossible certainty`).
 
 > Five-layer decision hierarchy that prevents agent deferral-to-user when protocol or precedent already speaks. Replaces ad-hoc "I don't know, ask the user" with disciplined search through layered authoritative sources.
 
@@ -58,7 +58,7 @@ DECISION SURFACE EMERGES (action sequence to enumerate, or item to gate)
 **Invariant steps:**
 1. Survey `~/Workspace/organvm/orchestration-start-here/docs/sop-*.md` for matching protocol
 2. Survey active plans in `~/.claude/plans/` (most-recent first per freshness rule)
-3. Survey feedback memories at `~/.claude/projects/-Users-4jp/memory/feedback_*.md`
+3. Survey feedback memories at `~/.claude/projects/-Users-[user]/memory/feedback_*.md`
 4. If matching protocol found → execute per protocol's prescribed sequence
 5. If protocol exists but ambiguous → apply protocol's "When applicable" criteria; if still ambiguous → L3
 6. If no protocol → L3
@@ -73,9 +73,9 @@ DECISION SURFACE EMERGES (action sequence to enumerate, or item to gate)
 1. Query stores **exhaustively** (impossible-certainty rule):
    - `python -m action_ledger show --verb <V> --target <T>`
    - `python -m action_ledger cycles --type verb_sequence --min-recurrence 2`
-   - `grep -l "<keywords>" ~/.claude/projects/-Users-4jp/memory/feedback_*.md`
-   - `grep -l "<keywords>" ~/.claude/projects/-Users-4jp/memory/project_artifact_*.md`
-   - `grep -l "<keywords>" ~/.claude/projects/-Users-4jp/memory/project_session_*.md`
+   - `grep -l "<keywords>" ~/.claude/projects/-Users-[user]/memory/feedback_*.md`
+   - `grep -l "<keywords>" ~/.claude/projects/-Users-[user]/memory/project_artifact_*.md`
+   - `grep -l "<keywords>" ~/.claude/projects/-Users-[user]/memory/project_session_*.md`
    - GitHub API: `gh pr list ...`, `gh search prs ...`, `gh api repos/.../branches/main/protection`
    - Originating plan files (NOT briefing-recap memories — freshness rule)
 2. Apply 3-of-4 rubric per match:

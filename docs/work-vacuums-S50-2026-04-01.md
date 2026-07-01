@@ -166,9 +166,9 @@ All 14 have empty `artifact_path` — none written to destination directories.
 
 | Agent | Exit code | Severity |
 |-------|-----------|----------|
-| `com.4jp.mcp.servers` | 78 | **High** — powers tool infrastructure |
-| `com.4jp.pipeline.daily-monitor` | 1 | Medium — contribution monitoring |
-| `com.4jp.pipeline.daily-scan` | 1 | Medium — contribution scanning |
+| `com.[user].mcp.servers` | 78 | **High** — powers tool infrastructure |
+| `com.[user].pipeline.daily-monitor` | 1 | Medium — contribution monitoring |
+| `com.[user].pipeline.daily-scan` | 1 | Medium — contribution scanning |
 
 ### LaunchAgents Documented but Missing (8)
 

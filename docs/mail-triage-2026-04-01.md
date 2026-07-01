@@ -2,7 +2,7 @@
 
 **Session:** S48 | **Ledger sequence:** seq-S48-002 (closed)
 **Window:** 72h (2026-03-30 → 2026-04-01)
-**Source:** padavano.anthony@gmail.com (58,596 messages total)
+**Source:** [email redacted] (58,596 messages total)
 
 ---
 
@@ -44,7 +44,7 @@
 |-------|-------|
 | **ID** | act-S48-0401-009 |
 | **Priority** | P0 (urgency: 0.85) |
-| **Source** | Render (no-reply@render.com), today 13:49 UTC |
+| **Source** | Render ([email redacted]), today 13:49 UTC |
 | **Service** | `ucc-mca-api` — Service ID: `srv-d6hh48fkijhs73fgk00g` |
 | **Repo** | `organvm-iii-ergon/public-record-data-scrapper` (ORGAN-III, Commercial Products) |
 | **Error** | Exited with status 1. May auto-recover (Render restarts automatically). |

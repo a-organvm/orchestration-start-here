@@ -26,7 +26,7 @@ Convergence recs: `docs/superpowers/specs/2026-03-30-fieldwork-zettelkasten-conv
 
 ## Step 1: seed.yaml P0 Fix (mechanical)
 
-**File:** `/Users/4jp/Workspace/organvm-iv-taxis/orchestration-start-here/seed.yaml`
+**File:** `~/Workspace/organvm-iv-taxis/orchestration-start-here/seed.yaml`
 
 Changes:
 - Add `absorption.py` to `metadata.modules.contrib_engine` list (missing, module exists since S35)
@@ -44,7 +44,7 @@ Changes:
 
 ## Step 2: Pydantic Models (schemas.py)
 
-**File:** `/Users/4jp/Workspace/organvm-iv-taxis/orchestration-start-here/contrib_engine/schemas.py`
+**File:** `~/Workspace/organvm-iv-taxis/orchestration-start-here/contrib_engine/schemas.py`
 
 Append after line 344 (end of AbsorptionIndex class). ~45 lines.
 
@@ -98,7 +98,7 @@ class FieldworkIndex(BaseModel):
 
 ## Step 3: fieldwork.py Module
 
-**File:** `/Users/4jp/Workspace/organvm-iv-taxis/orchestration-start-here/contrib_engine/fieldwork.py` (NEW)
+**File:** `~/Workspace/organvm-iv-taxis/orchestration-start-here/contrib_engine/fieldwork.py` (NEW)
 
 ~75 lines. Pattern source: `backflow.py` (56 lines).
 
@@ -127,7 +127,7 @@ save_fieldwork(index, output_path=None) -> Path
 
 ## Step 4: CLI Integration (__main__.py)
 
-**File:** `/Users/4jp/Workspace/organvm-iv-taxis/orchestration-start-here/contrib_engine/__main__.py`
+**File:** `~/Workspace/organvm-iv-taxis/orchestration-start-here/contrib_engine/__main__.py`
 
 Add `_register_fieldwork_commands(subparsers)` + call it in `main()`. ~45 lines.
 
@@ -163,7 +163,7 @@ Also register in `cli.py`'s `register_contrib_commands()`:
 
 ## Step 5: Tests
 
-**File:** `/Users/4jp/Workspace/organvm-iv-taxis/orchestration-start-here/tests/test_contrib_fieldwork.py` (NEW)
+**File:** `~/Workspace/organvm-iv-taxis/orchestration-start-here/tests/test_contrib_fieldwork.py` (NEW)
 
 ~120 lines. Pattern source: `test_contrib_backflow.py`.
 
@@ -195,7 +195,7 @@ TestPersistence:
 
 ## Step 6: Verify
 
-1. `cd /Users/4jp/Workspace/organvm-iv-taxis/orchestration-start-here`
+1. `cd ~/Workspace/organvm-iv-taxis/orchestration-start-here`
 2. `python -m pytest tests/test_contrib_fieldwork.py -v` — all new tests pass
 3. `python -m pytest tests/ -v` — full suite passes, no regressions
 4. `python -m contrib_engine fieldwork record --workspace contrib--dbt-mcp --category ci_architecture --signal "GitHub Actions matrix with 3 Python versions" --spectrum 1 --source repo_exploration` — produces valid observation

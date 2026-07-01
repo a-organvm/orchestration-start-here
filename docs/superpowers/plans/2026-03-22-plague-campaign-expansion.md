@@ -81,7 +81,7 @@ class TestInferTargetDictFormat:
 
 - [ ] **Step 2: Run tests to verify they fail**
 
-Run: `cd /Users/4jp/Workspace/organvm-iv-taxis/orchestration-start-here && python3 -m pytest tests/test_contrib_monitor.py::TestInferTargetDictFormat -v`
+Run: `cd ~/Workspace/organvm-iv-taxis/orchestration-start-here && python3 -m pytest tests/test_contrib_monitor.py::TestInferTargetDictFormat -v`
 Expected: 3 FAILED (all return "" because dict format not handled)
 
 - [ ] **Step 3: Fix `_infer_target()` in monitor.py**
@@ -113,13 +113,13 @@ def _infer_target(seed: dict) -> str:
 
 - [ ] **Step 4: Run all monitor tests**
 
-Run: `cd /Users/4jp/Workspace/organvm-iv-taxis/orchestration-start-here && python3 -m pytest tests/test_contrib_monitor.py -v`
+Run: `cd ~/Workspace/organvm-iv-taxis/orchestration-start-here && python3 -m pytest tests/test_contrib_monitor.py -v`
 Expected: 12 passed (9 existing + 3 new)
 
 - [ ] **Step 5: Commit**
 
 ```bash
-cd /Users/4jp/Workspace/organvm-iv-taxis/orchestration-start-here
+cd ~/Workspace/organvm-iv-taxis/orchestration-start-here
 git add contrib_engine/monitor.py tests/test_contrib_monitor.py
 git commit -m "fix: monitor._infer_target() handles both seed.yaml formats
 
@@ -329,18 +329,18 @@ class BackflowIndex(BaseModel):
 
 - [ ] **Step 2: Verify all imports work**
 
-Run: `cd /Users/4jp/Workspace/organvm-iv-taxis/orchestration-start-here && python3 -c "from contrib_engine.schemas import Campaign, CampaignAction, CampaignPhase, OutreachIndex, TargetRelationship, OutreachEvent, OutreachChannel, OutreachDirection, BackflowIndex, BackflowItem, BackflowType, BackflowStatus; print('All 12 new models import OK')"`
+Run: `cd ~/Workspace/organvm-iv-taxis/orchestration-start-here && python3 -c "from contrib_engine.schemas import Campaign, CampaignAction, CampaignPhase, OutreachIndex, TargetRelationship, OutreachEvent, OutreachChannel, OutreachDirection, BackflowIndex, BackflowItem, BackflowType, BackflowStatus; print('All 12 new models import OK')"`
 Expected: `All 12 new models import OK`
 
 - [ ] **Step 3: Run existing tests to verify no regressions**
 
-Run: `cd /Users/4jp/Workspace/organvm-iv-taxis/orchestration-start-here && python3 -m pytest tests/ -v`
+Run: `cd ~/Workspace/organvm-iv-taxis/orchestration-start-here && python3 -m pytest tests/ -v`
 Expected: All 25+ existing tests still pass
 
 - [ ] **Step 4: Commit**
 
 ```bash
-cd /Users/4jp/Workspace/organvm-iv-taxis/orchestration-start-here
+cd ~/Workspace/organvm-iv-taxis/orchestration-start-here
 git add contrib_engine/schemas.py
 git commit -m "feat: add campaign, outreach, backflow Pydantic models to schemas
 
@@ -376,7 +376,7 @@ class TestCliEntryPoint:
         result = subprocess.run(
             [sys.executable, "-m", "contrib_engine", "--help"],
             capture_output=True, text=True,
-            cwd="/Users/4jp/Workspace/organvm-iv-taxis/orchestration-start-here",
+            cwd="~/Workspace/organvm-iv-taxis/orchestration-start-here",
         )
         assert result.returncode == 0
         assert "scan" in result.stdout
@@ -386,7 +386,7 @@ class TestCliEntryPoint:
         result = subprocess.run(
             [sys.executable, "-m", "contrib_engine", "scan", "--help"],
             capture_output=True, text=True,
-            cwd="/Users/4jp/Workspace/organvm-iv-taxis/orchestration-start-here",
+            cwd="~/Workspace/organvm-iv-taxis/orchestration-start-here",
         )
         assert result.returncode == 0
         assert "--no-github" in result.stdout
@@ -395,7 +395,7 @@ class TestCliEntryPoint:
         result = subprocess.run(
             [sys.executable, "-m", "contrib_engine", "nonexistent"],
             capture_output=True, text=True,
-            cwd="/Users/4jp/Workspace/organvm-iv-taxis/orchestration-start-here",
+            cwd="~/Workspace/organvm-iv-taxis/orchestration-start-here",
         )
         assert result.returncode != 0
 
@@ -403,7 +403,7 @@ class TestCliEntryPoint:
         result = subprocess.run(
             [sys.executable, "-m", "contrib_engine", "campaign", "--help"],
             capture_output=True, text=True,
-            cwd="/Users/4jp/Workspace/organvm-iv-taxis/orchestration-start-here",
+            cwd="~/Workspace/organvm-iv-taxis/orchestration-start-here",
         )
         assert result.returncode == 0
         assert "show" in result.stdout or "campaign" in result.stdout.lower()
@@ -412,7 +412,7 @@ class TestCliEntryPoint:
         result = subprocess.run(
             [sys.executable, "-m", "contrib_engine", "outreach", "--help"],
             capture_output=True, text=True,
-            cwd="/Users/4jp/Workspace/organvm-iv-taxis/orchestration-start-here",
+            cwd="~/Workspace/organvm-iv-taxis/orchestration-start-here",
         )
         assert result.returncode == 0
 
@@ -420,7 +420,7 @@ class TestCliEntryPoint:
         result = subprocess.run(
             [sys.executable, "-m", "contrib_engine", "backflow", "--help"],
             capture_output=True, text=True,
-            cwd="/Users/4jp/Workspace/organvm-iv-taxis/orchestration-start-here",
+            cwd="~/Workspace/organvm-iv-taxis/orchestration-start-here",
         )
         assert result.returncode == 0
 
@@ -452,7 +452,7 @@ class TestPrefixParameter:
 
 - [ ] **Step 2: Run tests to verify they fail**
 
-Run: `cd /Users/4jp/Workspace/organvm-iv-taxis/orchestration-start-here && python3 -m pytest tests/test_contrib_cli.py -v`
+Run: `cd ~/Workspace/organvm-iv-taxis/orchestration-start-here && python3 -m pytest tests/test_contrib_cli.py -v`
 Expected: FAIL (no `__main__.py`, no `prefix` parameter)
 
 - [ ] **Step 3: Refactor cli.py to accept prefix parameter**
@@ -721,13 +721,13 @@ if __name__ == "__main__":
 
 - [ ] **Step 5: Run CLI tests**
 
-Run: `cd /Users/4jp/Workspace/organvm-iv-taxis/orchestration-start-here && python3 -m pytest tests/test_contrib_cli.py -v`
+Run: `cd ~/Workspace/organvm-iv-taxis/orchestration-start-here && python3 -m pytest tests/test_contrib_cli.py -v`
 Expected: Some pass (help, prefix), some fail (campaign/outreach/backflow modules not yet created). That's expected — they depend on Tasks 4-6.
 
 - [ ] **Step 6: Commit**
 
 ```bash
-cd /Users/4jp/Workspace/organvm-iv-taxis/orchestration-start-here
+cd ~/Workspace/organvm-iv-taxis/orchestration-start-here
 git add contrib_engine/cli.py contrib_engine/__main__.py tests/test_contrib_cli.py
 git commit -m "feat: standalone CLI entry point + prefix parameter for cli.py
 
@@ -859,7 +859,7 @@ class TestCompleteAction:
 
 - [ ] **Step 2: Run tests to verify they fail**
 
-Run: `cd /Users/4jp/Workspace/organvm-iv-taxis/orchestration-start-here && python3 -m pytest tests/test_contrib_campaign.py -v`
+Run: `cd ~/Workspace/organvm-iv-taxis/orchestration-start-here && python3 -m pytest tests/test_contrib_campaign.py -v`
 Expected: FAIL (campaign module not found)
 
 - [ ] **Step 3: Create `contrib_engine/campaign.py`**
@@ -937,13 +937,13 @@ def load_campaign(input_path: Path | None = None) -> Campaign:
 
 - [ ] **Step 4: Run campaign tests**
 
-Run: `cd /Users/4jp/Workspace/organvm-iv-taxis/orchestration-start-here && python3 -m pytest tests/test_contrib_campaign.py -v`
+Run: `cd ~/Workspace/organvm-iv-taxis/orchestration-start-here && python3 -m pytest tests/test_contrib_campaign.py -v`
 Expected: 8 passed
 
 - [ ] **Step 5: Commit**
 
 ```bash
-cd /Users/4jp/Workspace/organvm-iv-taxis/orchestration-start-here
+cd ~/Workspace/organvm-iv-taxis/orchestration-start-here
 git add contrib_engine/campaign.py tests/test_contrib_campaign.py
 git commit -m "feat: campaign sequencer with priority ordering and blocked_by resolution"
 ```
@@ -1051,7 +1051,7 @@ class TestPersistence:
 
 - [ ] **Step 2: Run tests to verify they fail**
 
-Run: `cd /Users/4jp/Workspace/organvm-iv-taxis/orchestration-start-here && python3 -m pytest tests/test_contrib_outreach.py -v`
+Run: `cd ~/Workspace/organvm-iv-taxis/orchestration-start-here && python3 -m pytest tests/test_contrib_outreach.py -v`
 Expected: FAIL
 
 - [ ] **Step 3: Create `contrib_engine/outreach.py`**
@@ -1177,13 +1177,13 @@ def load_outreach(input_path: Path | None = None) -> OutreachIndex:
 
 - [ ] **Step 4: Run outreach tests**
 
-Run: `cd /Users/4jp/Workspace/organvm-iv-taxis/orchestration-start-here && python3 -m pytest tests/test_contrib_outreach.py -v`
+Run: `cd ~/Workspace/organvm-iv-taxis/orchestration-start-here && python3 -m pytest tests/test_contrib_outreach.py -v`
 Expected: 6 passed
 
 - [ ] **Step 5: Commit**
 
 ```bash
-cd /Users/4jp/Workspace/organvm-iv-taxis/orchestration-start-here
+cd ~/Workspace/organvm-iv-taxis/orchestration-start-here
 git add contrib_engine/outreach.py tests/test_contrib_outreach.py
 git commit -m "feat: outreach tracker with event logging, scoring, persistence"
 ```
@@ -1286,7 +1286,7 @@ class TestPersistence:
 
 - [ ] **Step 2: Run tests to verify they fail**
 
-Run: `cd /Users/4jp/Workspace/organvm-iv-taxis/orchestration-start-here && python3 -m pytest tests/test_contrib_backflow.py -v`
+Run: `cd ~/Workspace/organvm-iv-taxis/orchestration-start-here && python3 -m pytest tests/test_contrib_backflow.py -v`
 Expected: FAIL
 
 - [ ] **Step 3: Create `contrib_engine/backflow.py`**
@@ -1375,13 +1375,13 @@ def load_backflow(input_path: Path | None = None) -> BackflowIndex:
 
 - [ ] **Step 4: Run backflow tests**
 
-Run: `cd /Users/4jp/Workspace/organvm-iv-taxis/orchestration-start-here && python3 -m pytest tests/test_contrib_backflow.py -v`
+Run: `cd ~/Workspace/organvm-iv-taxis/orchestration-start-here && python3 -m pytest tests/test_contrib_backflow.py -v`
 Expected: 6 passed
 
 - [ ] **Step 5: Commit**
 
 ```bash
-cd /Users/4jp/Workspace/organvm-iv-taxis/orchestration-start-here
+cd ~/Workspace/organvm-iv-taxis/orchestration-start-here
 git add contrib_engine/backflow.py tests/test_contrib_backflow.py
 git commit -m "feat: backflow pipeline with organ routing and deposit tracking"
 ```
@@ -1396,19 +1396,19 @@ git commit -m "feat: backflow pipeline with organ routing and deposit tracking"
 
 - [ ] **Step 1: Run full test suite**
 
-Run: `cd /Users/4jp/Workspace/organvm-iv-taxis/orchestration-start-here && python3 -m pytest tests/test_contrib_*.py -v --tb=short`
+Run: `cd ~/Workspace/organvm-iv-taxis/orchestration-start-here && python3 -m pytest tests/test_contrib_*.py -v --tb=short`
 Expected: All tests pass (25 existing + 20+ new)
 
 - [ ] **Step 2: Run CLI help to verify all subcommands**
 
-Run: `cd /Users/4jp/Workspace/organvm-iv-taxis/orchestration-start-here && python3 -m contrib_engine --help`
+Run: `cd ~/Workspace/organvm-iv-taxis/orchestration-start-here && python3 -m contrib_engine --help`
 Expected: Lists scan, list, approve, status, monitor, campaign, outreach, backflow
 
 - [ ] **Step 3: Run CLI integration smoke test**
 
 Run:
 ```bash
-cd /Users/4jp/Workspace/organvm-iv-taxis/orchestration-start-here
+cd ~/Workspace/organvm-iv-taxis/orchestration-start-here
 python3 -m contrib_engine campaign show 2>&1
 python3 -m contrib_engine outreach show 2>&1
 python3 -m contrib_engine backflow pending 2>&1
@@ -1494,7 +1494,7 @@ Write `contrib_engine/outreach_protocol.md` from spec Section 6 — the full Pre
 
 Run:
 ```bash
-cd /Users/4jp/Workspace/organvm-iv-taxis/orchestration-start-here
+cd ~/Workspace/organvm-iv-taxis/orchestration-start-here
 python3 -m contrib_engine campaign show
 python3 -m contrib_engine outreach show
 python3 -m contrib_engine backflow pending
@@ -1504,7 +1504,7 @@ Expected: All three display data correctly
 - [ ] **Step 6: Commit**
 
 ```bash
-cd /Users/4jp/Workspace/organvm-iv-taxis/orchestration-start-here
+cd ~/Workspace/organvm-iv-taxis/orchestration-start-here
 git add contrib_engine/data/ contrib_engine/outreach_protocol.md
 git commit -m "feat: initialize campaign data — 13 actions, 7 relationships, backflow items
 
@@ -1737,13 +1737,13 @@ def _extract_dependency_signals(workspace_dir: Path | None = None) -> list[dict]
 
 - [ ] **Step 3: Run scanner source tests**
 
-Run: `cd /Users/4jp/Workspace/organvm-iv-taxis/orchestration-start-here && python3 -m pytest tests/test_contrib_scanner_sources.py tests/test_contrib_github_client.py -v`
+Run: `cd ~/Workspace/organvm-iv-taxis/orchestration-start-here && python3 -m pytest tests/test_contrib_scanner_sources.py tests/test_contrib_github_client.py -v`
 Expected: 8 + 3 = 11 passed
 
 - [ ] **Step 4: Commit**
 
 ```bash
-cd /Users/4jp/Workspace/organvm-iv-taxis/orchestration-start-here
+cd ~/Workspace/organvm-iv-taxis/orchestration-start-here
 git add contrib_engine/scanner.py contrib_engine/github_client.py tests/test_contrib_scanner_sources.py tests/test_contrib_github_client.py
 git commit -m "feat: expand scanner with 4 new sources — stars, forks, deps, PR history
 
@@ -1824,18 +1824,18 @@ class TestCampaignOutreachInteraction:
 
 - [ ] **Step 2: Run integration tests**
 
-Run: `cd /Users/4jp/Workspace/organvm-iv-taxis/orchestration-start-here && python3 -m pytest tests/test_contrib_integration.py -v`
+Run: `cd ~/Workspace/organvm-iv-taxis/orchestration-start-here && python3 -m pytest tests/test_contrib_integration.py -v`
 Expected: 2 passed
 
 - [ ] **Step 3: Run complete test suite**
 
-Run: `cd /Users/4jp/Workspace/organvm-iv-taxis/orchestration-start-here && python3 -m pytest tests/test_contrib_*.py -v --tb=short`
+Run: `cd ~/Workspace/organvm-iv-taxis/orchestration-start-here && python3 -m pytest tests/test_contrib_*.py -v --tb=short`
 Expected: 67+ tests passed
 
 - [ ] **Step 4: Commit**
 
 ```bash
-cd /Users/4jp/Workspace/organvm-iv-taxis/orchestration-start-here
+cd ~/Workspace/organvm-iv-taxis/orchestration-start-here
 git add tests/test_contrib_integration.py
 git commit -m "test: cross-module integration tests for campaign + outreach"
 ```
@@ -1846,14 +1846,14 @@ git commit -m "test: cross-module integration tests for campaign + outreach"
 
 - [ ] **Step 1: Run full test suite one final time**
 
-Run: `cd /Users/4jp/Workspace/organvm-iv-taxis/orchestration-start-here && python3 -m pytest tests/ -v --tb=short`
+Run: `cd ~/Workspace/organvm-iv-taxis/orchestration-start-here && python3 -m pytest tests/ -v --tb=short`
 Expected: All tests pass, 0 failures
 
 - [ ] **Step 2: Verify CLI end-to-end**
 
 Run:
 ```bash
-cd /Users/4jp/Workspace/organvm-iv-taxis/orchestration-start-here
+cd ~/Workspace/organvm-iv-taxis/orchestration-start-here
 python3 -m contrib_engine campaign show
 python3 -m contrib_engine campaign next
 python3 -m contrib_engine outreach show
@@ -1866,7 +1866,7 @@ Expected: All commands produce sensible output
 
 Run:
 ```bash
-cd /Users/4jp/Workspace/organvm-iv-taxis/orchestration-start-here
+cd ~/Workspace/organvm-iv-taxis/orchestration-start-here
 python3 -c "
 from contrib_engine.monitor import discover_contributions
 contribs = discover_contributions()
@@ -1881,7 +1881,7 @@ Expected: All 7 workspaces show targets (no empty strings)
 - [ ] **Step 4: Git status and final commit if needed**
 
 ```bash
-cd /Users/4jp/Workspace/organvm-iv-taxis/orchestration-start-here
+cd ~/Workspace/organvm-iv-taxis/orchestration-start-here
 git status
 ```
 

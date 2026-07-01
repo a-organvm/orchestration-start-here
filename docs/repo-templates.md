@@ -314,7 +314,7 @@ gh repo create <org>/<new-repo> \
   --public
 
 # Clone and customize
-git clone git@github.com:<org>/<new-repo>.git
+git clone [email redacted]:<org>/<new-repo>.git
 cd <new-repo>
 # Edit seed.yaml, README.md, CLAUDE.md with repo-specific content
 ```
